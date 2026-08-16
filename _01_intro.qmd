@@ -38,59 +38,58 @@ bibliography: references.bib
 #| include: false
 
 import sqlite3
-import pandas as pd
-import numpy as np
+# import pandas as pd
+# import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import seaborn as sns
-from scipy import stats
-import geopandas as gpd
-from shapely.affinity import translate, scale
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn.metrics import r2_score, mean_squared_error
-from sklearn.manifold import TSNE
-from statsmodels.stats.multitest import multipletests
+# import matplotlib.patches as mpatches
+# import seaborn as sns
+# from scipy import stats
+# import geopandas as gpd
+# from shapely.affinity import translate, scale
+# from sklearn.cluster import KMeans
+# from sklearn.preprocessing import StandardScaler
+# from sklearn.linear_model import LinearRegression
+# from sklearn.ensemble import RandomForestRegressor
+# from sklearn.model_selection import KFold, cross_val_score
+# from sklearn.metrics import r2_score, mean_squared_error
+# from sklearn.manifold import TSNE
+# from statsmodels.stats.multitest import multipletests
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# ── Database connection 
-DB_PATH = r"C:\Users\cpini\Downloads\capstone_traditional.db"
+# Database connection 
+DB_PATH = "./capstone_traditional.db"
 conn = sqlite3.connect(DB_PATH)
 
-# ── Project color palette 
-C_ENACTED  = '#018571'
-C_NOPOLICY = '#dfc27d'
+# Project color palette 
+# C_ENACTED  = '#018571'
+# C_NOPOLICY = '#dfc27d'
 
+# POLICY_COLORS = {
+#     'FM': '#590755', 'UM': '#f1a340',
+#     'AP': '#998ec3', 'AT': '#f26a10',
+#     'NO_ENACTED_POLICY': '#aea9a9',
+# }
 
-POLICY_COLORS = {
-    'FM': '#590755', 'UM': '#f1a340',
-    'AP': '#998ec3', 'AT': '#f26a10',
-    'NO_ENACTED_POLICY': '#aea9a9',
-}
+# ENACTED_STATES = [
+#     'alabama','arizona','arkansas','california','colorado','connecticut',
+#     'delaware','florida','georgia','hawaii','illinois','maryland','michigan',
+#     'minnesota','mississippi','missouri','nebraska','nevada','new hampshire',
+#     'new jersey','new mexico','new york','north carolina','ohio','oregon',
+#     'pennsylvania','rhode island','tennessee','utah','vermont','virginia',
+#     'washington'
+# ]
+# EXCLUDE = ['bureau of indian education','district of columbia','puerto rico']
 
-ENACTED_STATES = [
-    'alabama','arizona','arkansas','california','colorado','connecticut',
-    'delaware','florida','georgia','hawaii','illinois','maryland','michigan',
-    'minnesota','mississippi','missouri','nebraska','nevada','new hampshire',
-    'new jersey','new mexico','new york','north carolina','ohio','oregon',
-    'pennsylvania','rhode island','tennessee','utah','vermont','virginia',
-    'washington'
-]
-EXCLUDE = ['bureau of indian education','district of columbia','puerto rico']
-
-plt.rcParams.update({
-    'figure.dpi': 150,
-    'axes.spines.top': False,
-    'axes.spines.right': False,
-    'axes.grid': True,
-    'grid.alpha': 0.25,
-    'grid.linestyle': '--',
-})
+# plt.rcParams.update({
+#     'figure.dpi': 150,
+#     'axes.spines.top': False,
+#     'axes.spines.right': False,
+#     'axes.grid': True,
+#     'grid.alpha': 0.25,
+#     'grid.linestyle': '--',
+# })
 ```
 
 # Introduction
@@ -101,7 +100,7 @@ Chronic absenteeism, defined as missing 10 percent or more of school days in a g
 
 ## Period poverty as an absenteeism driver
 
-Among the many root causes of chronic absenteeism, **period poverty** has received growing attention as a barrier specific to students who menstruate. Period poverty refers to the inability to access menstrual products due to cost or availability. Nearly one in four teens who menstruate in the United States struggle to afford period products, and research suggests that lack of access may contribute to school absenteeism [@period_thinx_2025]. When a student cannot safely attend school during their period due to lack of access to menstrual products, the result is a missed school day that has nothing to do with academic disengagement, illness, or discipline.
+Among the many root causes of chronic absenteeism, period poverty has received growing attention as a barrier specific to students who menstruate. Period poverty refers to the inability to access menstrual products due to cost or availability. Nearly one in four teens who menstruate in the United States struggle to afford period products, and research suggests that lack of access may contribute to school absenteeism [@period_thinx_2025]. When a student cannot safely attend school during their period due to lack of access to menstrual products, the result is a missed school day that has nothing to do with academic disengagement, illness, or discipline.
 
 In response to this barrier, a growing number of US states have enacted Menstrual Health and Hygiene (MHH) legislation requiring or funding the provision of free menstrual products in public school restrooms. As of August 2024, 32 states had enacted some form of this legislation, ranging from funded mandates to unfunded authorizations [@ballard_2025]. Despite this policy momentum, rigorous empirical evaluation of whether these laws relate to measurable changes in absenteeism remains limited.
 
