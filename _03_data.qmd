@@ -1,1 +1,225 @@
-# Data
+```{python}
+#| label: setup
+#| include: false
+
+import sqlite3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import seaborn as sns
+from scipy import stats
+import geopandas as gpd
+from shapely.affinity import translate, scale
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.manifold import TSNE
+from statsmodels.stats.multitest import multipletests
+import warnings
+warnings.filterwarnings('ignore')
+
+
+# ── Database connection 
+DB_PATH = r"C:\Users\cpini\Downloads\capstone_traditional.db"
+conn = sqlite3.connect(DB_PATH)
+
+# ── Project color palette 
+C_ENACTED  = '#018571'
+C_NOPOLICY = '#dfc27d'
+
+
+POLICY_COLORS = {
+    'FM': '#590755', 'UM': '#f1a340',
+    'AP': '#998ec3', 'AT': '#f26a10',
+    'NO_ENACTED_POLICY': '#aea9a9',
+}
+
+ENACTED_STATES = [
+    'alabama','arizona','arkansas','california','colorado','connecticut',
+    'delaware','florida','georgia','hawaii','illinois','maryland','michigan',
+    'minnesota','mississippi','missouri','nebraska','nevada','new hampshire',
+    'new jersey','new mexico','new york','north carolina','ohio','oregon',
+    'pennsylvania','rhode island','tennessee','utah','vermont','virginia',
+    'washington'
+]
+EXCLUDE = ['bureau of indian education','district of columbia','puerto rico']
+
+plt.rcParams.update({
+    'figure.dpi': 150,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.grid': True,
+    'grid.alpha': 0.25,
+    'grid.linestyle': '--',
+})
+```
+
+# Data Engineering
+
+This project integrates two primary data sources: federal chronic absenteeism records from the US Department of Education's EDFacts initiative, and state-level MHH legislation data manually transcribed from a peer-reviewed policy review [@ballard_2025]. A third source, the NCES Geographic Relationship File (GRF) crosswalk, was used to filter the absenteeism dataset to geographically-defined traditional public school districts.
+
+## Chronic absenteeism data (EDFacts)
+
+Chronic absenteeism data are publicly available through the Every Student Succeeds Act (ESSA, 2015), which requires every state to submit annual chronic absenteeism records to the US Department of Education [@essa_2015; @us_dept_ed_2023]. These records are distributed through the ED Data Express portal under Data Group 814. For each school year, two separate files are released per state: a percentage file (DG814PCT) containing one row per LEA with the overall absenteeism rate, total enrollment, and total chronically absent students; and a subgroup detail file (FS195/DG814) containing many rows per LEA, one per demographic subgroup and sex combination, with raw counts of chronically absent students.
+
+Three school years were downloaded and processed: 2020–2021, 2021–2022, and 2022–2023. After merging the two files per year, pivoting the subgroup file from long to wide format, and stacking all three years, the combined dataset contained 53,321 district-year rows across 43 columns. Key columns were renamed for clarity (DENOMINATOR to TOTAL_STUDENTS_ENROLLMENT, NUMERATOR to TOTAL_STUDENTS_ABSENT, NUMERIC_VALUE to ABSENTEEISM_RATE). Placeholder rows with LEAID = 0 were removed as they carried no real data.
+
+The economically disadvantaged subgroup (ECODIS) only appears in the 2022–2023 file due to a federal reporting change; earlier years carry missing values for this subgroup rather than a false zero. A merge validation confirmed internal consistency: male and female counts summed to the combined total in all 131,860 subgroup-year checks with zero mismatches.
+
+## Menstrual health legislation data
+
+State-level MHH legislation data were sourced from @ballard_2025, a peer-reviewed systematic policy review published in *Frontiers in Reproductive Health*. Table 2 of that article covers all 32 US states with enacted school MHH legislation as of August 2024, reporting policy type (funded mandate, unfunded mandate, appropriation, or authorization), year enacted, funding amount, estimated percentage of K-12 students reached, and coverage of seven MHH policy domains (materials provision, WASH facilities, knowledge and education, discomfort and disorders, supportive social environment, MHH impact assessment, and funding mechanism).
+
+The table was manually transcribed into a CSV file and validated against the article's own summary statistics. The remaining 18 states without enacted legislation were added with a policy type of NO_ENACTED_POLICY. A stray whitespace character found in one field was corrected before database loading.
+
+## Geographic filter: NCES GRF crosswalk
+
+The EDFacts dataset includes not only traditional public school districts but also independent charter schools, virtual academies, and administrative service agencies that lack fixed geographic boundaries. Including these non-geographic entities creates a structural imbalance between the two comparison groups: enacted-policy states average 28 percent of their LEAs excluded by the geographic filter, compared to only 10 percent for no-policy states, because charter schools cluster disproportionately in states that also tend to pass progressive education legislation.
+
+To address this, each LEA was matched against the NCES School District Geographic Relationship File (GRF), which assigns each geographically defined district to its primary county based on Census Bureau TIGER/Line boundaries [@nces_grf]. Separate GRF vintages were used for each school year (GRF21 for 2020–2021, GRF22 for 2021–2022, GRF23 for 2022–2023). For districts spanning multiple counties, the primary county was assigned based on the largest land area overlap.
+
+Of the 53,321 district-year rows, 38,602 matched to a county (traditional public school districts) and 14,719 did not (charter and non-geographic entities). The 38,602 matched rows form the primary analysis dataset. The excluded rows were saved separately for transparency.
+
+```{python}
+#| label: tbl-match-rates
+#| tbl-cap: "GRF crosswalk match rates by school year. Traditional public school districts are those successfully matched to a primary county via the NCES GRF crosswalk."
+
+pd.DataFrame({
+    'School year': ['2020–2021', '2021–2022', '2022–2023', 'Total'],
+    'Matched (traditional)': [12839, 12914, 13039, 38792],
+    'Unmatched (non-geographic)': [4685, 4887, 4957, 14529],
+    'Match rate': ['73%', '73%', '74%', '73%']
+}).set_index('School year')
+```
+
+## Data normalization
+
+Our combined absenteeism dataset is structured in a wide format, with one row per district and dozens of columns representing each subgroup (AM7, AM7_F, AM7_M, AS7). This results in 36 demographic-related columns alone. While this layout is convenient for rapid exploration, it does not constitute a properly normalized database. Many columns simply repeat the same type of information across subgroups, and attaching state-level attributes directly to each district row would require duplicating the same state information thousands of times. To address this, we reorganized the data into five relational tables that reference one another, achieving a structure consistent with third normal form.
+
+## Entity Relationship Diagram
+
+```{mermaid}
+erDiagram
+  STATES ||--o{ LEAS : contains
+  STATES ||--o| MENSTRUAL_LEGISLATION : has
+  LEAS ||--o{ ABSENTEEISM_FACTS : reports
+  LEAS ||--o{ ABSENTEEISM_SUBGROUPS : reports
+
+  STATES {
+    int state_id PK
+    string state_name
+  }
+  LEAS {
+    string lea_id PK
+    string lea_name
+    int state_id FK
+  }
+  ABSENTEEISM_FACTS {
+    int fact_id PK
+    string lea_id FK
+    string school_year
+    real total_students_enrollment
+    real total_students_absent
+    real absenteeism_rate
+  }
+  ABSENTEEISM_SUBGROUPS {
+    int subgroup_fact_id PK
+    string lea_id FK
+    string school_year
+    string subgroup_code
+    real count_total
+    real count_female
+    real count_male
+  }
+  MENSTRUAL_LEGISLATION {
+    int legislation_id PK
+    int state_id FK
+    string policy_type
+    int year_enacted
+    real funding_amount
+    real pct_k12_reached
+    string domain_materials
+    string domain_wash
+    string domain_funding
+  }
+```
+
+```{python}
+#| label: tbl-schema
+#| tbl-cap: "Five-table normalized database schema (capstone_traditional.db). The schema satisfies third normal form: each table contains only attributes dependent on its own primary key, with no repeating groups and no transitive dependencies."
+
+pd.DataFrame({
+    'Table': ['states', 'leas', 'absenteeism_facts',
+              'absenteeism_subgroups', 'menstrual_legislation'],
+    'Grain': ['One row per state', 'One row per LEA',
+              'One row per LEA per year',
+              'One row per LEA per year per subgroup',
+              'One row per state'],
+    'Primary key': ['state_id', 'lea_id', 'fact_id',
+                    'subgroup_fact_id', 'legislation_id'],
+    'Foreign key(s)': ['—', 'state_id → states', 'lea_id → leas',
+                       'lea_id → leas', 'state_id → states']
+}).set_index('Table')
+```
+
+
+## Database integrity check
+```{python}
+#| label: db-validation
+#| code-summary: 'Database integrity check — row counts per table'
+
+row_counts = pd.read_sql("""
+    SELECT 'absenteeism_facts' AS Tables, COUNT(*) AS Rows FROM absenteeism_facts
+    UNION ALL SELECT 'absenteeism_subgroups', COUNT(*) FROM absenteeism_subgroups
+    UNION ALL SELECT 'leas', COUNT(*) FROM leas
+    UNION ALL SELECT 'states', COUNT(*) FROM states
+    UNION ALL SELECT 'menstrual_legislation', COUNT(*) FROM menstrual_legislation
+""", conn)
+
+(row_counts.style
+    .hide(axis='index')
+    .set_properties(**{'font-size': '0.85em', 'text-align': 'left'})
+    .set_table_styles([
+        {'selector': 'th', 'props': [('font-size', '0.85em'), ('text-align', 'left')]},
+        {'selector': 'td', 'props': [('padding', '3px 16px')]},
+    ])
+    .format({'rows': '{:,}'})
+)
+```
+
+
+## Feature engineering
+
+The **female chronic absenteeism rate** (primary outcome for machine learning) is estimated as:
+
+$$\text{Female rate} = \frac{\text{count\_total} \times \text{female share}}{\text{total enrollment} \times 0.488} \times 100$$
+
+where female share = count\_female / count\_total per subgroup, and 0.488 reflects the nationally documented 48.8% female share of K-12 public enrollment [@nces_digest_2023]. District-level sex-disaggregated enrollment is unavailable in EDFacts; CCD provides it only at the state level using an incompatible ID system (CCD Agency ID ≠ EDFacts LEAID), making district-level merging infeasible. Applying a fixed 48.8% split uniformly introduces small measurement error at the district level, but deviations are expected to largely cancel out when aggregated to the state level.
+
+**Policy score** encodes policy strength based on resource availability, informed by the legislative framework described in @ballard_2025:
+
+| Policy type | Score | Rationale |
+|-------------|-------|-----------|
+| FM (Funded Mandate) | 4 | Mandate + external funds allocated |
+| AP (Appropriations) | 3 | Funds allocated; no mandate |
+| AT (Authorization) | 2 | Permission to spend; no new funds |
+| UM (Unfunded Mandate) | 1 | Mandate only; no funds, no authorization |
+| No policy | 0 | No enacted legislation |
+
+**Domain coverage score** counts how many of the seven MHH domains a state's legislation addresses (0–7), providing a measure of policy comprehensiveness independent of policy type.
+
+## Data Ethics
+
+This project uses publicly available, federally mandated reporting data at the LEA level. No individual student records are involved, and all data are aggregated at the district level at minimum. The demographic subgroup data (race, disability status, economic disadvantage, English learner status) are used to examine whether policy associations differ across populations, which is a standard and appropriate use of this type of data in education equity research.
+
+**Binary sex classification.** By focusing on the female share of chronic absenteeism as an outcome, we are treating a binary sex classification (male/female) as a proxy for students who menstruate, because subgroup-level enrollment denominators by sex are not available in this dataset. Not all students coded female in school administrative records menstruate, and some students coded male do. This framing is a methodological simplification, not an endorsement of a binary view of gender. A program specialist at the Oregon Department of Education confirmed that transgender and non-binary students are explicitly underserved by current implementation practices and are invisible in this dataset — a substantive limitation, not merely a statistical one. Future work with richer data could examine this question with greater nuance.
+
+**Selection bias.** States with enacted legislation tend to be those that were already experiencing higher absenteeism, which means any analysis comparing enacted to non-enacted states is partly comparing states with different baseline conditions rather than measuring a pure policy effect. We address this by framing our findings as correlational and by explicitly discussing the selection effect throughout.
+
+**Qualitative data handling.** Insights from an informational interview with an Oregon Department of Education program specialist are cited as a personal communication [@oregon_specialist_2026], pending her consent to be named. No identifying information about students, families, or individual schools is included.
+
+**Representation of vulnerable groups.** The ECODIS and HOM (homeless) subgroups represent the most economically vulnerable students. Their data are presented to highlight, not diminish, their disproportionate burden of chronic absenteeism.

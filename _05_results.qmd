@@ -1,1 +1,11 @@
 # Results
+
+Our analysis consistently shows that states with enacted MHH legislation have a lower female share of chronic absenteeism compared to states without such legislation, a pattern that holds across 11 of 12 demographic subgroups, all three school years, and three different levels of geographic aggregation. The finding is statistically significant and survives Holm-Bonferroni correction across 12 parallel subgroup tests.
+
+What these results do not mean is equally important to state clearly. Enacted-policy states have higher overall chronic absenteeism rates than no-policy states, not lower,confirming that states already struggling with attendance were the ones motivated to act. This is a selection effect, not evidence that the legislation made things worse. Chronic absenteeism is driven by a complex web of root causes including poverty, housing instability, transportation barriers, language access, and lack of belonging, and menstrual health legislation addresses only one thread in that web.
+
+The machine learning analysis adds critical nuance: **policy type alone does not determine outcomes**. The t-SNE visualization shows Funded Mandate states scattered across the entire feature space. The percentage of K-12 schools actually reached (PCT_K12_REACHED) predicts female absenteeism better than policy score, implementation reach matters more than what the legislation says on paper.
+
+The null trajectory result, enacted and no-policy states changing at the same rate year-over-year, is framed as an honest strength rather than a weakness: MHH legislation may lower the *level* of female absenteeism burden but has not yet changed its *trajectory*, supporting a "floor not ceiling" interpretation. With most policies enacted between 2021 and 2023, and our data window closing in 2023, we are measuring at most one to two years of post-enactment data, far too narrow a window to detect long-term behavioral change.
+
+Qualitative evidence from the Oregon Department of Education Menstrual Dignity Program explains cluster C5: Strong Policy, low poverty where school board resistance, stakeholder opposition, and unused funds create an implementation gap that no administrative dataset currently measures. These findings are best understood as an early signal that warrants continued monitoring, not a demonstration that the policy works.
