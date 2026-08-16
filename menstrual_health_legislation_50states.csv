@@ -1,0 +1,51 @@
+STATE,POLICY_TYPE,YEAR_ENACTED,FUNDING_AMOUNT,PCT_K12_REACHED,DOMAIN_MATERIALS,DOMAIN_WASH,DOMAIN_KNOWLEDGE,DOMAIN_DISCOMFORTS,DOMAIN_SOCIAL_ENV,DOMAIN_MHH_IMPACT,DOMAIN_FUNDING
+Alabama,AP,2022,400000,29,Yes,No,No,No,No,No,Yes
+Alaska,NO_ENACTED_POLICY,,,,,,,,,, 
+Arizona,AP,2023,2000000,94,Yes,No,No,No,No,No,Yes
+Arkansas,AT,2021,0,52,Yes,No,No,No,Yes,No,No
+California,FM,2017,,63,Yes,Yes,No,No,Yes,No,Yes
+Colorado,FM,2021,200000,94,Yes,Yes,No,No,Yes,Yes,Yes
+Connecticut,FM,2022,2000000,71,Yes,Yes,No,No,Yes,No,Yes
+Delaware,UM,2021,0,58,Yes,Yes,No,No,Yes,No,No
+Florida,AT,2023,0,,Yes,No,No,No,Yes,No,No
+Georgia,AP,2019,1500000,,Yes,No,No,No,No,No,Yes
+Hawaii,FM,2022,2000000,82,Yes,No,No,No,No,No,Yes
+Idaho,NO_ENACTED_POLICY,,,,,,,,,,
+Illinois,UM,2017,0,64,Yes,No,No,No,No,No,No
+Indiana,NO_ENACTED_POLICY,,,,,,,,,,
+Iowa,NO_ENACTED_POLICY,,,,,,,,,,
+Kansas,NO_ENACTED_POLICY,,,,,,,,,,
+Kentucky,NO_ENACTED_POLICY,,,,,,,,,,
+Louisiana,NO_ENACTED_POLICY,,,,,,,,,,
+Maine,NO_ENACTED_POLICY,,,,,,,,,,
+Maryland,FM,2021,500000,87,Yes,Yes,No,No,No,No,Yes
+Massachusetts,NO_ENACTED_POLICY,,,,,,,,,,
+Michigan,AP,2023,1000000,,Yes,No,No,No,No,No,Yes
+Minnesota,FM,2021,,65,Yes,Yes,No,No,No,No,Yes
+Mississippi,AT,2023,0,49,Yes,No,No,No,No,No,No
+Missouri,FM,2022,1000000,50,Yes,No,No,No,No,No,Yes
+Montana,NO_ENACTED_POLICY,,,,,,,,,,
+Nebraska,AP,2024,250000,29,Yes,No,No,No,No,No,Yes
+Nevada,UM,2021,0,34,Yes,Yes,Yes,No,Yes,Yes,No
+New Hampshire,UM,2019,0,50,Yes,Yes,No,No,No,No,No
+New Jersey,FM,2023,,49,Yes,Yes,No,No,No,Yes,Yes
+New Mexico,FM,2023,1000000,93,Yes,Yes,No,No,No,No,Yes
+New York,UM,2018,0,56,Yes,No,No,No,No,No,No
+North Carolina,AP,2022,250000,,Yes,No,No,No,No,Yes,Yes
+North Dakota,NO_ENACTED_POLICY,,,,,,,,,,
+Ohio,FM,2023,5000000,54,Yes,No,No,No,No,No,Yes
+Oklahoma,NO_ENACTED_POLICY,,,,,,,,,,
+Oregon,FM,2021,5600000,93,Yes,Yes,Yes,No,Yes,No,Yes
+Pennsylvania,AP,2024,3000000,,Yes,No,No,No,No,No,Yes
+Rhode Island,UM,2021,0,56,Yes,Yes,No,No,No,No,No
+South Carolina,NO_ENACTED_POLICY,,,,,,,,,,
+South Dakota,NO_ENACTED_POLICY,,,,,,,,,,
+Tennessee,AT,2019,0,9,Yes,Yes,No,No,No,No,No
+Texas,NO_ENACTED_POLICY,,,,,,,,,,
+Utah,FM,2022,2400000,98,Yes,Yes,No,No,Yes,No,Yes
+Vermont,UM,2021,0,70,Yes,Yes,No,No,No,No,No
+Virginia,UM,2020,0,91,Yes,No,No,No,No,No,No
+Washington,UM,2021,0,77,Yes,Yes,No,No,No,No,No
+West Virginia,NO_ENACTED_POLICY,,,,,,,,,,
+Wisconsin,NO_ENACTED_POLICY,,,,,,,,,,
+Wyoming,NO_ENACTED_POLICY,,,,,,,,,,
