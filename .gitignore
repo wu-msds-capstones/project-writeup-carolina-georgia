@@ -4,4 +4,6 @@
 /.quarto/
 /_output/
 
+.vscode/
+
 **/*.quarto_ipynb
