@@ -15,11 +15,20 @@ format:
     fig-height: 4
     fig-dpi: 150
     fig-align: center
+    code-fold: true
+    code-summary: "Show code"
     include-in-header:
       text: |
         <style>
-        img.figure-img { max-width: 100% !important; width: auto !important; height: auto !important; }
-        .cell-output-display img { max-width: 100% !important; width: auto !important; }
+        img.figure-img { 
+          max-width: 100% !important; 
+          width: auto !important; 
+          height: auto !important; 
+        }
+        .cell-output-display img { 
+          max-width: 100% !important; 
+          width: auto !important; 
+        }
         </style>
 execute:
   echo: true
