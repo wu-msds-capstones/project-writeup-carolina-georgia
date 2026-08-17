@@ -1,5 +1,5 @@
 ```{python}
-#| label: setup
+#| label: setup-data
 #| include: false
 
 import sqlite3
