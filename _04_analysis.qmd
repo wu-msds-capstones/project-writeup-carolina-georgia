@@ -660,8 +660,6 @@ plt.show()
 #| fig-height: 4
 #| out-width: "100%"
 
-
-
 #  Pull data from database 
 
 fm_raw = pd.read_sql("""
@@ -773,11 +771,17 @@ def draw_panel(ax, data, color_f, color_m, title):
            label='Male')
 
     for i, (fv, mv) in enumerate(zip(f_vals, m_vals)):
-        ax.text(i - bar_w / 2, fv + 0.3, f'{fv:.1f}%',
-                ha='center', va='bottom',
+        close = abs(fv - mv) < 1.5
+        ha_f = 'right' if close else 'center'
+        ha_m = 'left' if close else 'center'
+        x_f = (i - bar_w / 2 - 0.03) if close else (i - bar_w / 2)
+        x_m = (i + bar_w / 2 + 0.03) if close else (i + bar_w / 2)
+
+        ax.text(x_f, fv + 0.3, f'{fv:.1f}%',
+                ha=ha_f, va='bottom',
                 fontsize=8.5, fontweight='bold', color='black')
-        ax.text(i + bar_w / 2, mv + 0.3, f'{mv:.1f}%',
-                ha='center', va='bottom',
+        ax.text(x_m, mv + 0.3, f'{mv:.1f}%',
+                ha=ha_m, va='bottom',
                 fontsize=8, fontweight='bold', color='black')
 
     ax.set_xticks(x)
