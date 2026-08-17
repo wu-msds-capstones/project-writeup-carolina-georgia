@@ -10,7 +10,7 @@
   year      = {2025},
   note      = {Volume and DOI pending publication}
 }
-å
+
 @report{period_thinx_2025,
   author      = {{PERIOD.} and {Thinx}},
   title       = {2025 State of the period study},
