@@ -2,7 +2,7 @@
 
 The one takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association survives every analytical lens applied to it. This does not prove the policy works causally, but it is precisely the kind of early, consistent, multi-method signal that justifies continued investment in both the policy and its evaluation.
 
-**Policy type alone is not enough.** Enacting a law is the floor, not the ceiling. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent, determines outcomes more than what the legislation requires. Our case study for Oregon State  makes this concrete: Oregon and Nevada hold the strongest policy configurations in the nation and the worst outcomes among enacted states.
+**Policy type alone is not enough.** Enacting a law is the floor, not the ceiling. Implementation fidelity, whether schools actually stock products and whether allocated funds are actually spent, determines outcomes more than what the legislation requires. Our case study for Oregon State  makes this concrete: Oregon and Nevada hold the strongest policy configurations in the nation and the worst outcomes among enacted states.
 
 Our specific recommendation is that states without enacted legislation should treat the ECODIS finding as their highest-priority decision point. Economically disadvantaged female students are both the most likely to face period-poverty barriers due to cost and the group showing the most consistent association with the legislation signal across all analytical versions.
 
