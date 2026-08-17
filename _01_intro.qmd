@@ -39,7 +39,7 @@ To follow this analysis, readers need familiarity with the following terms:
 
 ## MHH legislation landscape
 
-Beyond policy type, @ballard_2025 identify seven MHH policy **domains** that legislation may address: (1) menstrual materials provision, (2) WASH facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:
+Beyond policy type, @ballard_2025 identifies seven MHH policy **domains** that legislation may address: (1) menstrual materials provision, (2) WASH facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:
 
 | Policy type | Code | Description |
 |-------------|------|-------------|
