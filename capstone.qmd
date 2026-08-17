@@ -1,5 +1,4 @@
 ---
-
 title: "Menstrual Health Legislation and K-12 Chronic Absenteeism"
 subtitle: "Exploring the Association Between State Menstrual Health and Hygiene Policy and Female Student Absenteeism in US Public Schools"
 author:
