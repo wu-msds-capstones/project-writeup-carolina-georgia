@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>capstone</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-534f9e6eb4fde8fa3495dc6c45b1673d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="citation_language" content="en">
+</head>
+
+<body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#the-chronic-absenteeism-crisis" id="toc-the-chronic-absenteeism-crisis" class="nav-link" data-scroll-target="#the-chronic-absenteeism-crisis">The chronic absenteeism crisis</a></li>
+  <li><a href="#period-poverty-as-an-absenteeism-driver" id="toc-period-poverty-as-an-absenteeism-driver" class="nav-link" data-scroll-target="#period-poverty-as-an-absenteeism-driver">Period poverty as an absenteeism driver</a></li>
+  <li><a href="#key-vocabulary" id="toc-key-vocabulary" class="nav-link" data-scroll-target="#key-vocabulary">Key vocabulary</a></li>
+  <li><a href="#mhh-legislation-landscape" id="toc-mhh-legislation-landscape" class="nav-link" data-scroll-target="#mhh-legislation-landscape">MHH legislation landscape</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research question</a></li>
+  </ul></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#key-vocabulary-1" id="toc-key-vocabulary-1" class="nav-link" data-scroll-target="#key-vocabulary-1">Key vocabulary</a></li>
+  <li><a href="#mhh-legislation-landscape-1" id="toc-mhh-legislation-landscape-1" class="nav-link" data-scroll-target="#mhh-legislation-landscape-1">MHH legislation landscape</a></li>
+  <li><a href="#research-question-1" id="toc-research-question-1" class="nav-link" data-scroll-target="#research-question-1">Research question</a></li>
+  </ul></li>
+  <li><a href="#data-engineering" id="toc-data-engineering" class="nav-link" data-scroll-target="#data-engineering">Data Engineering</a>
+  <ul class="collapse">
+  <li><a href="#chronic-absenteeism-data-edfacts" id="toc-chronic-absenteeism-data-edfacts" class="nav-link" data-scroll-target="#chronic-absenteeism-data-edfacts">Chronic absenteeism data (EDFacts)</a></li>
+  <li><a href="#menstrual-health-legislation-data" id="toc-menstrual-health-legislation-data" class="nav-link" data-scroll-target="#menstrual-health-legislation-data">Menstrual health legislation data</a></li>
+  <li><a href="#geographic-filter-nces-grf-crosswalk" id="toc-geographic-filter-nces-grf-crosswalk" class="nav-link" data-scroll-target="#geographic-filter-nces-grf-crosswalk">Geographic filter: NCES GRF crosswalk</a></li>
+  <li><a href="#data-normalization" id="toc-data-normalization" class="nav-link" data-scroll-target="#data-normalization">Data normalization</a></li>
+  <li><a href="#entity-relationship-diagram" id="toc-entity-relationship-diagram" class="nav-link" data-scroll-target="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
+  <li><a href="#database-integrity-check" id="toc-database-integrity-check" class="nav-link" data-scroll-target="#database-integrity-check">Database integrity check</a></li>
+  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">Feature engineering</a></li>
+  <li><a href="#data-ethics" id="toc-data-ethics" class="nav-link" data-scroll-target="#data-ethics">Data Ethics</a></li>
+  </ul></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
+  <li><a href="#analytical-approach-and-variable-structure" id="toc-analytical-approach-and-variable-structure" class="nav-link" data-scroll-target="#analytical-approach-and-variable-structure">Analytical approach and variable structure</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#overall-absenteeism-trends" id="toc-overall-absenteeism-trends" class="nav-link" data-scroll-target="#overall-absenteeism-trends">Overall absenteeism trends</a></li>
+  <li><a href="#female-share-of-chronic-absenteeism" id="toc-female-share-of-chronic-absenteeism" class="nav-link" data-scroll-target="#female-share-of-chronic-absenteeism">Female share of chronic absenteeism</a></li>
+  </ul></li>
+  <li><a href="#policy-type-bars" id="toc-policy-type-bars" class="nav-link" data-scroll-target="#policy-type-bars">Policy Type Bars</a>
+  <ul class="collapse">
+  <li><a href="#year-over-year-female-chronic-absenteeism-by-state" id="toc-year-over-year-female-chronic-absenteeism-by-state" class="nav-link" data-scroll-target="#year-over-year-female-chronic-absenteeism-by-state">Year-over-year female chronic absenteeism by state</a></li>
+  <li><a href="#female-vs-male-chronic-absenteeism-rate" id="toc-female-vs-male-chronic-absenteeism-rate" class="nav-link" data-scroll-target="#female-vs-male-chronic-absenteeism-rate">Female vs male chronic absenteeism rate</a></li>
+  <li><a href="#subgroup-analysis-with-holm-bonferroni-correction" id="toc-subgroup-analysis-with-holm-bonferroni-correction" class="nav-link" data-scroll-target="#subgroup-analysis-with-holm-bonferroni-correction">Subgroup analysis with Holm-Bonferroni correction</a></li>
+  </ul></li>
+  <li><a href="#subgroups-analysis" id="toc-subgroups-analysis" class="nav-link" data-scroll-target="#subgroups-analysis">Subgroups Analysis</a>
+  <ul class="collapse">
+  <li><a href="#economically-disadvantaged-students" id="toc-economically-disadvantaged-students" class="nav-link" data-scroll-target="#economically-disadvantaged-students">Economically disadvantaged students</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks">Robustness checks</a></li>
+  </ul></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#why-these-methods" id="toc-why-these-methods" class="nav-link" data-scroll-target="#why-these-methods">Why these methods?</a></li>
+  <li><a href="#feature-matrix" id="toc-feature-matrix" class="nav-link" data-scroll-target="#feature-matrix">Feature matrix</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear regression</a></li>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest">Random forest</a></li>
+  <li><a href="#oregon-case-study-the-implementation-gap" id="toc-oregon-case-study-the-implementation-gap" class="nav-link" data-scroll-target="#oregon-case-study-the-implementation-gap">Oregon case study: the implementation gap</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-means clustering</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+<hr>
+<p>title: “Menstrual Health Legislation and K-12 Chronic Absenteeism” subtitle: “Exploring the Association Between State Menstrual Health and Hygiene Policy and Female Student Absenteeism in US Public Schools” author: - name: Carolina Pinillos - name: Georgia Kirkpatrick jupyter: capstone date: today format: html: theme: light: lightly dark: darkly fig-width: 8 fig-height: 4 fig-dpi: 150 execute: echo: true warning: false message: false bibliography: references.bib —</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="the-chronic-absenteeism-crisis" class="level2">
+<h2 class="anchored" data-anchor-id="the-chronic-absenteeism-crisis">The chronic absenteeism crisis</h2>
+<p>Chronic absenteeism, defined as missing 10 percent or more of school days in a given year, has emerged as one of the most urgent challenges in US public education. The COVID-19 pandemic accelerated a trend already underway: by the 2022–2023 school year, more than one in four K-12 students was chronically absent <span class="citation" data-cites="us_dept_ed_2023">[@us_dept_ed_2023]</span>. Research consistently links chronic absenteeism to reduced academic achievement, lower graduation rates, and long-term economic consequences, making it a key equity concern for students from disadvantaged backgrounds <span class="citation" data-cites="heckman_2006 attendance_works_2019">[@heckman_2006; @attendance_works_2019]</span>.</p>
+</section>
+<section id="period-poverty-as-an-absenteeism-driver" class="level2">
+<h2 class="anchored" data-anchor-id="period-poverty-as-an-absenteeism-driver">Period poverty as an absenteeism driver</h2>
+<p>Among the many root causes of chronic absenteeism, period poverty has received growing attention as a barrier specific to students who menstruate. Period poverty refers to the inability to access menstrual products due to cost or availability. Nearly one in four teens who menstruate in the United States struggle to afford period products, and research suggests that lack of access may contribute to school absenteeism <span class="citation" data-cites="period_thinx_2025">[@period_thinx_2025]</span>. When a student cannot safely attend school during their period due to lack of access to menstrual products, the result is a missed school day that has nothing to do with academic disengagement, illness, or discipline.</p>
+<p>In response to this barrier, a growing number of US states have enacted Menstrual Health and Hygiene (MHH) legislation requiring or funding the provision of free menstrual products in public school restrooms. As of August 2024, 32 states had enacted some form of this legislation, ranging from funded mandates to unfunded authorizations <span class="citation" data-cites="ballard_2025">[@ballard_2025]</span>. Despite this policy momentum, rigorous empirical evaluation of whether these laws relate to measurable changes in absenteeism remains limited.</p>
+<p>This project addresses that gap by integrating three years of federal chronic absenteeism data with a comprehensive state-level MHH legislation dataset to examine whether enacted-policy states show systematically different female absenteeism patterns. We approach this as a correlational, exploratory analysis rather than a causal evaluation, acknowledging that the narrow observation window and the complexity of absenteeism root causes prevent strong causal claims. Our findings are intended to inform the design of future evaluations rather than to serve as final evidence of policy effectiveness.</p>
+</section>
+<section id="key-vocabulary" class="level2">
+<h2 class="anchored" data-anchor-id="key-vocabulary">Key vocabulary</h2>
+<p>To follow this analysis, readers need familiarity with the following terms:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Chronic absenteeism</strong></td>
+<td>Missing ≥10% of school days in a given year</td>
+</tr>
+<tr class="even">
+<td><strong>LEA</strong></td>
+<td>Local Education Agency — a school district</td>
+</tr>
+<tr class="odd">
+<td><strong>EDFacts</strong></td>
+<td>Federal data system collecting LEA-level chronic absenteeism counts</td>
+</tr>
+<tr class="even">
+<td><strong>Female share of absent</strong></td>
+<td>Female chronically absent ÷ total chronically absent, as a percentage</td>
+</tr>
+<tr class="odd">
+<td><strong>Period poverty</strong></td>
+<td>Inability to access menstrual products due to cost or availability</td>
+</tr>
+<tr class="even">
+<td><strong>ECODIS</strong></td>
+<td>Economically disadvantaged subgroup in EDFacts reporting</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mhh-legislation-landscape" class="level2">
+<h2 class="anchored" data-anchor-id="mhh-legislation-landscape">MHH legislation landscape</h2>
+<p>Beyond policy type, <span class="citation" data-cites="ballard_2025">@ballard_2025</span> identify seven MHH policy <strong>domains</strong> that legislation may address: (1) menstrual materials provision, (2) WASH facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 18%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Policy type</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Funded Mandate</td>
+<td>FM</td>
+<td>State receives funds AND has a compliance mandate</td>
+</tr>
+<tr class="even">
+<td>Appropriations</td>
+<td>AP</td>
+<td>Funds allocated; no compliance mandate</td>
+</tr>
+<tr class="odd">
+<td>Authorization</td>
+<td>AT</td>
+<td>Permission to spend existing funds; no new funds</td>
+</tr>
+<tr class="even">
+<td>Unfunded Mandate</td>
+<td>UM</td>
+<td>Compliance required; zero funds, no authorization</td>
+</tr>
+<tr class="odd">
+<td>No enacted policy</td>
+<td>—</td>
+<td>No legislation of any kind</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research question</h2>
+<blockquote class="blockquote">
+<p>Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?</p>
+</blockquote>
+</section>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<section id="key-vocabulary-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-vocabulary-1">Key vocabulary</h3>
+<p>To follow this analysis, readers need familiarity with the following terms:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Chronic absenteeism</strong></td>
+<td>Missing ≥10% of school days in a given year</td>
+</tr>
+<tr class="even">
+<td><strong>LEA</strong></td>
+<td>Local Education Agency — a school district</td>
+</tr>
+<tr class="odd">
+<td><strong>EDFacts</strong></td>
+<td>Federal data system collecting LEA-level chronic absenteeism counts</td>
+</tr>
+<tr class="even">
+<td><strong>Female share of absent</strong></td>
+<td>Female students chronically absent ÷ total students chronically absent, as a percentage</td>
+</tr>
+<tr class="odd">
+<td><strong>Period poverty</strong></td>
+<td>Inability to access menstrual products due to cost or availability</td>
+</tr>
+<tr class="even">
+<td><strong>ECODIS</strong></td>
+<td>Economically disadvantaged subgroup in EDFacts reporting</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mhh-legislation-landscape-1" class="level3">
+<h3 class="anchored" data-anchor-id="mhh-legislation-landscape-1">MHH legislation landscape</h3>
+<p>Beyond policy type, <span class="citation" data-cites="ballard_2025">@ballard_2025</span> identify seven MHH policy domains that legislation may address: (1) menstrual materials provision, (2) water, sanitation, and hygiene (WASH) facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 18%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Policy type</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Funded Mandate</td>
+<td>FM</td>
+<td>State receives funds AND has a compliance mandate</td>
+</tr>
+<tr class="even">
+<td>Appropriations</td>
+<td>AP</td>
+<td>Funds allocated; no compliance mandate</td>
+</tr>
+<tr class="odd">
+<td>Authorization</td>
+<td>AT</td>
+<td>Permission to spend existing funds; no new funds</td>
+</tr>
+<tr class="even">
+<td>Unfunded Mandate</td>
+<td>UM</td>
+<td>Compliance required; zero funds, no authorization</td>
+</tr>
+<tr class="odd">
+<td>No enacted policy</td>
+<td>—</td>
+<td>No legislation of any kind</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="research-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-1">Research question</h3>
+<blockquote class="blockquote">
+<p>Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?</p>
+</blockquote>
+</section>
+</section>
+<section id="data-engineering" class="level1">
+<h1>Data Engineering</h1>
+<p>This project integrates two primary data sources: federal chronic absenteeism records from the US Department of Education’s EDFacts initiative, and state-level MHH legislation data manually transcribed from a peer-reviewed policy review <span class="citation" data-cites="ballard_2025">[@ballard_2025]</span>. A third source, the NCES Geographic Relationship File (GRF) crosswalk, was used to filter the absenteeism dataset to geographically-defined traditional public school districts.</p>
+<section id="chronic-absenteeism-data-edfacts" class="level2">
+<h2 class="anchored" data-anchor-id="chronic-absenteeism-data-edfacts">Chronic absenteeism data (EDFacts)</h2>
+<p>Chronic absenteeism data are publicly available through the Every Student Succeeds Act (ESSA, 2015), which requires every state to submit annual chronic absenteeism records to the US Department of Education <span class="citation" data-cites="essa_2015 us_dept_ed_2023">[@essa_2015; @us_dept_ed_2023]</span>. These records are distributed through the ED Data Express portal under Data Group 814. For each school year, two separate files are released per state: a percentage file (DG814PCT) containing one row per LEA with the overall absenteeism rate, total enrollment, and total chronically absent students; and a subgroup detail file (FS195/DG814) containing many rows per LEA, one per demographic subgroup and sex combination, with raw counts of chronically absent students.</p>
+<p>Three school years were downloaded and processed: 2020–2021, 2021–2022, and 2022–2023. After merging the two files per year, pivoting the subgroup file from long to wide format, and stacking all three years, the combined dataset contained 53,321 district-year rows across 43 columns. Key columns were renamed for clarity (DENOMINATOR to TOTAL_STUDENTS_ENROLLMENT, NUMERATOR to TOTAL_STUDENTS_ABSENT, NUMERIC_VALUE to ABSENTEEISM_RATE). Placeholder rows with LEAID = 0 were removed as they carried no real data.</p>
+<p>The economically disadvantaged subgroup (ECODIS) only appears in the 2022–2023 file due to a federal reporting change; earlier years carry missing values for this subgroup rather than a false zero. A merge validation confirmed internal consistency: male and female counts summed to the combined total in all 131,860 subgroup-year checks with zero mismatches.</p>
+</section>
+<section id="menstrual-health-legislation-data" class="level2">
+<h2 class="anchored" data-anchor-id="menstrual-health-legislation-data">Menstrual health legislation data</h2>
+<p>State-level MHH legislation data were sourced from <span class="citation" data-cites="ballard_2025">@ballard_2025</span>, a peer-reviewed systematic policy review published in <em>Frontiers in Reproductive Health</em>. Table 2 of that article covers all 32 US states with enacted school MHH legislation as of August 2024, reporting policy type (funded mandate, unfunded mandate, appropriation, or authorization), year enacted, funding amount, estimated percentage of K-12 students reached, and coverage of seven MHH policy domains (materials provision, WASH facilities, knowledge and education, discomfort and disorders, supportive social environment, MHH impact assessment, and funding mechanism).</p>
+<p>The table was manually transcribed into a CSV file and validated against the article’s own summary statistics. The remaining 18 states without enacted legislation were added with a policy type of NO_ENACTED_POLICY. A stray whitespace character found in one field was corrected before database loading.</p>
+</section>
+<section id="geographic-filter-nces-grf-crosswalk" class="level2">
+<h2 class="anchored" data-anchor-id="geographic-filter-nces-grf-crosswalk">Geographic filter: NCES GRF crosswalk</h2>
+<p>The EDFacts dataset includes not only traditional public school districts but also independent charter schools, virtual academies, and administrative service agencies that lack fixed geographic boundaries. Including these non-geographic entities creates a structural imbalance between the two comparison groups: enacted-policy states average 28 percent of their LEAs excluded by the geographic filter, compared to only 10 percent for no-policy states, because charter schools cluster disproportionately in states that also tend to pass progressive education legislation.</p>
+<p>To address this, each LEA was matched against the NCES School District Geographic Relationship File (GRF), which assigns each geographically defined district to its primary county based on Census Bureau TIGER/Line boundaries <span class="citation" data-cites="nces_grf">[@nces_grf]</span>. Separate GRF vintages were used for each school year (GRF21 for 2020–2021, GRF22 for 2021–2022, GRF23 for 2022–2023). For districts spanning multiple counties, the primary county was assigned based on the largest land area overlap.</p>
+<p>Of the 53,321 district-year rows, 38,602 matched to a county (traditional public school districts) and 14,719 did not (charter and non-geographic entities). The 38,602 matched rows form the primary analysis dataset. The excluded rows were saved separately for transparency.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-match-rates" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-match-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public school districts are those successfully matched to a primary county via the NCES GRF crosswalk.
+</figcaption>
+<div aria-describedby="tbl-match-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Matched (traditional)</th>
+<th data-quarto-table-cell-role="th">Unmatched (non-geographic)</th>
+<th data-quarto-table-cell-role="th">Match rate</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">School year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2020–2021</th>
+<td>12839</td>
+<td>4685</td>
+<td>73%</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2021–2022</th>
+<td>12914</td>
+<td>4887</td>
+<td>73%</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2022–2023</th>
+<td>13039</td>
+<td>4957</td>
+<td>74%</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Total</th>
+<td>38792</td>
+<td>14529</td>
+<td>73%</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="data-normalization" class="level2">
+<h2 class="anchored" data-anchor-id="data-normalization">Data normalization</h2>
+<p>Our combined absenteeism dataset is structured in a wide format, with one row per district and dozens of columns representing each subgroup (AM7, AM7_F, AM7_M, AS7). This results in 36 demographic-related columns alone. While this layout is convenient for rapid exploration, it does not constitute a properly normalized database. Many columns simply repeat the same type of information across subgroups, and attaching state-level attributes directly to each district row would require duplicating the same state information thousands of times. To address this, we reorganized the data into five relational tables that reference one another, achieving a structure consistent with third normal form.</p>
+</section>
+<section id="entity-relationship-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="entity-relationship-diagram">Entity Relationship Diagram</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  STATES ||--o{ LEAS : contains
+  STATES ||--o| MENSTRUAL_LEGISLATION : has
+  LEAS ||--o{ ABSENTEEISM_FACTS : reports
+  LEAS ||--o{ ABSENTEEISM_SUBGROUPS : reports
+
+  STATES {
+    int state_id PK
+    string state_name
+  }
+  LEAS {
+    string lea_id PK
+    string lea_name
+    int state_id FK
+  }
+  ABSENTEEISM_FACTS {
+    int fact_id PK
+    string lea_id FK
+    string school_year
+    real total_students_enrollment
+    real total_students_absent
+    real absenteeism_rate
+  }
+  ABSENTEEISM_SUBGROUPS {
+    int subgroup_fact_id PK
+    string lea_id FK
+    string school_year
+    string subgroup_code
+    real count_total
+    real count_female
+    real count_male
+  }
+  MENSTRUAL_LEGISLATION {
+    int legislation_id PK
+    int state_id FK
+    string policy_type
+    int year_enacted
+    real funding_amount
+    real pct_k12_reached
+    string domain_materials
+    string domain_wash
+    string domain_funding
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div id="tbl-schema" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). The schema satisfies third normal form: each table contains only attributes dependent on its own primary key, with no repeating groups and no transitive dependencies.
+</figcaption>
+<div aria-describedby="tbl-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Grain</th>
+<th data-quarto-table-cell-role="th">Primary key</th>
+<th data-quarto-table-cell-role="th">Foreign key(s)</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Table</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">states</th>
+<td>One row per state</td>
+<td>state_id</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">leas</th>
+<td>One row per LEA</td>
+<td>lea_id</td>
+<td>state_id → states</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">absenteeism_facts</th>
+<td>One row per LEA per year</td>
+<td>fact_id</td>
+<td>lea_id → leas</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">absenteeism_subgroups</th>
+<td>One row per LEA per year per subgroup</td>
+<td>subgroup_fact_id</td>
+<td>lea_id → leas</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">menstrual_legislation</th>
+<td>One row per state</td>
+<td>legislation_id</td>
+<td>state_id → states</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="database-integrity-check" class="level2">
+<h2 class="anchored" data-anchor-id="database-integrity-check">Database integrity check</h2>
+<div id="cell-db-validation" class="cell" data-execution_count="5">
+<div id="db-validation" class="cell-output cell-output-display" data-execution_count="5">
+<style type="text/css">
+#T_4e9e3 th {
+  font-size: 0.85em;
+  text-align: left;
+}
+#T_4e9e3 td {
+  padding: 3px 16px;
+}
+#T_4e9e3_row0_col0, #T_4e9e3_row0_col1, #T_4e9e3_row1_col0, #T_4e9e3_row1_col1, #T_4e9e3_row2_col0, #T_4e9e3_row2_col1, #T_4e9e3_row3_col0, #T_4e9e3_row3_col1, #T_4e9e3_row4_col0, #T_4e9e3_row4_col1 {
+  font-size: 0.85em;
+  text-align: left;
+}
+</style>
+
+<table id="T_4e9e3" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th id="T_4e9e3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Tables</th>
+<th id="T_4e9e3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Rows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_4e9e3_row0_col0" class="data row0 col0">absenteeism_facts</td>
+<td id="T_4e9e3_row0_col1" class="data row0 col1">38602</td>
+</tr>
+<tr class="even">
+<td id="T_4e9e3_row1_col0" class="data row1 col0">absenteeism_subgroups</td>
+<td id="T_4e9e3_row1_col1" class="data row1 col1">324209</td>
+</tr>
+<tr class="odd">
+<td id="T_4e9e3_row2_col0" class="data row2 col0">leas</td>
+<td id="T_4e9e3_row2_col1" class="data row2 col1">12969</td>
+</tr>
+<tr class="even">
+<td id="T_4e9e3_row3_col0" class="data row3 col0">states</td>
+<td id="T_4e9e3_row3_col1" class="data row3 col1">52</td>
+</tr>
+<tr class="odd">
+<td id="T_4e9e3_row4_col0" class="data row4 col0">menstrual_legislation</td>
+<td id="T_4e9e3_row4_col1" class="data row4 col1">50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering">Feature engineering</h2>
+<p>The <strong>female chronic absenteeism rate</strong> (primary outcome for machine learning) is estimated as:</p>
+<p><span class="math display">\[\text{Female rate} = \frac{\text{count\_total} \times \text{female share}}{\text{total enrollment} \times 0.488} \times 100\]</span></p>
+<p>where female share = count_female / count_total per subgroup, and 0.488 reflects the nationally documented 48.8% female share of K-12 public enrollment <span class="citation" data-cites="nces_digest_2023">[@nces_digest_2023]</span>. District-level sex-disaggregated enrollment is unavailable in EDFacts; CCD provides it only at the state level using an incompatible ID system (CCD Agency ID ≠ EDFacts LEAID), making district-level merging infeasible. Applying a fixed 48.8% split uniformly introduces small measurement error at the district level, but deviations are expected to largely cancel out when aggregated to the state level.</p>
+<p><strong>Policy score</strong> encodes policy strength based on resource availability, informed by the legislative framework described in <span class="citation" data-cites="ballard_2025">@ballard_2025</span>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Policy type</th>
+<th>Score</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FM (Funded Mandate)</td>
+<td>4</td>
+<td>Mandate + external funds allocated</td>
+</tr>
+<tr class="even">
+<td>AP (Appropriations)</td>
+<td>3</td>
+<td>Funds allocated; no mandate</td>
+</tr>
+<tr class="odd">
+<td>AT (Authorization)</td>
+<td>2</td>
+<td>Permission to spend; no new funds</td>
+</tr>
+<tr class="even">
+<td>UM (Unfunded Mandate)</td>
+<td>1</td>
+<td>Mandate only; no funds, no authorization</td>
+</tr>
+<tr class="odd">
+<td>No policy</td>
+<td>0</td>
+<td>No enacted legislation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Domain coverage score</strong> counts how many of the seven MHH domains a state’s legislation addresses (0–7), providing a measure of policy comprehensiveness independent of policy type.</p>
+</section>
+<section id="data-ethics" class="level2">
+<h2 class="anchored" data-anchor-id="data-ethics">Data Ethics</h2>
+<p>This project uses publicly available, federally mandated reporting data at the LEA level. No individual student records are involved, and all data are aggregated at the district level at minimum. The demographic subgroup data (race, disability status, economic disadvantage, English learner status) are used to examine whether policy associations differ across populations, which is a standard and appropriate use of this type of data in education equity research.</p>
+<p><strong>Binary sex classification.</strong> By focusing on the female share of chronic absenteeism as an outcome, we are treating a binary sex classification (male/female) as a proxy for students who menstruate, because subgroup-level enrollment denominators by sex are not available in this dataset. Not all students coded female in school administrative records menstruate, and some students coded male do. This framing is a methodological simplification, not an endorsement of a binary view of gender. A program specialist at the Oregon Department of Education confirmed that transgender and non-binary students are explicitly underserved by current implementation practices and are invisible in this dataset — a substantive limitation, not merely a statistical one. Future work with richer data could examine this question with greater nuance.</p>
+<p><strong>Selection bias.</strong> States with enacted legislation tend to be those that were already experiencing higher absenteeism, which means any analysis comparing enacted to non-enacted states is partly comparing states with different baseline conditions rather than measuring a pure policy effect. We address this by framing our findings as correlational and by explicitly discussing the selection effect throughout.</p>
+<p><strong>Qualitative data handling.</strong> Insights from an informational interview with an Oregon Department of Education program specialist are cited as a personal communication <span class="citation" data-cites="oregon_specialist_2026">[@oregon_specialist_2026]</span>, pending her consent to be named. No identifying information about students, families, or individual schools is included.</p>
+<p><strong>Representation of vulnerable groups.</strong> The ECODIS and HOM (homeless) subgroups represent the most economically vulnerable students. Their data are presented to highlight, not diminish, their disproportionate burden of chronic absenteeism.</p>
+</section>
+</section>
+<section id="analysis" class="level1 page-columns page-full">
+<h1>Analysis</h1>
+<p>The validated and normalized database provided the foundation for the exploratory analysis reported here. All visuals were produced by joining three to five tables in the relational database using the traditional public school districts-only dataset, which represents the cleanest and most comparable sample between the two groups: enacted-policy and no-policy states. This dataset excludes charter schools and other non-geographic LEAs, which were found to be disproportionately concentrated in enacted-policy states and would otherwise create a structural imbalance between the two comparison groups.</p>
+<section id="analytical-approach-and-variable-structure" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="analytical-approach-and-variable-structure">Analytical approach and variable structure</h2>
+<p><strong>Dependent variable.</strong> The primary outcome of interest is the female share of chronic absenteeism, the percentage of chronically absent students who are female, measured at the school district (LEA) level and aggregated to the state level for analysis. This metric is used rather than a true female absenteeism rate because subgroup-level female enrollment denominators are not available in the EDFacts data at the district level.</p>
+<p><strong>Key independent variable.</strong> Whether a state has enacted menstrual health and hygiene (MHH) legislation, operationalized as a binary comparison (enacted vs no enacted policy) for the inferential statistics stage and as an ordinal policy score (FM=4, AP=3, AT=2, UM=1, none=0) for the machine learning stage.</p>
+<p><strong>Additional independent variables.</strong> Policy strength, domain coverage score (0–7), funding amount, and percentage of K-12 schools reached by the program.</p>
+<p><strong>Control variables.</strong> We include ECODIS rate (poverty concentration), the pre-existing gender gap in absenteeism rates, years since enactment, and implementation reach. These are features we hold constant to isolate the policy signal, poverty drives absenteeism independently of policy, the gender gap reflects structural conditions unrelated to MHH legislation, and years enacted accounts for the fact that older policies have had more time to show effects. Including these controls allows us to ask: does the policy association hold even after accounting for these other factors?</p>
+<p><strong>Multilevel nested design.</strong> Our data has a natural hierarchical structure: districts are nested within states, and the key independent variable, MHH legislation, varies only at the state level, not the district level. Because legislation is enacted at the state level and applies uniformly to all districts within that state, the analytic unit is the state (n=50) rather than the district (n≈12,800). District-level absenteeism counts are aggregated to state averages to correctly align the outcome variable with the level at which the policy varies. This is a deliberate methodological choice, not a data limitation: treating each of 38,602 district-year observations as an independent policy experiment would be statistically inappropriate given that all districts within the same state share the same policy environment. A formal multilevel regression model would explicitly estimate within-state and between-state variance; our approach addresses the same dependency by aggregating before modeling.</p>
+<p><strong>Inferential statistics.</strong> Welch’s two-sample t-tests compare the female share of chronic absenteeism between enacted and no-policy states separately for each of 12 demographic subgroups and across three school years. Welch’s t-test was chosen over the standard Student’s t-test because it does not assume equal variances between groups,appropriate here given that enacted-policy states (n≈8,265 district-year observations) and no-policy states (n≈4,500) differ substantially in size and composition. Holm-Bonferroni correction is applied across the 12 parallel subgroup tests to control the familywise error rate and reduce the risk of false positives.</p>
+<div class="cell page-columns page-full" data-execution_count="7">
+<div id="tbl-subgroup-ttest" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-execution_count="7">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-subgroup-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism by demographic subgroup. Enacted-policy states are compared to no-policy states for each subgroup. Mean difference is computed as enacted minus no-policy — negative values indicate enacted states have a lower female share (favourable direction). Holm-Bonferroni adjusted p-values are shown alongside raw p-values. Traditional Public School Districts Only.
+</figcaption>
+<div aria-describedby="tbl-subgroup-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="cell-output cell-output-display column-body" data-execution_count="7">
+<style type="text/css">
+#T_b9419 th {
+  font-size: 0.78em;
+}
+#T_b9419 td {
+  padding: 2px 6px;
+}
+#T_b9419_row0_col0, #T_b9419_row0_col1, #T_b9419_row0_col2, #T_b9419_row0_col3, #T_b9419_row0_col4, #T_b9419_row0_col5, #T_b9419_row0_col6, #T_b9419_row0_col7, #T_b9419_row0_col8, #T_b9419_row1_col0, #T_b9419_row1_col1, #T_b9419_row1_col2, #T_b9419_row1_col3, #T_b9419_row1_col4, #T_b9419_row1_col5, #T_b9419_row1_col6, #T_b9419_row1_col7, #T_b9419_row1_col8, #T_b9419_row2_col0, #T_b9419_row2_col1, #T_b9419_row2_col2, #T_b9419_row2_col3, #T_b9419_row2_col4, #T_b9419_row2_col5, #T_b9419_row2_col6, #T_b9419_row2_col7, #T_b9419_row2_col8, #T_b9419_row3_col0, #T_b9419_row3_col1, #T_b9419_row3_col2, #T_b9419_row3_col3, #T_b9419_row3_col4, #T_b9419_row3_col5, #T_b9419_row3_col6, #T_b9419_row3_col7, #T_b9419_row3_col8, #T_b9419_row4_col0, #T_b9419_row4_col1, #T_b9419_row4_col2, #T_b9419_row4_col3, #T_b9419_row4_col4, #T_b9419_row4_col5, #T_b9419_row4_col6, #T_b9419_row4_col7, #T_b9419_row4_col8, #T_b9419_row5_col0, #T_b9419_row5_col1, #T_b9419_row5_col2, #T_b9419_row5_col3, #T_b9419_row5_col4, #T_b9419_row5_col5, #T_b9419_row5_col6, #T_b9419_row5_col7, #T_b9419_row5_col8, #T_b9419_row6_col0, #T_b9419_row6_col1, #T_b9419_row6_col2, #T_b9419_row6_col3, #T_b9419_row6_col4, #T_b9419_row6_col5, #T_b9419_row6_col6, #T_b9419_row6_col7, #T_b9419_row6_col8, #T_b9419_row7_col0, #T_b9419_row7_col1, #T_b9419_row7_col2, #T_b9419_row7_col3, #T_b9419_row7_col4, #T_b9419_row7_col5, #T_b9419_row7_col6, #T_b9419_row7_col7, #T_b9419_row7_col8, #T_b9419_row8_col0, #T_b9419_row8_col1, #T_b9419_row8_col2, #T_b9419_row8_col3, #T_b9419_row8_col4, #T_b9419_row8_col5, #T_b9419_row8_col6, #T_b9419_row8_col7, #T_b9419_row8_col8, #T_b9419_row9_col0, #T_b9419_row9_col1, #T_b9419_row9_col2, #T_b9419_row9_col3, #T_b9419_row9_col4, #T_b9419_row9_col5, #T_b9419_row9_col6, #T_b9419_row9_col7, #T_b9419_row9_col8, #T_b9419_row10_col0, #T_b9419_row10_col1, #T_b9419_row10_col2, #T_b9419_row10_col3, #T_b9419_row10_col4, #T_b9419_row10_col5, #T_b9419_row10_col6, #T_b9419_row10_col7, #T_b9419_row10_col8, #T_b9419_row11_col0, #T_b9419_row11_col1, #T_b9419_row11_col2, #T_b9419_row11_col3, #T_b9419_row11_col4, #T_b9419_row11_col5, #T_b9419_row11_col6, #T_b9419_row11_col7, #T_b9419_row11_col8 {
+  font-size: 0.75em;
+}
+</style>
+
+<table id="T_b9419" class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_b9419_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">n (enacted)</th>
+<th id="T_b9419_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n (no policy)</th>
+<th id="T_b9419_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Mean (enacted)</th>
+<th id="T_b9419_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Mean (no policy)</th>
+<th id="T_b9419_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Mean difference</th>
+<th id="T_b9419_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">t-statistic</th>
+<th id="T_b9419_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">p-value (raw)</th>
+<th id="T_b9419_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">p-value (Holm-Bonferroni)</th>
+<th id="T_b9419_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">Significant (α=0.05)</th>
+</tr>
+<tr class="even">
+<th class="index_name level0" data-quarto-table-cell-role="th">Subgroup</th>
+<th class="blank col0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col1" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col2" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col3" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col4" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col5" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col6" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col7" data-quarto-table-cell-role="th">&nbsp;</th>
+<th class="blank col8" data-quarto-table-cell-role="th">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th id="T_b9419_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Asian</th>
+<td id="T_b9419_row0_col0" class="data row0 col0">12204</td>
+<td id="T_b9419_row0_col1" class="data row0 col1">4257</td>
+<td id="T_b9419_row0_col2" class="data row0 col2">55.15</td>
+<td id="T_b9419_row0_col3" class="data row0 col3">59.60</td>
+<td id="T_b9419_row0_col4" class="data row0 col4">-4.45</td>
+<td id="T_b9419_row0_col5" class="data row0 col5">-9.352</td>
+<td id="T_b9419_row0_col6" class="data row0 col6">0.000000</td>
+<td id="T_b9419_row0_col7" class="data row0 col7">0.000000</td>
+<td id="T_b9419_row0_col8" class="data row0 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Black or African American</th>
+<td id="T_b9419_row1_col0" class="data row1 col0">17092</td>
+<td id="T_b9419_row1_col1" class="data row1 col1">7431</td>
+<td id="T_b9419_row1_col2" class="data row1 col2">52.58</td>
+<td id="T_b9419_row1_col3" class="data row1 col3">54.55</td>
+<td id="T_b9419_row1_col4" class="data row1 col4">-1.97</td>
+<td id="T_b9419_row1_col5" class="data row1 col5">-6.256</td>
+<td id="T_b9419_row1_col6" class="data row1 col6">0.000000</td>
+<td id="T_b9419_row1_col7" class="data row1 col7">0.000000</td>
+<td id="T_b9419_row1_col8" class="data row1 col8">✓</td>
+</tr>
+<tr class="odd">
+<th id="T_b9419_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hispanic / Latino</th>
+<td id="T_b9419_row2_col0" class="data row2 col0">21933</td>
+<td id="T_b9419_row2_col1" class="data row2 col1">11301</td>
+<td id="T_b9419_row2_col2" class="data row2 col2">51.11</td>
+<td id="T_b9419_row2_col3" class="data row2 col3">52.41</td>
+<td id="T_b9419_row2_col4" class="data row2 col4">-1.30</td>
+<td id="T_b9419_row2_col5" class="data row2 col5">-6.359</td>
+<td id="T_b9419_row2_col6" class="data row2 col6">0.000000</td>
+<td id="T_b9419_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_b9419_row2_col8" class="data row2 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Multiracial</th>
+<td id="T_b9419_row3_col0" class="data row3 col0">20071</td>
+<td id="T_b9419_row3_col1" class="data row3 col1">9989</td>
+<td id="T_b9419_row3_col2" class="data row3 col2">52.10</td>
+<td id="T_b9419_row3_col3" class="data row3 col3">54.25</td>
+<td id="T_b9419_row3_col4" class="data row3 col4">-2.15</td>
+<td id="T_b9419_row3_col5" class="data row3 col5">-8.447</td>
+<td id="T_b9419_row3_col6" class="data row3 col6">0.000000</td>
+<td id="T_b9419_row3_col7" class="data row3 col7">0.000000</td>
+<td id="T_b9419_row3_col8" class="data row3 col8">✓</td>
+</tr>
+<tr class="odd">
+<th id="T_b9419_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Children w/ Disabilities (IDEA)</th>
+<td id="T_b9419_row4_col0" class="data row4 col0">23746</td>
+<td id="T_b9419_row4_col1" class="data row4 col1">12280</td>
+<td id="T_b9419_row4_col2" class="data row4 col2">37.35</td>
+<td id="T_b9419_row4_col3" class="data row4 col3">39.41</td>
+<td id="T_b9419_row4_col4" class="data row4 col4">-2.06</td>
+<td id="T_b9419_row4_col5" class="data row4 col5">-13.666</td>
+<td id="T_b9419_row4_col6" class="data row4 col6">0.000000</td>
+<td id="T_b9419_row4_col7" class="data row4 col7">0.000000</td>
+<td id="T_b9419_row4_col8" class="data row4 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">White</th>
+<td id="T_b9419_row5_col0" class="data row5 col0">24468</td>
+<td id="T_b9419_row5_col1" class="data row5 col1">13130</td>
+<td id="T_b9419_row5_col2" class="data row5 col2">48.45</td>
+<td id="T_b9419_row5_col3" class="data row5 col3">49.62</td>
+<td id="T_b9419_row5_col4" class="data row5 col4">-1.17</td>
+<td id="T_b9419_row5_col5" class="data row5 col5">-10.652</td>
+<td id="T_b9419_row5_col6" class="data row5 col6">0.000000</td>
+<td id="T_b9419_row5_col7" class="data row5 col7">0.000000</td>
+<td id="T_b9419_row5_col8" class="data row5 col8">✓</td>
+</tr>
+<tr class="odd">
+<th id="T_b9419_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">English Learner</th>
+<td id="T_b9419_row6_col0" class="data row6 col0">16206</td>
+<td id="T_b9419_row6_col1" class="data row6 col1">7704</td>
+<td id="T_b9419_row6_col2" class="data row6 col2">49.41</td>
+<td id="T_b9419_row6_col3" class="data row6 col3">51.86</td>
+<td id="T_b9419_row6_col4" class="data row6 col4">-2.44</td>
+<td id="T_b9419_row6_col5" class="data row6 col5">-8.478</td>
+<td id="T_b9419_row6_col6" class="data row6 col6">0.000000</td>
+<td id="T_b9419_row6_col7" class="data row6 col7">0.000000</td>
+<td id="T_b9419_row6_col8" class="data row6 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Section 504 Disability</th>
+<td id="T_b9419_row7_col0" class="data row7 col0">14496</td>
+<td id="T_b9419_row7_col1" class="data row7 col1">9225</td>
+<td id="T_b9419_row7_col2" class="data row7 col2">49.18</td>
+<td id="T_b9419_row7_col3" class="data row7 col3">50.85</td>
+<td id="T_b9419_row7_col4" class="data row7 col4">-1.66</td>
+<td id="T_b9419_row7_col5" class="data row7 col5">-6.201</td>
+<td id="T_b9419_row7_col6" class="data row7 col6">0.000000</td>
+<td id="T_b9419_row7_col7" class="data row7 col7">0.000000</td>
+<td id="T_b9419_row7_col8" class="data row7 col8">✓</td>
+</tr>
+<tr class="odd">
+<th id="T_b9419_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Homeless</th>
+<td id="T_b9419_row8_col0" class="data row8 col0">17706</td>
+<td id="T_b9419_row8_col1" class="data row8 col1">7575</td>
+<td id="T_b9419_row8_col2" class="data row8 col2">52.75</td>
+<td id="T_b9419_row8_col3" class="data row8 col3">55.08</td>
+<td id="T_b9419_row8_col4" class="data row8 col4">-2.33</td>
+<td id="T_b9419_row8_col5" class="data row8 col5">-8.087</td>
+<td id="T_b9419_row8_col6" class="data row8 col6">0.000000</td>
+<td id="T_b9419_row8_col7" class="data row8 col7">0.000000</td>
+<td id="T_b9419_row8_col8" class="data row8 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">Economically Disadvantaged</th>
+<td id="T_b9419_row9_col0" class="data row9 col0">8098</td>
+<td id="T_b9419_row9_col1" class="data row9 col1">4462</td>
+<td id="T_b9419_row9_col2" class="data row9 col2">49.08</td>
+<td id="T_b9419_row9_col3" class="data row9 col3">50.16</td>
+<td id="T_b9419_row9_col4" class="data row9 col4">-1.08</td>
+<td id="T_b9419_row9_col5" class="data row9 col5">-6.338</td>
+<td id="T_b9419_row9_col6" class="data row9 col6">0.000000</td>
+<td id="T_b9419_row9_col7" class="data row9 col7">0.000000</td>
+<td id="T_b9419_row9_col8" class="data row9 col8">✓</td>
+</tr>
+<tr class="odd">
+<th id="T_b9419_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Pacific Islander</th>
+<td id="T_b9419_row10_col0" class="data row10 col0">5755</td>
+<td id="T_b9419_row10_col1" class="data row10 col1">2089</td>
+<td id="T_b9419_row10_col2" class="data row10 col2">62.87</td>
+<td id="T_b9419_row10_col3" class="data row10 col3">65.82</td>
+<td id="T_b9419_row10_col4" class="data row10 col4">-2.94</td>
+<td id="T_b9419_row10_col5" class="data row10 col5">-3.852</td>
+<td id="T_b9419_row10_col6" class="data row10 col6">0.000119</td>
+<td id="T_b9419_row10_col7" class="data row10 col7">0.000238</td>
+<td id="T_b9419_row10_col8" class="data row10 col8">✓</td>
+</tr>
+<tr class="even">
+<th id="T_b9419_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">American Indian / Alaska Native</th>
+<td id="T_b9419_row11_col0" class="data row11 col0">10510</td>
+<td id="T_b9419_row11_col1" class="data row11 col1">6247</td>
+<td id="T_b9419_row11_col2" class="data row11 col2">60.04</td>
+<td id="T_b9419_row11_col3" class="data row11 col3">59.30</td>
+<td id="T_b9419_row11_col4" class="data row11 col4">0.74</td>
+<td id="T_b9419_row11_col5" class="data row11 col5">1.765</td>
+<td id="T_b9419_row11_col6" class="data row11 col6">0.077626</td>
+<td id="T_b9419_row11_col7" class="data row11 col7">0.077626</td>
+<td id="T_b9419_row11_col8" class="data row11 col8">✗</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>Robustness validation.</strong> The core finding is cross-checked at three independent levels of geographic aggregation: the full LEA-level dataset including charters, the traditional-LEA-only dataset (primary), and a county-level aggregation. A finding that survives all three levels is substantially less likely to be a data artifact. This three-way check directly addresses the question: <em>how do you know a result is good, not just lucky?</em></p>
+<p><strong>Machine learning.</strong> Linear Regression and Random Forest are used as complementary tools rather than competing models. Linear Regression provides directly interpretable standardized coefficients, each coefficient answers “controlling for all other features, what is the estimated direction and magnitude of this feature’s association with female absenteeism?” Random Forest captures non-linear relationships and feature interactions that linear regression cannot, and its feature importance scores are robust to correlated predictors. Both models are evaluated using 5-fold cross-validation R² and, for Random Forest, out-of-bag R² as independent generalization estimates. K-means clustering (K=7, validated by silhouette score and t-SNE projection) identifies natural state groupings beyond the binary policy classification.</p>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<section id="overall-absenteeism-trends" class="level3">
+<h3 class="anchored" data-anchor-id="overall-absenteeism-trends">Overall absenteeism trends</h3>
+<p>Chronic absenteeism rose sharply in the 2021–2022 school year across both enacted-policy and no-policy states, reflecting the well-documented national post-pandemic attendance crisis, before partially recovering in 2022–2023. Enacted-policy states showed higher average absenteeism rates than no-policy states in every year studied. Despite this higher overall rate, the distribution of absenteeism rates across districts overlaps substantially between the two groups, confirming that overall absenteeism rate alone cannot distinguish enacted-policy from no-policy states. The consistently higher overall absenteeism in enacted-policy states is interpreted as a <strong>selection effect</strong>: states that were already struggling more with attendance were the ones motivated to pass this kind of legislation.</p>
+<div id="cell-fig-overall-trend" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-overall-trend" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overall-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-overall-trend-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Average chronic absenteeism rate by legislation status and school year. Enacted-policy states (green) show higher overall rates in every year, a selection effect, not a policy harm. States already struggling with attendance were the ones motivated to enact legislation."><img src="capstone_files/figure-html/fig-overall-trend-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="1334" height="732"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overall-trend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Average chronic absenteeism rate by legislation status and school year. Enacted-policy states (green) show higher overall rates in every year, a selection effect, not a policy harm. States already struggling with attendance were the ones motivated to enact legislation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="female-share-of-chronic-absenteeism" class="level3">
+<h3 class="anchored" data-anchor-id="female-share-of-chronic-absenteeism">Female share of chronic absenteeism</h3>
+<p>The primary outcome of interest is the <strong>female share of chronic absenteeism</strong>: for each district, the proportion of chronically absent students who are female, computed as the sum of all female subgroup counts divided by the sum of all combined subgroup counts. This metric is used rather than a true female absenteeism rate because subgroup-level female enrollment denominators are not available in the EDFacts data.</p>
+<p>Across all three school years, districts in enacted-policy states showed a consistently lower female share than districts in no-policy states. KDE density plots of this distribution, computed separately for each school year to avoid pooling the same districts across multiple years, show the enacted-policy curve shifted slightly left of the no-policy curve in every year, with Welch’s t-tests confirming the difference is statistically significant (p values ranging from 3.7×10⁻⁸ to 4.7×10⁻⁹). Both groups show rising female shares over the study period, reflecting a national post-pandemic trend, but the enacted-policy group remains consistently below the no-policy group.</p>
+<div id="cell-fig-us-map" class="cell" data-fig-height="6" data-fig-width="9" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-us-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-us-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-us-map-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Female share of chronic absenteeism by state and MHH policy type, school year 2022–2023. Each state is colored by policy type: Funded Mandate (dark blue), Appropriations (light blue), Authorization (green), Unfunded Mandate (orange), and No Enacted Policy (gray). The percentage shown inside each state is the average female share of chronically absent students across all traditional public school districts in that state. Traditional Public School Districts Only."><img src="capstone_files/figure-html/fig-us-map-output-1.png" width="1335" height="639" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-us-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Female share of chronic absenteeism by state and MHH policy type, school year 2022–2023. Each state is colored by policy type: Funded Mandate (dark blue), Appropriations (light blue), Authorization (green), Unfunded Mandate (orange), and No Enacted Policy (gray). The percentage shown inside each state is the average female share of chronically absent students across all traditional public school districts in that state. Traditional Public School Districts Only.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="policy-type-bars" class="level2">
+<h2 class="anchored" data-anchor-id="policy-type-bars">Policy Type Bars</h2>
+<div id="cell-fig-policy-type-bars" class="cell" data-fig-height="8" data-fig-width="9" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-policy-type-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-policy-type-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-policy-type-bars-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type. Traditional Public School Districts Only."><img src="capstone_files/figure-html/fig-policy-type-bars-output-1.png" width="1461" height="1509" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-policy-type-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type. Traditional Public School Districts Only.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="year-over-year-female-chronic-absenteeism-by-state" class="level3">
+<h3 class="anchored" data-anchor-id="year-over-year-female-chronic-absenteeism-by-state">Year-over-year female chronic absenteeism by state</h3>
+<p>To examine whether the female share was changing differently in the two groups over time, we computed year-over-year changes in female share for each state across two transition periods: 2020–2021 to 2021–2022, and 2021–2022 to 2022–2023. Female share rose in nearly every state during the pandemic spike year, with no significant difference between groups (+1.90pp enacted vs +1.36pp no-policy, p = 0.10). During the partial recovery year, the two groups were virtually identical (+0.81pp enacted vs +0.82pp no-policy, p = 0.97). Neither transition showed a statistically significant group difference, confirming that while enacted-policy states consistently show a lower <strong>level</strong> of female share, they are not changing at a different <strong>rate</strong>. This null trajectory result is discussed further in the Discussion section as evidence that product provision alone may be insufficient to alter the direction of female absenteeism trends.</p>
+<div id="cell-fig-female-share-kde" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div id="fig-female-share-kde" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-female-share-kde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-female-share-kde-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Distribution of district-level female share of chronic absenteeism by legislation status, shown as independent samples per school year. Enacted-policy districts (green, solid) peak consistently to the left in every year. Welch’s t-tests confirm statistical significance (p < 0.001) in all three years. Dashed vertical lines show group means."><img src="capstone_files/figure-html/fig-female-share-kde-output-1.png" width="1336" height="628" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-female-share-kde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Distribution of district-level female share of chronic absenteeism by legislation status, shown as independent samples per school year. Enacted-policy districts (green, solid) peak consistently to the left in every year. Welch’s t-tests confirm statistical significance (p &lt; 0.001) in all three years. Dashed vertical lines show group means.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="female-vs-male-chronic-absenteeism-rate" class="level3">
+<h3 class="anchored" data-anchor-id="female-vs-male-chronic-absenteeism-rate">Female vs male chronic absenteeism rate</h3>
+<div id="cell-fig-female-male-bars" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-female-male-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-female-male-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-female-male-bars-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Female and male chronic absenteeism rates by school year and legislation status. Rates are estimated as total absent × sex share ÷ estimated sex-specific enrollment (female 48.8%, male 51.2%, NCES 2023 Table 203.10). Female share is derived from subgroup counts to avoid double-counting students appearing in multiple subgroups. Traditional Public School Districts Only."><img src="capstone_files/figure-html/fig-female-male-bars-output-1.png" width="1322" height="668" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-female-male-bars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Female and male chronic absenteeism rates by school year and legislation status. Rates are estimated as total absent × sex share ÷ estimated sex-specific enrollment (female 48.8%, male 51.2%, NCES 2023 Table 203.10). Female share is derived from subgroup counts to avoid double-counting students appearing in multiple subgroups. Traditional Public School Districts Only.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="subgroup-analysis-with-holm-bonferroni-correction" class="level3">
+<h3 class="anchored" data-anchor-id="subgroup-analysis-with-holm-bonferroni-correction">Subgroup analysis with Holm-Bonferroni correction</h3>
+<p>The female-share comparison was conducted separately for each of 12 demographic subgroups using Welch’s t-tests. Eleven of 12 subgroups showed a statistically significantly lower female share in enacted-policy states. The strongest signal was among children with disabilities under IDEA (p ≈ 2.8×10⁻⁴²), and the largest effect size was for Asian students (4.4 percentage points lower in enacted-policy states). The economically disadvantaged subgroup (ECODIS, available in 2022–2023 only) showed a significant association (p ≈ 2.5×10⁻¹⁰), which is of particular interest given that period poverty is by definition a poverty-driven barrier. The only subgroup without a significant difference was American Indian or Alaska Native.</p>
+<p>To address the multiple comparisons problem introduced by running 12 parallel significance tests, we apply <strong>Holm-Bonferroni correction</strong> <span class="citation" data-cites="holm_1979">[@holm_1979]</span> alongside the unadjusted p-values.</p>
+<div id="cell-fig-subgroup" class="cell" data-fig-height="5" data-fig-width="7" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div id="fig-subgroup" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-subgroup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-subgroup-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share - the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance."><img src="capstone_files/figure-html/fig-subgroup-output-1.png" width="1358" height="814" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-subgroup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share - the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="subgroups-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="subgroups-analysis">Subgroups Analysis</h2>
+<div class="cell" data-fig-height="6" data-fig-width="9" data-execution_count="14">
+<div id="fig-subgroup-by-year" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="14" data-fig-height="6" data-fig-width="9">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-subgroup-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-subgroup-by-year-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-subgroup-by-year-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-subgroup-by-year-output-1.png" class="lightbox" data-gallery="fig-subgroup-by-year" title="Figure&nbsp;7&nbsp;(a): Female share of chronic absenteeism by demographic subgroup and school year. Blue bars show enacted-policy states; orange bars show no-policy states. Significance labels reflect Welch’s t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only."><img src="capstone_files/figure-html/fig-subgroup-by-year-output-1.png" data-ref-parent="fig-subgroup-by-year" width="1360" height="883" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-subgroup-by-year-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Female share of chronic absenteeism by demographic subgroup and school year. Blue bars show enacted-policy states; orange bars show no-policy states. Significance labels reflect Welch’s t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-subgroup-by-year-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1360" height="883">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-subgroup-by-year-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-subgroup-by-year-output-2.png" class="lightbox" data-gallery="fig-subgroup-by-year" title="Figure&nbsp;7&nbsp;(b): "><img src="capstone_files/figure-html/fig-subgroup-by-year-output-2.png" id="fig-subgroup-by-year-2" data-ref-parent="fig-subgroup-by-year" width="1360" height="883" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-subgroup-by-year-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-subgroup-by-year-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="1360" height="883">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-subgroup-by-year-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-subgroup-by-year-output-3.png" class="lightbox" data-gallery="fig-subgroup-by-year" title="Figure&nbsp;7&nbsp;(c): "><img src="capstone_files/figure-html/fig-subgroup-by-year-output-3.png" id="fig-subgroup-by-year-3" data-ref-parent="fig-subgroup-by-year" width="1360" height="883" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-subgroup-by-year-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-subgroup-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7
+</figcaption>
+</figure>
+</div>
+</div>
+<section id="economically-disadvantaged-students" class="level3">
+<h3 class="anchored" data-anchor-id="economically-disadvantaged-students">Economically disadvantaged students</h3>
+<p>In the 2022–2023 school year, economically disadvantaged students represented 66.8 percent of all chronically absent students nationwide, totaling 7,981,704 students, of whom 48.9 percent were female (3,900,707 students). This subgroup is central to the project’s theoretical framing: if menstrual product access is a meaningful driver of female absenteeism, its effect should be most visible among students who cannot afford products independently. The ECODIS finding — significantly lower female share in enacted-policy states — is consistent with this hypothesis, though the single-year availability of this subgroup limits the strength of the inference.</p>
+</section>
+<section id="robustness-checks" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-checks">Robustness checks</h3>
+<p>The core female-share finding was cross-checked at three different levels of geographic aggregation: the full LEA-level dataset (including charters), the traditional-LEA-only dataset, and a county-level aggregation. The pattern held consistently across all three. The main difference was in the funding-amount correlation, which dropped from r = 0.429 in the full dataset to r = 0.176 in both cleaner versions, suggesting the higher original value was inflated by the charter distribution asymmetry.</p>
+<div class="cell" data-execution_count="15">
+<div id="tbl-robustness" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="15">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-robustness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Three-way robustness check across levels of geographic aggregation. ‘Sig.’ = statistically significant after Welch’s t-test (p &lt; 0.05). Direction indicates whether enacted-policy states show higher or lower female share relative to no-policy states.
+</figcaption>
+<div aria-describedby="tbl-robustness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">All LEAs</th>
+<th data-quarto-table-cell-role="th">Traditional LEAs only</th>
+<th data-quarto-table-cell-role="th">County level</th>
+<th data-quarto-table-cell-role="th">Verdict</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Finding</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Children w/ disabilities (IDEA)</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">White</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Economically disadvantaged</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Hispanic / Latino</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Asian</th>
+<td>Sig., negative (largest effect)</td>
+<td>Sig., negative</td>
+<td>Not significant</td>
+<td>LEA-grain robust</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">English learner</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Not significant</td>
+<td>LEA-grain robust</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Black or African American</th>
+<td>Sig., negative</td>
+<td>Sig., negative</td>
+<td>Sig., positive</td>
+<td>Direction reversal at county</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Overall rate trend</th>
+<td>Enacted higher</td>
+<td>Enacted higher</td>
+<td>Enacted higher</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Female share trend</th>
+<td>Enacted lower</td>
+<td>Enacted lower</td>
+<td>Enacted lower</td>
+<td>Robust across all three</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Funding correlation</th>
+<td>r = 0.429</td>
+<td>r = 0.176</td>
+<td>r = 0.178</td>
+<td>Not robust — charter-inflated</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning">Machine Learning</h2>
+<p>Machine learning serves two complementary purposes in this analysis. First, regression models test which policy and contextual features are most predictive of female chronic absenteeism, providing a data-driven complement to the descriptive group comparisons. Second, clustering reveals natural groupings of states that a binary enacted/no-policy classification cannot capture, generating hypotheses about why some enacted states perform well and others do not.</p>
+<section id="why-these-methods" class="level3">
+<h3 class="anchored" data-anchor-id="why-these-methods">Why these methods?</h3>
+<p><strong>Linear Regression</strong> was chosen as the baseline model because it provides directly interpretable coefficients for a policy audience: each coefficient answers “controlling for all other features, what is the estimated association between this feature and female absenteeism?” Its assumption of linearity is a known simplification but appropriate for a first-pass model on n=50 states.</p>
+<p><strong>Random Forest</strong> was chosen as the second model because it captures non-linear relationships and feature interactions that linear regression cannot. It is robust to correlated features and provides feature importance scores that are stable across runs. With n=50, overfitting is expected and is quantified honestly using out-of-bag (OOB) score. The two models are not competitors — they triangulate the same story from different angles.</p>
+<p><strong>K-means clustering</strong> was chosen because the research question is fundamentally exploratory: we want to discover whether states naturally group into meaningfully distinct profiles beyond the binary enacted/no-policy classification.</p>
+<p><strong>t-SNE</strong> was chosen to visualize the high-dimensional feature space in two dimensions, revealing structure that cluster labels alone cannot convey and showing whether policy type naturally separates states in feature space.</p>
+</section>
+<section id="feature-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="feature-matrix">Feature matrix</h3>
+<div id="ml-features" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-stdout">
+<pre><code>Feature matrix: 50 states × 10 features
+Target (female rate 2022-23): mean=27.3%, range=15.9–43.4%</code></pre>
+</div>
+</div>
+</section>
+<section id="linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression">Linear regression</h3>
+<p>A linear regression using the clean 10-feature set explained 36.1% of variance in the target (R²=0.361, RMSE=6.24pp). Five-fold cross-validation returned a mean CV R² of -0.505, indicating that the model does not generalize to unseen states, expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. <strong>Policy score carries a positive standardized coefficient (+1.02)</strong>, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. The <strong>strongest negative coefficient belongs to domain coverage score (-1.44)</strong>, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.</p>
+<div id="cell-fig-lr-coef" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="17">
+<div class="cell-output cell-output-stdout">
+<pre><code>             Feature                       Label  Coefficient
+4       domain_score       Domain coverage score    -1.442972
+9    gender_gap_2223        Gender gap (2022–23)    -1.118808
+1      years_enacted               Years enacted    -0.998696
+2     funding_amount          Funding amount ($)    -0.322889
+7  domain_mhh_impact          Domain: MHH impact    -0.281239
+6  domain_social_env  Domain: Social environment    -0.125170
+0       policy_score                Policy score     1.018035
+8        ecodis_rate       ECODIS rate (poverty)     1.626842
+3    pct_k12_reached              % K-12 reached     2.268693
+5   domain_knowledge           Domain: Knowledge     3.555019</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-lr-coef" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lr-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-lr-coef-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;8: Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. Policy score is positive (+1.02), likely reflecting selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone."><img src="capstone_files/figure-html/fig-lr-coef-output-2.png" width="1184" height="731" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lr-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. Policy score is positive (+1.02), likely reflecting selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest">Random forest</h3>
+<p>A Random Forest Regressor (500 trees, minimum 2 samples per leaf) achieved a training R² of 0.779 and RMSE of 3.67pp, but an out-of-bag R² of 0.093 and a 5-fold CV mean R² of -0.085. The large gap between training and out-of-bag performance confirms overfitting consistent with the small sample size. The OOB R² of 0.093 represents the most conservative and honest estimate of generalization performance. Despite overfitting, the <strong>feature importance rankings</strong> are interpreted as descriptive findings: gender gap (0.543), ECODIS rate (0.174), and % K-12 reached (0.131) consistently outrank policy score and domain coverage, confirming that structural context dominates short-term policy effects.</p>
+<div id="cell-fig-rf-importance" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div id="fig-rf-importance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rf-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-rf-importance-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;9: Random Forest feature importance ranking. Gender gap between female and male absenteeism rates and poverty concentration (ECODIS rate) dominate, confirming that structural context explains more variance in female absenteeism than policy characteristics alone at the state level. The dashed line marks the median importance across all features."><img src="capstone_files/figure-html/fig-rf-importance-output-1.png" width="1218" height="732" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rf-importance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Random Forest feature importance ranking. Gender gap between female and male absenteeism rates and poverty concentration (ECODIS rate) dominate, confirming that structural context explains more variance in female absenteeism than policy characteristics alone at the state level. The dashed line marks the median importance across all features.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div id="tbl-model-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="19">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Regression model comparison — state-level ML pipeline (n=50 states). The large gap between training R² and cross-validation R² reflects overfitting expected at this sample size. OOB R² is the most conservative and honest generalization estimate.
+</figcaption>
+<div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Linear Regression</th>
+<th data-quarto-table-cell-role="th">Random Forest</th>
+<th data-quarto-table-cell-role="th">Interpretation</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">Metric</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Training R²</th>
+<td>0.281</td>
+<td>0.722</td>
+<td>In-sample fit</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5-Fold CV R²</th>
+<td>-0.205</td>
+<td>-0.230</td>
+<td>Overfitting — n=50 too small</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">OOB R² (RF only)</th>
+<td>—</td>
+<td>-0.097</td>
+<td>Best honest estimate</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">RMSE</th>
+<td>5.66pp</td>
+<td>3.52pp</td>
+<td>Average prediction error</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Top predictor</th>
+<td>Gender gap (coef negative)</td>
+<td>Gender gap (imp 0.543)</td>
+<td>Consistent across both models</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="oregon-case-study-the-implementation-gap" class="level3">
+<h3 class="anchored" data-anchor-id="oregon-case-study-the-implementation-gap">Oregon case study: the implementation gap</h3>
+<p>Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration — Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.</p>
+<p>An informational interview with a program specialist at the Oregon Department of Education’s Menstrual Dignity Program <span class="citation" data-cites="oregon_specialist_2026">[@oregon_specialist_2026]</span> revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: <strong>MHH legislation is necessary but insufficient</strong>, and its impact depends critically on implementation fidelity at the school and district level.</p>
+</section>
+<section id="k-means-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h3>
+<p>K-means clustering was applied to the full 11-feature matrix (including the target variable) to identify natural groupings of states. The optimal number of clusters was selected using the elbow method and silhouette score across K=2 through K=10. Silhouette scores peaked at K=7 (score=0.262). The seven clusters reveal a more nuanced typology than the binary enacted/no-policy distinction: Funded Mandate states appear in five of the seven clusters, confirming that policy type alone is insufficient to predict outcomes.</p>
+<div id="cell-fig-tsne" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<div id="fig-tsne" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="capstone_files/figure-html/fig-tsne-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;10: t-SNE projection of the state-level feature space, colored by cluster membership. The 18 no-policy states (gray, C1) form a distinct mass on the right, cleanly separated from all enacted-policy clusters. Oregon and Nevada (red, C6 — the Paradox Cluster) sit isolated at top center, visually distinct from all other Funded Mandate states. Colorado, New Jersey, and North Carolina (dark blue, C5 — the Sweet Spot) anchor the lower left, combining strong policy with low poverty and achieving the best outcomes."><img src="capstone_files/figure-html/fig-tsne-output-1.png" width="1328" height="734" class="figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: t-SNE projection of the state-level feature space, colored by cluster membership. The 18 no-policy states (gray, C1) form a distinct mass on the right, cleanly separated from all enacted-policy clusters. Oregon and Nevada (red, C6 — the Paradox Cluster) sit isolated at top center, visually distinct from all other Funded Mandate states. Colorado, New Jersey, and North Carolina (dark blue, C5 — the Sweet Spot) anchor the lower left, combining strong policy with low poverty and achieving the best outcomes.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div id="tbl-clusters" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="21">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: K-means cluster profiles (K=7) — state-level feature matrix (n=50 states). Avg female rate is the mean target variable per cluster. The Sweet Spot cluster (C5) achieves the best outcomes by combining strong policy with low poverty. The Paradox Cluster (C6) holds maximum domain coverage yet maximum absenteeism.
+</figcaption>
+<div aria-describedby="tbl-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">N states</th>
+<th data-quarto-table-cell-role="th">Avg female rate (%)</th>
+<th data-quarto-table-cell-role="th">Avg policy score</th>
+<th data-quarto-table-cell-role="th">Avg domain score</th>
+<th data-quarto-table-cell-role="th">Avg % K-12 reached</th>
+<th data-quarto-table-cell-role="th">Avg ECODIS rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C0: Moderate implementation</th>
+<td>5</td>
+<td>28.2</td>
+<td>0.2</td>
+<td>0.4</td>
+<td>14.0</td>
+<td>52.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C1: Policy void</th>
+<td>12</td>
+<td>28.8</td>
+<td>3.4</td>
+<td>2.2</td>
+<td>52.7</td>
+<td>49.1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C2: High poverty, low reach</th>
+<td>8</td>
+<td>26.5</td>
+<td>1.4</td>
+<td>1.6</td>
+<td>50.4</td>
+<td>49.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C3: Low poverty, high reach</th>
+<td>2</td>
+<td>41.0</td>
+<td>2.5</td>
+<td>5.0</td>
+<td>63.5</td>
+<td>48.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C4: High reach, high absenteeism</th>
+<td>14</td>
+<td>25.2</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>49.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">C5: Strong policy, low poverty</th>
+<td>3</td>
+<td>25.7</td>
+<td>3.7</td>
+<td>4.0</td>
+<td>47.7</td>
+<td>48.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">C6: Strong policy, high absenteeism</th>
+<td>6</td>
+<td>25.2</td>
+<td>2.8</td>
+<td>3.2</td>
+<td>57.0</td>
+<td>49.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>Our analysis consistently shows that states with enacted MHH legislation have a lower female share of chronic absenteeism compared to states without such legislation, a pattern that holds across 11 of 12 demographic subgroups, all three school years, and three different levels of geographic aggregation. The finding is statistically significant and survives Holm-Bonferroni correction across 12 parallel subgroup tests.</p>
+<p>What these results do not mean is equally important to state clearly. Enacted-policy states have higher overall chronic absenteeism rates than no-policy states, not lower,confirming that states already struggling with attendance were the ones motivated to act. This is a selection effect, not evidence that the legislation made things worse. Chronic absenteeism is driven by a complex web of root causes including poverty, housing instability, transportation barriers, language access, and lack of belonging, and menstrual health legislation addresses only one thread in that web.</p>
+<p>The machine learning analysis adds critical nuance: <strong>policy type alone does not determine outcomes</strong>. The t-SNE visualization shows Funded Mandate states scattered across the entire feature space. The percentage of K-12 schools actually reached (PCT_K12_REACHED) predicts female absenteeism better than policy score, implementation reach matters more than what the legislation says on paper.</p>
+<p>The null trajectory result, enacted and no-policy states changing at the same rate year-over-year, is framed as an honest strength rather than a weakness: MHH legislation may lower the <em>level</em> of female absenteeism burden but has not yet changed its <em>trajectory</em>, supporting a “floor not ceiling” interpretation. With most policies enacted between 2021 and 2023, and our data window closing in 2023, we are measuring at most one to two years of post-enactment data, far too narrow a window to detect long-term behavioral change.</p>
+<p>Qualitative evidence from the Oregon Department of Education Menstrual Dignity Program explains cluster C5: Strong Policy, low poverty where school board resistance, stakeholder opposition, and unused funds create an implementation gap that no administrative dataset currently measures. These findings are best understood as an early signal that warrants continued monitoring, not a demonstration that the policy works.</p>
+</section>
+<section id="conclusions" class="level1">
+<h1>Conclusions</h1>
+<p>The one takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association survives every analytical lens applied to it. This does not prove the policy works causally, but it is precisely the kind of early, consistent, multi-method signal that justifies continued investment in both the policy and its evaluation.</p>
+<p><strong>Policy type alone is not enough.</strong> Enacting a law is the floor, not the ceiling. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent, determines outcomes more than what the legislation requires. Our case study for Oregon State makes this concrete: Oregon and Nevada hold the strongest policy configurations in the nation and the worst outcomes among enacted states.</p>
+<p>Our specific recommendation is that states without enacted legislation should treat the ECODIS finding as their highest-priority decision point. Economically disadvantaged female students are both the most likely to face period-poverty barriers due to cost and the group showing the most consistent association with the legislation signal across all analytical versions.</p>
+<p><strong>Future work</strong> should: (1) extend to 2023–2025 school years for a within-state difference-in-differences design; (2) develop a district-level implementation fidelity measure using product purchase records and reimbursement claim rates; (3) replicate the ML pipeline at the LEA level (n≈12,800) for stable, generalizable regression estimates; and (4) explicitly include transgender and non-binary students in both data collection and analysis frameworks.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" role="list">
+
+</div>
+<p><span class="citation" data-cites="article">@article</span>{ballard_2025, author = {Ballard, Madeleine and {others}}, title = {Menstrual health and hygiene in {US} {K-12} schools: A systematic policy review}, journal = {Frontiers in Reproductive Health}, year = {2025}, note = {Volume and DOI pending publication} }</p>
+<p><span class="citation" data-cites="report">@report</span>{period_thinx_2025, author = {{PERIOD.} and {Thinx}}, title = {2025 State of the period study}, institution = {PERIOD.}, year = {2025}, url = {https://period.org/uploads/2025-State-of-the-Period-Study.pdf} }</p>
+<p><span class="citation" data-cites="misc">@misc</span>{us_dept_ed_2023, author = {{US Department of Education}}, title = {{EDFacts} chronic absenteeism data ({Data Group 814})}, year = {2021–2023}, howpublished = {ED Data Express}, url = {https://eddataexpress.ed.gov} }</p>
+<p><span class="citation" data-cites="misc">@misc</span>{nces_grf, author = {{National Center for Education Statistics}}, title = {School {District} {Geographic} {Relationship} {Files}}, year = {2021–2023}, howpublished = {NCES Education Demographic and Geographic Estimates (EDGE) program}, url = {https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles} }</p>
+<p><span class="citation" data-cites="misc">@misc</span>{nces_digest_2023, author = {{National Center for Education Statistics}}, title = {Digest of {Education} {Statistics} 2023, {Table} 203.10}, year = {2023}, howpublished = {US Department of Education}, url = {https://nces.ed.gov/programs/digest/} }</p>
+<p><span class="citation" data-cites="law">@law</span>{essa_2015, title = {Every {Student} {Succeeds} {Act}}, year = {2015}, number = {Pub. L. 114-95}, note = {20 U.S.C. § 6301 et seq.} }</p>
+<p><span class="citation" data-cites="article">@article</span>{heckman_2006, author = {Heckman, James J.}, title = {Skill formation and the economics of investing in disadvantaged children}, journal = {Science}, volume = {312}, number = {5782}, pages = {1900–1902}, year = {2006}, doi = {10.1126/science.1128898} }</p>
+<p><span class="citation" data-cites="article">@article</span>{attendance_works_2019, author = {{Attendance Works} and {Everyone Graduates Center}}, title = {Portraits of change: Aligning school and community resources to reduce chronic absence}, institution = {Attendance Works}, year = {2019}, url = {https://www.attendanceworks.org} }</p>
+<p><span class="citation" data-cites="article">@article</span>{holm_1979, author = {Holm, Sture}, title = {A simple sequentially rejective multiple test procedure}, journal = {Scandinavian Journal of Statistics}, volume = {6}, number = {2}, pages = {65–70}, year = {1979} }</p>
+<p><span class="citation" data-cites="misc">@misc</span>{oregon_specialist_2026, author = {[Name withheld pending consent]}, title = {Personal communication — {Oregon Department of Education Menstrual Dignity Program}}, year = {2026}, month = {July}, note = {Informational interview conducted by Carolina Pinillos and Georgia Kirkpatrick} }</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

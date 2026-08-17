@@ -1,1 +1,30 @@
 # Background
+
+### Key vocabulary
+
+To follow this analysis, readers need familiarity with the following terms:
+
+| Term | Definition |
+|------|-----------|
+| **Chronic absenteeism** | Missing ≥10% of school days in a given year |
+| **LEA** | Local Education Agency — a school district |
+| **EDFacts** | Federal data system collecting LEA-level chronic absenteeism counts |
+| **Female share of absent** | Female students chronically absent ÷ total students chronically absent, as a percentage |
+| **Period poverty** | Inability to access menstrual products due to cost or availability |
+| **ECODIS** | Economically disadvantaged subgroup in EDFacts reporting |
+
+### MHH legislation landscape
+
+Beyond policy type, @ballard_2025 identify seven MHH policy domains that legislation may address: (1) menstrual materials provision, (2) water, sanitation, and hygiene (WASH) facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:
+
+| Policy type | Code | Description |
+|-------------|------|-------------|
+| Funded Mandate | FM | State receives funds AND has a compliance mandate |
+| Appropriations | AP | Funds allocated; no compliance mandate |
+| Authorization | AT | Permission to spend existing funds; no new funds |
+| Unfunded Mandate | UM | Compliance required; zero funds, no authorization |
+| No enacted policy | — | No legislation of any kind |
+
+### Research question
+
+> Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?

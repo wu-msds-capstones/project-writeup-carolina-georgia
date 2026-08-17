@@ -1,0 +1,1500 @@
+```{python}
+#| label: setup-analysis
+#| include: false
+
+import sqlite3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import seaborn as sns
+from scipy import stats
+import geopandas as gpd
+from shapely.affinity import translate, scale
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.manifold import TSNE
+from statsmodels.stats.multitest import multipletests
+import warnings
+warnings.filterwarnings('ignore')
+
+
+# ── Database connection 
+DB_PATH = "./capstone_traditional.db"
+conn = sqlite3.connect(DB_PATH)
+
+# ── Project color palette 
+C_ENACTED  = '#018571'
+C_NOPOLICY = '#dfc27d'
+
+
+POLICY_COLORS = {
+    'FM': '#590755', 'UM': '#f1a340',
+    'AP': '#998ec3', 'AT': '#f26a10',
+    'NO_ENACTED_POLICY': '#aea9a9',
+}
+
+ENACTED_STATES = [
+    'alabama','arizona','arkansas','california','colorado','connecticut',
+    'delaware','florida','georgia','hawaii','illinois','maryland','michigan',
+    'minnesota','mississippi','missouri','nebraska','nevada','new hampshire',
+    'new jersey','new mexico','new york','north carolina','ohio','oregon',
+    'pennsylvania','rhode island','tennessee','utah','vermont','virginia',
+    'washington'
+]
+EXCLUDE = ['bureau of indian education','district of columbia','puerto rico']
+
+plt.rcParams.update({
+    'figure.dpi': 150,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.grid': True,
+    'grid.alpha': 0.25,
+    'grid.linestyle': '--',
+})
+```
+
+# Analysis
+
+The validated and normalized database provided the foundation for the exploratory analysis reported here. All visuals were produced by joining three to five tables in the relational database using the traditional public school districts-only dataset, which represents the cleanest and most comparable sample between the two groups: enacted-policy and no-policy states. This dataset excludes charter schools and other non-geographic LEAs, which were found to be disproportionately concentrated in enacted-policy states and would otherwise create a structural imbalance between the two comparison groups.
+
+## Analytical approach and variable structure
+
+**Dependent variable.** The primary outcome of interest is the female share of chronic absenteeism, the percentage of chronically absent students who are female, measured at the school district (LEA) level and aggregated to the state level for analysis. This metric is used rather than a true female absenteeism rate because subgroup-level female enrollment denominators are not available in the EDFacts data at the district level.
+
+**Key independent variable.** Whether a state has enacted menstrual health and hygiene (MHH) legislation, operationalized as a binary comparison (enacted vs no enacted policy) for the inferential statistics stage and as an ordinal policy score (FM=4, AP=3, AT=2, UM=1, none=0) for the machine learning stage.
+
+**Additional independent variables.** Policy strength, domain coverage score (0–7), funding amount, and percentage of K-12 schools reached by the program.
+
+**Control variables.** We include ECODIS rate (poverty concentration), the pre-existing gender gap in absenteeism rates, years since enactment, and implementation reach. These are features we hold constant to isolate the policy signal, poverty drives absenteeism independently of policy, the gender gap reflects structural conditions unrelated to MHH legislation, and years enacted accounts for the fact that older policies have had more time to show effects. Including these controls allows us to ask: does the policy association hold even after accounting for these other factors?
+
+**Multilevel nested design.** Our data has a natural hierarchical structure: districts are nested within states, and the key independent variable, MHH legislation, varies only at the state level, not the district level. Because legislation is enacted at the state level and applies uniformly to all districts within that state, the analytic unit is the state (n=50) rather than the district (n≈12,800). District-level absenteeism counts are aggregated to state averages to correctly align the outcome variable with the level at which the policy varies. This is a deliberate methodological choice, not a data limitation: treating each of 38,602 district-year observations as an independent policy experiment would be statistically inappropriate given that all districts within the same state share the same policy environment. A formal multilevel regression model would explicitly estimate within-state and between-state variance; our approach addresses the same dependency by aggregating before modeling.
+
+**Inferential statistics.** Welch's two-sample t-tests compare the female share of chronic absenteeism between enacted and no-policy states separately for each of 12 demographic subgroups and across three school years. Welch's t-test was chosen over the standard Student's t-test because it does not assume equal variances between groups,appropriate here given that enacted-policy states (n≈8,265 district-year observations) and no-policy states (n≈4,500) differ substantially in size and composition. Holm-Bonferroni correction is applied across the 12 parallel subgroup tests to control the familywise error rate and reduce the risk of false positives.
+
+```{python}
+
+#| column: body
+#| label: tbl-subgroup-ttest
+#| tbl-cap: "Welch's t-test results for female share of chronic absenteeism by demographic subgroup. Enacted-policy states are compared to no-policy states for each subgroup. Mean difference is computed as enacted minus no-policy — negative values indicate enacted states have a lower female share (favourable direction). Holm-Bonferroni adjusted p-values are shown alongside raw p-values. Traditional Public School Districts Only."
+#| code-summary: "Subgroup t-test results table"
+
+sg_all = pd.read_sql("""
+    SELECT ag.school_year, ag.lea_id, ag.subgroup_code,
+           ag.count_female, ag.count_total,
+           s.state_name
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education','district of columbia','puerto rico')
+""", conn)
+
+sg_all['legislation_status'] = sg_all['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+sg_all['female_share'] = sg_all['count_female'] / sg_all['count_total'] * 100
+sg_all = sg_all[sg_all['female_share'].between(0, 100)]
+
+SUBGROUP_LABELS = {
+    'AM7':         'American Indian / Alaska Native',
+    'AS7':         'Asian',
+    'BL7':         'Black or African American',
+    'HI7':         'Hispanic / Latino',
+    'MU7':         'Multiracial',
+    'PI7':         'Pacific Islander',
+    'WH7':         'White',
+    'WDIS':        'Children w/ Disabilities (IDEA)',
+    'DISAB504STAT':'Section 504 Disability',
+    'LEP':         'English Learner',
+    'HOM':         'Homeless',
+    'ECODIS':      'Economically Disadvantaged',
+}
+
+test_results = []
+for code, label in SUBGROUP_LABELS.items():
+    enacted   = sg_all[(sg_all['subgroup_code'] == code) &
+                       (sg_all['legislation_status'] == 'Enacted policy')]['female_share']
+    no_policy = sg_all[(sg_all['subgroup_code'] == code) &
+                       (sg_all['legislation_status'] == 'No enacted policy')]['female_share']
+    if len(enacted) < 2 or len(no_policy) < 2:
+        continue
+    t_stat, p_value = stats.ttest_ind(enacted, no_policy, equal_var=False)
+    test_results.append({
+        'Subgroup':        label,
+        'n (enacted)':     len(enacted),
+        'n (no policy)':   len(no_policy),
+        'Mean (enacted)':  round(enacted.mean(), 2),
+        'Mean (no policy)':round(no_policy.mean(), 2),
+        'Mean difference': round(enacted.mean() - no_policy.mean(), 2),
+        't-statistic':     round(t_stat, 3),
+        'p-value (raw)':   round(p_value, 6),
+    })
+
+test_df = pd.DataFrame(test_results)
+
+# Apply Holm-Bonferroni correction
+_, p_adj, _, _ = multipletests(test_df['p-value (raw)'], method='holm')
+test_df['p-value (Holm-Bonferroni)'] = p_adj.round(6)
+test_df['Significant (α=0.05)'] = test_df['p-value (Holm-Bonferroni)'].apply(
+    lambda p: '✓' if p < 0.05 else '✗'
+)
+
+test_df = test_df.sort_values('p-value (raw)').reset_index(drop=True)
+test_df.set_index('Subgroup')
+
+# to fix size (ok)
+
+(test_df.set_index('Subgroup')
+    .style
+    .set_properties(**{'font-size': '0.75em'})
+    .set_table_styles([
+        {'selector': 'th', 'props': [('font-size', '0.78em')]},
+        {'selector': 'td', 'props': [('padding', '2px 6px')]},
+    ])
+    .format({
+        'Mean (enacted)':            '{:.2f}',
+        'Mean (no policy)':          '{:.2f}',
+        'Mean difference':           '{:.2f}',
+        't-statistic':               '{:.3f}',
+        'p-value (raw)':             '{:.6f}',
+        'p-value (Holm-Bonferroni)': '{:.6f}',
+    })
+)
+```
+
+
+**Robustness validation.** The core finding is cross-checked at three independent levels of geographic aggregation: the full LEA-level dataset including charters, the traditional-LEA-only dataset (primary), and a county-level aggregation. A finding that survives all three levels is substantially less likely to be a data artifact. This three-way check directly addresses the question: *how do you know a result is good, not just lucky?*
+
+**Machine learning.** Linear Regression and Random Forest are used as complementary tools rather than competing models. Linear Regression provides directly interpretable standardized coefficients, each coefficient answers "controlling for all other features, what is the estimated direction and magnitude of this feature's association with female absenteeism?" Random Forest captures non-linear relationships and feature interactions that linear regression cannot, and its feature importance scores are robust to correlated predictors. Both models are evaluated using 5-fold cross-validation R² and, for Random Forest, out-of-bag R² as independent generalization estimates. K-means clustering (K=7, validated by silhouette score and t-SNE projection) identifies natural state groupings beyond the binary policy classification.
+
+## Exploratory Data Analysis
+
+
+### Overall absenteeism trends
+
+Chronic absenteeism rose sharply in the 2021–2022 school year across both enacted-policy and no-policy states, reflecting the well-documented national post-pandemic attendance crisis, before partially recovering in 2022–2023. Enacted-policy states showed higher average absenteeism rates than no-policy states in every year studied. Despite this higher overall rate, the distribution of absenteeism rates across districts overlaps substantially between the two groups, confirming that overall absenteeism rate alone cannot distinguish enacted-policy from no-policy states. The consistently higher overall absenteeism in enacted-policy states is interpreted as a **selection effect**: states that were already struggling more with attendance were the ones motivated to pass this kind of legislation.
+
+```{python}
+#| label: fig-overall-trend
+#| fig-cap: "Average chronic absenteeism rate by legislation status and school year. Enacted-policy states (green) show higher overall rates in every year, a selection effect, not a policy harm. States already struggling with attendance were the ones motivated to enact legislation."
+#| fig-width: 9
+#| fig-height: 5
+#| fig-align: "center"
+#| out-width: "50%"
+
+df = pd.read_sql("""
+    SELECT af.school_year,
+           s.state_name,
+           af.absenteeism_rate
+    FROM absenteeism_facts af
+    JOIN leas l ON af.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE LOWER(s.state_name) NOT IN (
+        'bureau of indian education','district of columbia','puerto rico')
+""", conn)
+
+df['legislation_status'] = df['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+
+trend = (df.groupby(['school_year','legislation_status'])['absenteeism_rate']
+           .mean().reset_index())
+
+years  = ['2020-2021','2021-2022','2022-2023']
+labels = ['2020–21','2021–22','2022–23']
+x = np.arange(len(years))
+
+fig, ax = plt.subplots(figsize=(9, 5))
+for status, color in [('Enacted policy', C_ENACTED),
+                       ('No enacted policy', C_NOPOLICY)]:
+    vals = [trend[(trend['school_year']==y) &
+                  (trend['legislation_status']==status)]['absenteeism_rate'].values[0]
+            for y in years]
+    ax.plot(x, vals, color=color, linewidth=2.5,
+            marker='o', markersize=8, label=status)
+    for i, v in enumerate(vals):
+        ax.text(i, v+0.5, f'{v:.1f}%', ha='center',
+                fontsize=9, fontweight='bold', color=color)
+
+ax.set_xticks(x)
+ax.set_xticklabels(labels, fontsize=9)
+ax.set_ylabel('Average Chronic Absenteeism Rate (%)', fontsize=10)
+ax.set_title('Chronic Absenteeism Rate Over Time by Legislation Status\n'
+             'Traditional Public School Districts Only',
+             fontsize=11, fontweight='bold')
+ax.legend(fontsize=8)
+ax.set_ylim(0, 35)
+plt.tight_layout()
+plt.show()
+```
+
+
+### Female share of chronic absenteeism
+
+The primary outcome of interest is the **female share of chronic absenteeism**: for each district, the proportion of chronically absent students who are female, computed as the sum of all female subgroup counts divided by the sum of all combined subgroup counts. This metric is used rather than a true female absenteeism rate because subgroup-level female enrollment denominators are not available in the EDFacts data.
+
+Across all three school years, districts in enacted-policy states showed a consistently lower female share than districts in no-policy states. KDE density plots of this distribution, computed separately for each school year to avoid pooling the same districts across multiple years, show the enacted-policy curve shifted slightly left of the no-policy curve in every year, with Welch's t-tests confirming the difference is statistically significant (p values ranging from 3.7×10⁻⁸ to 4.7×10⁻⁹). Both groups show rising female shares over the study period, reflecting a national post-pandemic trend, but the enacted-policy group remains consistently below the no-policy group.
+
+
+```{python}
+
+#| label: fig-us-map
+#| fig-cap: "Female share of chronic absenteeism by state and MHH policy type, school year 2022–2023. Each state is colored by policy type: Funded Mandate (dark blue), Appropriations (light blue), Authorization (green), Unfunded Mandate (orange), and No Enacted Policy (gray). The percentage shown inside each state is the average female share of chronically absent students across all traditional public school districts in that state. Traditional Public School Districts Only."
+#| fig-width: 9
+#| fig-height: 6
+#| out-width: "100%"
+
+
+# Pull data from database 
+sg_map = pd.read_sql("""
+    SELECT s.state_name,
+           ag.lea_id,
+           SUM(ag.count_female) AS total_f,
+           SUM(ag.count_total)  AS total_t
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.school_year = '2022-2023'
+      AND ag.count_total > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education',
+          'district of columbia',
+          'puerto rico')
+    GROUP BY s.state_name, ag.lea_id
+""", conn)
+
+# Female share per district first, then average to state
+sg_map = sg_map[sg_map['total_t'] > 0].copy()
+sg_map['female_share'] = sg_map['total_f'] / sg_map['total_t'] * 100
+sg_map = sg_map[sg_map['female_share'].between(0, 100)]
+
+state_share = (
+    sg_map.groupby('state_name')['female_share']
+    .mean().reset_index()
+    .rename(columns={'female_share': 'avg_female_share'})
+)
+
+legis_map = pd.read_sql("""
+    SELECT s.state_name, ml.policy_type
+    FROM menstrual_legislation ml
+    JOIN states s ON ml.state_id = s.state_id
+""", conn)
+
+state_data = state_share.merge(legis_map, on='state_name', how='left')
+state_data['policy_type'] = state_data['policy_type'].fillna('NO_ENACTED_POLICY')
+state_data['state_name_upper'] = state_data['state_name'].str.upper()
+
+policy_colors = {
+    'FM':                '#590755',
+    'AP':                '#998ec3',
+    'AT':                '#f26a10',
+    'UM':                '#f1a340',
+    'NO_ENACTED_POLICY': '#aea9a9',
+}
+policy_labels = {
+    'FM':                'Mandate, funded',
+    'AP':                'No mandate, funded',
+    'AT':                'Mandate, funded',
+    'UM':                'No mandate, no funded',
+    'NO_ENACTED_POLICY': 'No Enacted Policy',
+}
+
+state_data['color'] = state_data['policy_type'].map(policy_colors)
+
+# Load shapefile 
+
+usa = gpd.read_file(
+    'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/'
+    'master/data/geojson/us-states.json'
+)
+usa['name'] = usa['name'].str.upper()
+usa = usa.merge(state_data, left_on='name',
+                right_on='state_name_upper', how='left')
+usa['color'] = usa['color'].fillna('#d0d0d0')
+
+#  Reposition Alaska and Hawaii 
+
+def move_state(gdf, state_name, scale_factor, target_x, target_y):
+    geom     = gdf[gdf['name'] == state_name].geometry.values[0]
+    centroid = geom.centroid
+    geom_sc  = scale(geom, xfact=scale_factor, yfact=scale_factor,
+                     origin=centroid)
+    geom_mv  = translate(geom_sc,
+                         xoff=target_x - centroid.x,
+                         yoff=target_y - centroid.y)
+    return geom_mv
+
+usa_plot = usa.copy()
+usa_plot.loc[usa_plot['name'] == 'ALASKA', 'geometry'] = move_state(
+    usa, 'ALASKA', scale_factor=0.35, target_x=-119.0, target_y=26.5)
+usa_plot.loc[usa_plot['name'] == 'HAWAII', 'geometry'] = move_state(
+    usa, 'HAWAII', scale_factor=1.0,  target_x=-108.0, target_y=26.0)
+
+#  Plot 
+fig, ax = plt.subplots(figsize=(9, 6))
+
+for _, row in usa_plot.iterrows():
+    color = row['color'] if pd.notna(row['color']) else '#d0d0d0'
+    if row['geometry'] is not None:
+        gpd.GeoDataFrame([row], geometry='geometry',
+                         crs=usa_plot.crs).plot(
+            ax=ax, color=color, edgecolor='white', linewidth=0.8
+        )
+
+#  Female share label 
+for _, row in usa_plot.iterrows():
+    if row['geometry'] is None:
+        continue
+    if pd.isna(row.get('avg_female_share')):
+        continue
+    try:
+        centroid  = row['geometry'].centroid
+        txt_color = 'white' if row.get('policy_type') in [
+            'FM', 'UM'] else '#1a1a1a'
+        ax.text(centroid.x, centroid.y,
+                f"{row['avg_female_share']:.1f}%",
+                ha='center', va='center',
+                fontsize=5.5, fontweight='bold',
+                color=txt_color, zorder=6)
+    except Exception:
+        continue
+
+# Map bounds and formatting 
+ax.set_xlim(-128, -65)
+ax.set_ylim(24, 50)
+ax.axis('off')
+
+# Legend 
+legend_patches = [
+    mpatches.Patch(color=policy_colors[pt], label=policy_labels[pt])
+    for pt in ['FM', 'AP', 'AT', 'UM', 'NO_ENACTED_POLICY']
+]
+ax.legend(handles=legend_patches, loc='lower right',
+          fontsize=7.5, framealpha=0.9,
+          title='MHH Policy Type', title_fontsize=15)
+
+ax.set_title(
+    'Female Share of Chronic Absenteeism by State and MHH Policy Type School Year 2022–2023',
+    fontsize=11, fontweight='bold', pad=12
+)
+
+plt.tight_layout()
+plt.show()
+```
+
+
+
+## Policy Type Bars
+
+```{python}
+#| label: fig-policy-type-bars
+#| fig-cap: "Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type. Traditional Public School Districts Only."
+#| fig-width: 9
+#| fig-height: 8
+#| out-width: "100%"
+
+
+# Pull legislation from database 
+legis_db = pd.read_sql("""
+    SELECT s.state_name, ml.policy_type
+    FROM menstrual_legislation ml
+    JOIN states s ON ml.state_id = s.state_id
+    WHERE ml.policy_type != 'NO_ENACTED_POLICY'
+""", conn)
+
+# Pull absenteeism + subgroup data from database 
+sg_pol = pd.read_sql("""
+    SELECT s.state_name,
+           af.lea_id,
+           af.total_students_absent,
+           af.total_students_enrollment,
+           ag.subgroup_code,
+           ag.count_female,
+           ag.count_total
+    FROM absenteeism_facts af
+    JOIN absenteeism_subgroups ag ON af.lea_id = ag.lea_id
+                                  AND af.school_year = ag.school_year
+    JOIN leas l ON af.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE af.school_year = '2022-2023'
+      AND ag.school_year = '2022-2023'
+      AND ag.count_total > 0
+      AND af.total_students_enrollment > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education',
+          'district of columbia',
+          'puerto rico')
+      AND ag.subgroup_code IN (
+          'AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+          'WDIS','DISAB504STAT','LEP','HOM','ECODIS')
+""", conn)
+
+# ── Female share from subgroups (proportion only) ─────────────
+lea_sub = (
+    sg_pol.groupby(['state_name', 'lea_id',
+                    'total_students_absent',
+                    'total_students_enrollment'])
+    .agg(f_sub=('count_female', 'sum'),
+         t_sub=('count_total',  'sum'))
+    .reset_index()
+)
+lea_sub = lea_sub[lea_sub['t_sub'] > 0].copy()
+lea_sub['female_share']      = lea_sub['f_sub'] / lea_sub['t_sub']
+lea_sub['female_absent_est'] = (lea_sub['total_students_absent'] *
+                                 lea_sub['female_share'])
+lea_sub['female_enrolled']   = lea_sub['total_students_enrollment'] * 0.488
+lea_sub = lea_sub[lea_sub['female_enrolled'] > 0].copy()
+lea_sub['female_absent_rate'] = (lea_sub['female_absent_est'] /
+                                  lea_sub['female_enrolled'] * 100)
+lea_sub = lea_sub[lea_sub['female_absent_rate'].between(0, 100)].copy()
+
+#  Merge policy type 
+lea_sub = lea_sub.merge(legis_db, on='state_name', how='inner')
+
+# State-level average per policy type
+state_agg = (
+    lea_sub.groupby(['state_name', 'policy_type'])
+    .agg(
+        avg_female_rate=('female_absent_rate', 'mean'),
+        total_f_absent =('female_absent_est',  'sum'),
+        n_districts    =('lea_id',             'count'),
+    )
+    .reset_index()
+)
+
+#  Chart settings 
+policy_types = ['FM', 'UM', 'AP', 'AT']
+policy_labels = {
+    'FM': 'Funded Mandate',
+    'UM': 'Unfunded Mandate',
+    'AP': 'Appropriations',
+    'AT': 'Authorization',
+}
+policy_colors = {
+    'FM': '#590755',
+    'UM': '#f1a340',
+    'AP': '#998ec3',
+    'AT': '#f26a10',
+}
+
+BAR_HEIGHT = 0.45
+BAR_PAD    = 0.35
+ROW_SIZE   = 0.35
+
+# ── Row max: ensures bars same width within each row ──────────
+row_pairs = [['FM', 'UM'], ['AP', 'AT']]
+row_max   = {
+    pt: max(len(state_agg[state_agg['policy_type'] == p])
+            for p in pair)
+    for pair in row_pairs
+    for pt in pair
+}
+
+# ── Dynamic figure height based on row content ────────────────
+height_top = row_max['FM'] * ROW_SIZE + 1.5
+height_bot = row_max['AP'] * ROW_SIZE + 1.5
+
+fig, axes = plt.subplots(
+    2, 2,
+    figsize=(9, height_top + height_bot),
+    gridspec_kw={'height_ratios': [height_top, height_bot]}
+)
+axes = axes.flat
+
+for ax, pt in zip(axes, policy_types):
+    sub = (state_agg[state_agg['policy_type'] == pt]
+           .sort_values('avg_female_rate', ascending=True)
+           .reset_index(drop=True))
+    n      = len(sub)
+    color  = policy_colors[pt]
+    states = sub['state_name'].str.title().tolist()
+    values = sub['avg_female_rate'].tolist()
+    totals = sub['total_f_absent'].tolist()
+
+    y_pos = np.arange(n)
+
+    ax.barh(y_pos, values,
+            color=color, alpha=0.88,
+            edgecolor='white', linewidth=0.5,
+            height=BAR_HEIGHT)
+
+    for i, (val, tot) in enumerate(zip(values, totals)):
+        ax.text(val + 0.2, i, f'{val:.1f}%',
+                va='center', ha='left',
+                fontsize=8, color='black', fontweight='bold')
+
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(states, fontsize=9.5)
+
+    # Force same y range within each row so all bars same thickness
+    ax.set_ylim(-BAR_PAD, row_max[pt] - 1 + BAR_PAD)
+
+    ax.set_xlabel('Female Chronic Absenteeism Rate (%)', fontsize=8)
+    ax.set_title(
+        f'{policy_labels[pt]}  ({pt})',
+        fontsize=13, fontweight='bold',
+        color=color, pad=10
+    )
+    ax.set_xlim(0, 50)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.grid(axis='x', alpha=0.25, linestyle='--')
+    ax.text(0.98, 0.02, f'{n} states',
+            transform=ax.transAxes, fontsize=8,
+            ha='right', va='bottom', color='#555',
+            bbox=dict(boxstyle='round,pad=0.3',
+                      facecolor='white', edgecolor='#ccc',
+                      alpha=0.85))
+
+fig.suptitle('How 32 States Approached Menstrual Health Legislation? School Year 2022–2023',
+    fontsize=15, fontweight='bold', y=1.01
+)
+
+policy_patches = [
+    mpatches.Patch(color=policy_colors[pt], alpha=0.88,
+                   label=f'{policy_labels[pt]} ({pt})')
+    for pt in policy_types
+]
+fig.legend(handles=policy_patches, loc='lower center',
+           ncol=4, fontsize=10.5, framealpha=0.9,
+           bbox_to_anchor=(0.5, -0.02))
+
+
+plt.tight_layout()
+plt.show()
+```
+
+
+### Year-over-year female chronic absenteeism by state
+
+To examine whether the female share was changing differently in the two groups over time, we computed year-over-year changes in female share for each state across two transition periods: 2020–2021 to 2021–2022, and 2021–2022 to 2022–2023. Female share rose in nearly every state during the pandemic spike year, with no significant difference between groups (+1.90pp enacted vs +1.36pp no-policy, p = 0.10). During the partial recovery year, the two groups were virtually identical (+0.81pp enacted vs +0.82pp no-policy, p = 0.97). Neither transition showed a statistically significant group difference, confirming that while enacted-policy states consistently show a lower **level** of female share, they are not changing at a different **rate**. This null trajectory result is discussed further in the Discussion section as evidence that product provision alone may be insufficient to alter the direction of female absenteeism trends.
+
+```{python}
+#| label: fig-female-share-kde
+#| fig-cap: "Distribution of district-level female share of chronic absenteeism by legislation status, shown as independent samples per school year. Enacted-policy districts (green, solid) peak consistently to the left in every year. Welch's t-tests confirm statistical significance (p < 0.001) in all three years. Dashed vertical lines show group means."
+#| fig-width: 9
+#| fig-height: 4
+#| out-width: "100%"
+
+sg = pd.read_sql("""
+    SELECT ag.school_year,
+           ag.lea_id,
+           s.state_name,
+           ag.count_female,
+           ag.count_total
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education','district of columbia','puerto rico')
+""", conn)
+
+sg_dist = (sg.groupby(['school_year','lea_id','state_name'])
+             .agg(f=('count_female','sum'), t=('count_total','sum'))
+             .reset_index())
+sg_dist = sg_dist[sg_dist['t'] > 0].copy()
+sg_dist['female_share'] = sg_dist['f'] / sg_dist['t'] * 100
+sg_dist = sg_dist[sg_dist['female_share'].between(0,100)]
+sg_dist['legislation_status'] = sg_dist['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+
+years  = ['2020-2021','2021-2022','2022-2023']
+ylbls  = ['2020-2021','2021-2022','2022-2023']
+fig, axes = plt.subplots(1, 3, figsize=(9, 4), sharey=False)
+
+for ax, year, yl in zip(axes, years, ylbls):
+    for status, color, ls in [('Enacted policy', C_ENACTED, '-'),
+                               ('No enacted policy', C_NOPOLICY, '--')]:
+        data = sg_dist[(sg_dist['school_year']==year) &
+                       (sg_dist['legislation_status']==status)]['female_share']
+        data.plot.kde(ax=ax, color=color, linestyle=ls,
+                      linewidth=2.0, label=f'{status}(n={len(data):,})')
+
+        ax.axvline(data.mean(), color=color, linewidth=1.0,
+        linestyle=':', alpha=0.7)
+
+    e = sg_dist[(sg_dist['school_year']==year) &
+                (sg_dist['legislation_status']=='Enacted policy')]['female_share']
+    n = sg_dist[(sg_dist['school_year']==year) &
+                (sg_dist['legislation_status']=='No enacted policy')]['female_share']
+    _, p = stats.ttest_ind(e, n, equal_var=False)
+
+    ax.set_title(yl, fontsize=9, fontweight='bold')
+    ax.set_xlabel(f'Female share of absent (%)\np = {p:.2e}', fontsize=8)
+    ax.legend(fontsize=7, loc='upper center',
+              bbox_to_anchor=(0.5, -0.25),
+              ncol=1, framealpha=0.9)
+
+axes[0].set_ylabel('Density', fontsize=8)
+fig.suptitle('Female Share of Chronic Absenteeism Distribution by Year\n'
+             '(Independent Samples)',
+             fontsize=10, fontweight='bold')
+
+    # Set same ylim across all panels
+max_ylim = max(ax.get_ylim()[1] for ax in axes)
+for ax in axes:
+    ax.set_ylim(0, max_ylim)
+    ax.set_xlim(0, 100)
+
+
+plt.tight_layout()
+plt.subplots_adjust(bottom=0.22)
+plt.show()
+```
+
+
+### Female vs male chronic absenteeism rate
+
+```{python}
+#| label: fig-female-male-bars
+#| fig-cap: "Female and male chronic absenteeism rates by school year and legislation status. Rates are estimated as total absent × sex share ÷ estimated sex-specific enrollment (female 48.8%, male 51.2%, NCES 2023 Table 203.10). Female share is derived from subgroup counts to avoid double-counting students appearing in multiple subgroups. Traditional Public School Districts Only."
+#| fig-width: 8
+#| fig-height: 4
+#| out-width: "100%"
+
+
+
+#  Pull data from database 
+
+fm_raw = pd.read_sql("""
+    SELECT af.school_year,
+           af.lea_id,
+           af.total_students_absent,
+           af.total_students_enrollment,
+           ag.subgroup_code,
+           ag.count_female,
+           ag.count_total,
+           s.state_name
+    FROM absenteeism_facts af
+    JOIN absenteeism_subgroups ag ON af.lea_id    = ag.lea_id
+                                 AND af.school_year = ag.school_year
+    JOIN leas l  ON af.lea_id    = l.lea_id
+    JOIN states s ON l.state_id  = s.state_id
+    WHERE ag.count_total > 0
+      AND af.total_students_enrollment > 0
+      AND ag.subgroup_code IN (
+          'AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+          'WDIS','DISAB504STAT','LEP','HOM','ECODIS')
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education',
+          'district of columbia',
+          'puerto rico')
+""", conn)
+
+#  Collapse subgroups to one row per LEA-year 
+
+lea_agg = (
+    fm_raw.groupby(['school_year', 'lea_id',
+                    'total_students_absent',
+                    'total_students_enrollment',
+                    'state_name'])
+    .agg(f_sub=('count_female', 'sum'),
+         t_sub=('count_total',  'sum'))
+    .reset_index()
+)
+lea_agg = lea_agg[lea_agg['t_sub'] > 0].copy()
+
+#  Sex-specific rates 
+
+lea_agg['female_share']   = lea_agg['f_sub'] / lea_agg['t_sub']
+lea_agg['male_share']     = 1 - lea_agg['female_share']
+
+lea_agg['female_absent']  = lea_agg['total_students_absent'] * lea_agg['female_share']
+lea_agg['male_absent']    = lea_agg['total_students_absent'] * lea_agg['male_share']
+
+lea_agg['female_enrolled'] = lea_agg['total_students_enrollment'] * 0.488
+lea_agg['male_enrolled']   = lea_agg['total_students_enrollment'] * 0.512
+
+lea_agg = lea_agg[
+    (lea_agg['female_enrolled'] > 0) &
+    (lea_agg['male_enrolled']   > 0)
+].copy()
+
+lea_agg['female_rate'] = (
+    lea_agg['female_absent'] / lea_agg['female_enrolled'] * 100
+).clip(0, 100)
+lea_agg['male_rate'] = (
+    lea_agg['male_absent'] / lea_agg['male_enrolled'] * 100
+).clip(0, 100)
+
+#  Legislation status 
+
+lea_agg['legislation_status'] = lea_agg['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+
+# Aggregate by year and legislation status 
+
+agg = (
+    lea_agg.groupby(['school_year', 'legislation_status'])
+    .agg(female_rate=('female_rate', 'mean'),
+         male_rate  =('male_rate',   'mean'))
+    .reset_index()
+)
+
+years       = ['2020-2021', '2021-2022', '2022-2023']
+year_labels = ['2020–21',   '2021–22',   '2022–23']
+
+enacted  = agg[agg['legislation_status'] == 'Enacted policy'].set_index('school_year')
+nopolicy = agg[agg['legislation_status'] == 'No enacted policy'].set_index('school_year')
+
+#  Colors 
+
+C_F_E = '#018571'
+C_M_E = '#80cdc1'
+C_F_N = '#a6611a'
+C_M_N = '#dfc27d'
+
+# Plot 
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4), sharey=True)
+
+bar_w = 0.30
+x     = np.arange(len(years))
+
+def draw_panel(ax, data, color_f, color_m, title):
+    f_vals = [data.loc[y, 'female_rate'] for y in years]
+    m_vals = [data.loc[y, 'male_rate']   for y in years]
+
+    ax.bar(x - bar_w / 2, f_vals, bar_w,
+           color=color_f, alpha=0.90,
+           edgecolor='white', linewidth=0.5,
+           label='Female')
+    ax.bar(x + bar_w / 2, m_vals, bar_w,
+           color=color_m, alpha=0.90,
+           edgecolor='white', linewidth=0.5,
+           label='Male')
+
+    for i, (fv, mv) in enumerate(zip(f_vals, m_vals)):
+        ax.text(i - bar_w / 2, fv + 0.3, f'{fv:.1f}%',
+                ha='center', va='bottom',
+                fontsize=8.5, fontweight='bold', color='black')
+        ax.text(i + bar_w / 2, mv + 0.3, f'{mv:.1f}%',
+                ha='center', va='bottom',
+                fontsize=8, fontweight='bold', color='black')
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(year_labels, fontsize=10)
+    ax.set_title(title, fontsize=10, fontweight='bold', pad=10)
+    ax.set_xlabel('School Year', fontsize=9)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.grid(axis='y', alpha=0.25, linestyle='--')
+
+draw_panel(ax1, enacted,  C_F_E, C_M_E, 'Enacted Policy States')
+draw_panel(ax2, nopolicy, C_F_N, C_M_N, 'No Enacted Policy States')
+
+ax1.set_ylabel('Chronic Absenteeism Rate (%)', fontsize=10)
+
+all_vals = (
+    [enacted.loc[y,  'female_rate'] for y in years] +
+    [enacted.loc[y,  'male_rate']   for y in years] +
+    [nopolicy.loc[y, 'female_rate'] for y in years] +
+    [nopolicy.loc[y, 'male_rate']   for y in years]
+)
+ax1.set_ylim(0, max(all_vals) + 4)
+
+legend_handles = [
+    mpatches.Patch(color=C_F_E, alpha=0.90, label='Female — Enacted Policy'),
+    mpatches.Patch(color=C_M_E, alpha=0.90, label='Male — Enacted Policy'),
+    mpatches.Patch(color=C_F_N, alpha=0.90, label='Female — No Enacted Policy'),
+    mpatches.Patch(color=C_M_N, alpha=0.90, label='Male — No Enacted Policy'),
+]
+fig.legend(handles=legend_handles, fontsize=9,
+           framealpha=0.9, loc='lower center',
+           ncol=4, bbox_to_anchor=(0.5, -0.06))
+
+fig.suptitle(
+    'Female vs Male Chronic Absenteeism Rate by Year and Legislation Status',
+    fontsize=11, fontweight='bold', y=1.02
+)
+
+plt.tight_layout()
+plt.show()
+```
+
+### Subgroup analysis with Holm-Bonferroni correction
+
+The female-share comparison was conducted separately for each of 12 demographic subgroups using Welch's t-tests. Eleven of 12 subgroups showed a statistically significantly lower female share in enacted-policy states. The strongest signal was among children with disabilities under IDEA (p ≈ 2.8×10⁻⁴²), and the largest effect size was for Asian students (4.4 percentage points lower in enacted-policy states). The economically disadvantaged subgroup (ECODIS, available in 2022–2023 only) showed a significant association (p ≈ 2.5×10⁻¹⁰), which is of particular interest given that period poverty is by definition a poverty-driven barrier. The only subgroup without a significant difference was American Indian or Alaska Native.
+
+To address the multiple comparisons problem introduced by running 12 parallel significance tests, we apply **Holm-Bonferroni correction** [@holm_1979] alongside the unadjusted p-values.
+
+```{python}
+#| label: fig-subgroup
+#| fig-cap: 'Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share - the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.'
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "100%"
+
+SUBGROUP_LABELS = {
+    'AM7':         'American Indian / Alaska Native',
+    'AS7':         'Asian',
+    'BL7':         'Black or African American',
+    'HI7':         'Hispanic / Latino',
+    'MU7':         'Multiracial',
+    'PI7':         'Pacific Islander',
+    'WH7':         'White',
+    'WDIS':        'Children w/ Disabilities (IDEA)',
+    'DISAB504STAT':'Section 504 Disability',
+    'LEP':         'English Learner',
+    'HOM':         'Homeless',
+    'ECODIS':      'Economically Disadvantaged',
+}
+
+sg_all = pd.read_sql("""
+    SELECT ag.school_year, ag.lea_id, ag.subgroup_code,
+           ag.count_female, ag.count_total,
+           s.state_name
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education','district of columbia','puerto rico')
+""", conn)
+
+sg_all['legislation_status'] = sg_all['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+sg_all['female_share'] = sg_all['count_female'] / sg_all['count_total'] * 100
+sg_all = sg_all[sg_all['female_share'].between(0, 100)]
+
+results = []
+for code, label in SUBGROUP_LABELS.items():
+    sub = sg_all[sg_all['subgroup_code'] == code]
+    e = sub[sub['legislation_status'] == 'Enacted policy']['female_share']
+    n = sub[sub['legislation_status'] == 'No enacted policy']['female_share']
+    if len(e) < 10 or len(n) < 10:
+        continue
+    _, p = stats.ttest_ind(e, n, equal_var=False)
+    results.append({'code': code, 'label': label,
+                    'diff': e.mean() - n.mean(), 'p_raw': p,
+                    'n_e': len(e), 'n_n': len(n)})
+
+res_df = pd.DataFrame(results)
+_, p_adj, _, _ = multipletests(res_df['p_raw'], method='holm')
+res_df['p_adj'] = p_adj
+res_df['sig'] = res_df['p_adj'].apply(
+    lambda p: '***' if p < 0.001 else ('**' if p < 0.01 else ('*' if p < 0.05 else 'n.s.')))
+res_df = res_df.sort_values('diff', ascending=True)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+colors_bar = [C_NOPOLICY if v > 0 else C_ENACTED for v in res_df['diff']]
+ax.barh(range(len(res_df)), res_df['diff'], color=colors_bar,
+        alpha=0.85, edgecolor='white', linewidth=0.5, height=0.65)
+
+# Fix 1: extend x-axis left to prevent Asian label clipping
+x_min = res_df['diff'].min()
+ax.set_xlim(x_min - 1.2, res_df['diff'].max() + 1.5)
+
+for i, (_, row) in enumerate(res_df.iterrows()):
+    is_eco = row['code'] == 'ECODIS'
+    sign   = '+' if row['diff'] >= 0 else ''
+#  Fix 2: push annotation offset further from bar 
+    offset = 0.12 if row['diff'] >= 0 else -0.12
+    ax.text(row['diff'] + offset, i,
+            f"{sign}{row['diff']:.2f}pp {row['sig']}",
+            ha='left' if row['diff'] >= 0 else 'right',
+            va='center', fontsize=8,
+            color='black', fontweight='bold' if is_eco else 'normal')
+    if is_eco:
+        ax.barh(i, row['diff'], 0.65, color='none',
+                edgecolor='black', linewidth=1.5)
+
+ax.axvline(0, color='black', linewidth=1.0)
+ax.set_yticks(range(len(res_df)))
+ax.set_yticklabels(res_df['label'], fontsize=9)
+ax.set_xlabel('Difference in Female Share (pp): Enacted minus No Policy',
+              fontsize=10)
+ax.set_title(
+    'How Does the Female Share of Chronic Absenteeism Change Across Subgroups Post-policy?\n''(Holm-Bonferroni corrected)',
+    fontsize=11, fontweight='bold')
+
+# Fix 3: move legend to lower right away from bars 
+ax.legend(handles=[
+    mpatches.Patch(color=C_ENACTED,  alpha=0.85, label='Enacted lower (favourable)'),
+    mpatches.Patch(color=C_NOPOLICY, alpha=0.85, label='Enacted higher (unfavourable)'),
+], fontsize=9, loc='lower center',
+   bbox_to_anchor=(0.5, -0.12),
+   ncol=2, framealpha=0.9)
+
+plt.tight_layout()
+plt.subplots_adjust(bottom=0.18)
+plt.show()
+```
+
+
+## Subgroups Analysis
+
+```{python}
+
+#| label: fig-subgroup-by-year
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Blue bars show enacted-policy states; orange bars show no-policy states. Significance labels reflect Welch's t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only."
+#| fig-width: 9
+#| fig-height: 6
+#| out-width: "100%"
+
+from statsmodels.stats.multitest import multipletests
+
+subgroup_codes = ['AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+                   'WDIS','DISAB504STAT','LEP','HOM','ECODIS']
+
+subgroup_labels = {
+    'AM7':          'American Indian / Alaska Native',
+    'AS7':          'Asian',
+    'PI7':          'Native Hawaiian / Pacific Islander',
+    'BL7':          'Black or African American',
+    'HI7':          'Hispanic / Latino',
+    'MU7':          'Two or more races',
+    'WH7':          'White',
+    'WDIS':         'Children with disabilities (IDEA)',
+    'DISAB504STAT': 'Section 504 disability status',
+    'LEP':          'English learner',
+    'HOM':          'Homeless',
+    'ECODIS':       'Economically disadvantaged',
+}
+
+# ── Pull subgroup data from database ─────────────────────────
+sg_raw = pd.read_sql("""
+    SELECT ag.school_year,
+           ag.subgroup_code,
+           ag.count_female,
+           ag.count_total,
+           s.state_name
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND ag.subgroup_code IN (
+          'AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+          'WDIS','DISAB504STAT','LEP','HOM','ECODIS')
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education',
+          'district of columbia',
+          'puerto rico')
+""", conn)
+
+sg_raw['legislation_status'] = sg_raw['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+sg_raw['female_share'] = sg_raw['count_female'] / sg_raw['count_total']
+sg_raw = sg_raw[sg_raw['female_share'].between(0, 1)].copy()
+
+years = ['2020-2021', '2021-2022', '2022-2023']
+
+# One chart per school year 
+for year in years:
+    df_yr = sg_raw[sg_raw['school_year'] == year].copy()
+
+    #  T-test per subgroup with Holm-Bonferroni 
+    test_results = {}
+    codes_tested = []
+    p_values_raw = []
+
+    for code in subgroup_codes:
+        e   = df_yr[(df_yr['subgroup_code'] == code) &
+                    (df_yr['legislation_status'] == 'Enacted policy')]['female_share']
+        np_ = df_yr[(df_yr['subgroup_code'] == code) &
+                    (df_yr['legislation_status'] == 'No enacted policy')]['female_share']
+        if len(e) < 2 or len(np_) < 2:
+            continue
+        _, p = stats.ttest_ind(e, np_, equal_var=False)
+        codes_tested.append(code)
+        p_values_raw.append(p)
+
+    # Apply Holm-Bonferroni correction
+    if p_values_raw:
+        _, p_adj, _, _ = multipletests(p_values_raw, method='holm')
+        for code, p_raw, p_hb in zip(codes_tested, p_values_raw, p_adj):
+            test_results[code] = {'p_raw': p_raw, 'p_adj': p_hb}
+
+    # Build pivot 
+    pivot = (
+        df_yr.groupby(['subgroup_code', 'legislation_status'])['female_share']
+        .mean().reset_index()
+        .pivot(index='subgroup_code',
+               columns='legislation_status',
+               values='female_share')
+    )
+    pivot.index = pivot.index.map(lambda c: subgroup_labels.get(c, c))
+    pivot = pivot.sort_values('Enacted policy')
+
+    #  Plot 
+    fig, ax = plt.subplots(figsize=(9, 6))
+    pivot.plot(kind='barh', ax=ax, width=0.80,
+               color=[C_ENACTED, C_NOPOLICY])
+
+    # Significance labels using Holm-Bonferroni adjusted p
+    label_to_code = {v: k for k, v in subgroup_labels.items()}
+    for i, label in enumerate(pivot.index):
+        code = label_to_code.get(label)
+        if code and code in test_results:
+            p_hb = test_results[code]['p_adj']
+            if p_hb < 0.001:
+                sig_text = 'Significant (p < 0.001)'
+                color    = '#070707'
+            elif p_hb < 0.01:
+                sig_text = 'Significant (p < 0.01)'
+                color    = '#070707'
+            elif p_hb < 0.05:
+                sig_text = 'Significant (p < 0.05)'
+                color    = '#070707'
+            else:
+                sig_text = 'Not significant'
+                color    = '#999999'
+            max_val = pivot.loc[label].max()
+            ax.text(max_val + 0.003, i, sig_text,
+                    va='center', ha='left', fontsize=4,
+                    color=color, style='italic')
+
+    # ECODIS highlight annotation
+    ecodis_label = subgroup_labels.get('ECODIS', 'Economically disadvantaged')
+    if ecodis_label in pivot.index:
+        idx = list(pivot.index).index(ecodis_label)
+        ax.annotate(
+            '\u2190 Period poverty link',
+            xy=(pivot.loc[ecodis_label].max() + 0.003, idx - 0.35),
+            xytext=(pivot.loc[ecodis_label].max() + 0.025, idx - 0.35),
+            fontsize=5.5, color='#4214b5', va='center'
+        )
+
+    n_total = len(df_yr['female_share'].dropna())
+    ax.set_xlabel(
+        'Average Female Share of Chronically Absent Students\n'
+        '(Female absent ÷ Total absent, per district)',
+        fontsize=6.5
+    )
+    ax.set_ylabel('')
+    ax.set_title(
+        f'Female Share of Chronic Absenteeism by Demographic Subgroup\n'
+        f'School Year {year}',
+        fontsize=13, fontweight='bold'
+    )
+    ax.set_xlim(0, pivot.values.max() + 0.20)
+    ax.legend(
+        handles=[
+            mpatches.Patch(color=C_ENACTED,  label='Enacted MHH policy'),
+            mpatches.Patch(color=C_NOPOLICY, label='No enacted policy'),
+        ],
+        fontsize=5.5, framealpha=0.9
+    )
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    plt.tight_layout()
+    plt.show()
+
+```
+
+
+### Economically disadvantaged students
+
+In the 2022–2023 school year, economically disadvantaged students represented 66.8 percent of all chronically absent students nationwide, totaling 7,981,704 students, of whom 48.9 percent were female (3,900,707 students). This subgroup is central to the project's theoretical framing: if menstrual product access is a meaningful driver of female absenteeism, its effect should be most visible among students who cannot afford products independently. The ECODIS finding — significantly lower female share in enacted-policy states — is consistent with this hypothesis, though the single-year availability of this subgroup limits the strength of the inference.
+
+### Robustness checks
+
+The core female-share finding was cross-checked at three different levels of geographic aggregation: the full LEA-level dataset (including charters), the traditional-LEA-only dataset, and a county-level aggregation. The pattern held consistently across all three. The main difference was in the funding-amount correlation, which dropped from r = 0.429 in the full dataset to r = 0.176 in both cleaner versions, suggesting the higher original value was inflated by the charter distribution asymmetry.
+
+```{python}
+#| label: tbl-robustness
+#| tbl-cap: "Three-way robustness check across levels of geographic aggregation. 'Sig.' = statistically significant after Welch's t-test (p < 0.05). Direction indicates whether enacted-policy states show higher or lower female share relative to no-policy states."
+
+pd.DataFrame({
+    'Finding': [
+        'Children w/ disabilities (IDEA)', 'White',
+        'Economically disadvantaged', 'Hispanic / Latino',
+        'Asian', 'English learner', 'Black or African American',
+        'Overall rate trend', 'Female share trend', 'Funding correlation'
+    ],
+    'All LEAs': [
+        'Sig., negative','Sig., negative','Sig., negative',
+        'Sig., negative','Sig., negative (largest effect)','Sig., negative',
+        'Sig., negative','Enacted higher','Enacted lower','r = 0.429'
+    ],
+    'Traditional LEAs only': [
+        'Sig., negative','Sig., negative','Sig., negative',
+        'Sig., negative','Sig., negative','Sig., negative',
+        'Sig., negative','Enacted higher','Enacted lower','r = 0.176'
+    ],
+    'County level': [
+        'Sig., negative','Sig., negative','Sig., negative',
+        'Sig., negative','Not significant','Not significant',
+        'Sig., positive','Enacted higher','Enacted lower','r = 0.178'
+    ],
+    'Verdict': [
+        'Robust across all three','Robust across all three',
+        'Robust across all three','Robust across all three',
+        'LEA-grain robust','LEA-grain robust',
+        'Direction reversal at county','Robust across all three',
+        'Robust across all three','Not robust — charter-inflated'
+    ]
+}).set_index('Finding')
+```
+
+---
+
+## Machine Learning
+
+Machine learning serves two complementary purposes in this analysis. First, regression models test which policy and contextual features are most predictive of female chronic absenteeism, providing a data-driven complement to the descriptive group comparisons. Second, clustering reveals natural groupings of states that a binary enacted/no-policy classification cannot capture, generating hypotheses about why some enacted states perform well and others do not.
+
+### Why these methods?
+
+**Linear Regression** was chosen as the baseline model because it provides directly interpretable coefficients for a policy audience: each coefficient answers "controlling for all other features, what is the estimated association between this feature and female absenteeism?" Its assumption of linearity is a known simplification but appropriate for a first-pass model on n=50 states.
+
+**Random Forest** was chosen as the second model because it captures non-linear relationships and feature interactions that linear regression cannot. It is robust to correlated features and provides feature importance scores that are stable across runs. With n=50, overfitting is expected and is quantified honestly using out-of-bag (OOB) score. The two models are not competitors — they triangulate the same story from different angles.
+
+**K-means clustering** was chosen because the research question is fundamentally exploratory: we want to discover whether states naturally group into meaningfully distinct profiles beyond the binary enacted/no-policy classification.
+
+**t-SNE** was chosen to visualize the high-dimensional feature space in two dimensions, revealing structure that cluster labels alone cannot convey and showing whether policy type naturally separates states in feature space.
+
+### Feature matrix
+
+```{python}
+#| label: ml-features
+#| code-summary: "Build state-level ML feature matrix from database"
+
+state_yr = pd.read_sql("""
+    SELECT s.state_name, af.school_year,
+           AVG(af.absenteeism_rate)          AS avg_rate,
+           SUM(af.total_students_enrollment) AS total_enroll,
+           SUM(af.total_students_absent)     AS total_absent
+    FROM absenteeism_facts af
+    JOIN leas l ON af.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE LOWER(s.state_name) NOT IN (
+        'bureau of indian education','district of columbia','puerto rico')
+    GROUP BY s.state_name, af.school_year
+""", conn)
+
+legis = pd.read_sql("""
+    SELECT s.state_name, ml.policy_type, ml.year_enacted,
+           ml.funding_amount, ml.pct_k12_reached,
+           ml.domain_materials, ml.domain_wash, ml.domain_knowledge,
+           ml.domain_discomforts, ml.domain_social_env,
+           ml.domain_mhh_impact, ml.domain_funding
+    FROM menstrual_legislation ml
+    JOIN states s ON ml.state_id = s.state_id
+""", conn)
+
+fs_state = pd.read_sql("""
+    SELECT s.state_name, ag.school_year,
+           SUM(ag.count_female) AS f_sum,
+           SUM(ag.count_total)  AS t_sum
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education','district of columbia','puerto rico')
+    GROUP BY s.state_name, ag.school_year
+""", conn)
+fs_state['female_share'] = fs_state['f_sum'] / fs_state['t_sum']
+
+eco = pd.read_sql("""
+    SELECT s.state_name,
+           AVG(CAST(ag.count_female AS FLOAT) /
+               NULLIF(ag.count_total,0)*100) AS ecodis_rate
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.subgroup_code='ECODIS' AND ag.count_total>0
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education','district of columbia','puerto rico')
+    GROUP BY s.state_name
+""", conn)
+
+wide_rate = state_yr.pivot(index='state_name', columns='school_year',
+                            values='avg_rate').reset_index()
+wide_rate.columns = ['state_name'] + [f'rate_{c}' for c in wide_rate.columns[1:]]
+
+wide_fs = fs_state.pivot(index='state_name', columns='school_year',
+                          values='female_share').reset_index()
+wide_fs.columns = ['state_name'] + [f'fs_{c}' for c in wide_fs.columns[1:]]
+
+enroll_2223 = state_yr[state_yr['school_year']=='2022-2023'][
+    ['state_name','total_enroll','total_absent']].copy()
+
+ml_df = wide_rate.merge(wide_fs, on='state_name', how='outer')
+ml_df = ml_df.merge(enroll_2223, on='state_name', how='left')
+ml_df = ml_df.merge(legis, on='state_name', how='left')
+ml_df = ml_df.merge(eco, on='state_name', how='left')
+
+policy_map = {'FM':4,'AP':3,'AT':2,'UM':1,'NO_ENACTED_POLICY':0}
+ml_df['policy_score'] = ml_df['policy_type'].map(policy_map).fillna(0)
+ml_df['years_enacted'] = ml_df['year_enacted'].apply(
+    lambda x: max(0,2023-int(x)) if pd.notna(x) else 0)
+ml_df['funding_amount'] = pd.to_numeric(
+    ml_df['funding_amount'], errors='coerce').fillna(0)
+ml_df['pct_k12_reached'] = pd.to_numeric(
+    ml_df['pct_k12_reached'], errors='coerce').fillna(0)
+
+domain_cols = ['domain_materials','domain_wash','domain_knowledge',
+               'domain_discomforts','domain_social_env',
+               'domain_mhh_impact','domain_funding']
+for col in domain_cols:
+    ml_df[col] = (ml_df[col].astype(str).str.upper().str.strip()=='YES').astype(int)
+ml_df['domain_score'] = ml_df[domain_cols].sum(axis=1)
+
+fs_2223 = fs_state[fs_state['school_year']=='2022-2023'][
+    ['state_name','female_share']].copy()
+ml_df = ml_df.merge(fs_2223, on='state_name', how='left')
+ml_df['target_female_rate'] = (
+    ml_df['female_share'] * ml_df['total_absent'] /
+    (ml_df['total_enroll']*0.488)*100
+).clip(0,100)
+
+fs_2223_col = 'fs_2022-2023' if 'fs_2022-2023' in ml_df.columns else 'female_share'
+ml_df['gender_gap_2223'] = (ml_df[fs_2223_col] - 0.5)*100
+ml_df = ml_df.dropna(subset=['target_female_rate'])
+
+FEATURES = ['policy_score','years_enacted','funding_amount','pct_k12_reached',
+            'domain_score','domain_knowledge','domain_social_env','domain_mhh_impact',
+            'ecodis_rate','gender_gap_2223']
+
+FEAT_LABELS = {
+    'policy_score':'Policy score', 'years_enacted':'Years enacted',
+    'funding_amount':'Funding amount ($)', 'pct_k12_reached':'% K-12 reached',
+    'domain_score':'Domain coverage score', 'domain_knowledge':'Domain: Knowledge',
+    'domain_social_env':'Domain: Social environment',
+    'domain_mhh_impact':'Domain: MHH impact',
+    'ecodis_rate':'ECODIS rate (poverty)', 'gender_gap_2223':'Gender gap (2022–23)',
+}
+
+print(f"Feature matrix: {len(ml_df)} states × {len(FEATURES)} features")
+print(f"Target (female rate 2022-23): mean={ml_df['target_female_rate'].mean():.1f}%, "
+      f"range={ml_df['target_female_rate'].min():.1f}–{ml_df['target_female_rate'].max():.1f}%")
+```
+
+### Linear regression
+
+A linear regression using the clean 10-feature set explained 36.1% of variance in the target (R²=0.361, RMSE=6.24pp). Five-fold cross-validation returned a mean CV R² of -0.505, indicating that the model does not generalize to unseen states, expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. **Policy score carries a positive standardized coefficient (+1.02)**, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. The **strongest negative coefficient belongs to domain coverage score (-1.44)**, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.
+
+```{python}
+#| label: fig-lr-coef
+#| fig-cap: "Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. Policy score is positive (+1.02), likely reflecting selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone."
+#| fig-width: 8
+#| fig-height: 5
+#| out-width: "100%"
+
+X  = ml_df[FEATURES].fillna(0)
+y  = ml_df['target_female_rate']
+sc = StandardScaler()
+Xs = sc.fit_transform(X)
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+
+lr    = LinearRegression()
+lr.fit(Xs, y)
+
+print(pd.DataFrame({
+    'Feature': FEATURES,
+    'Label': [FEAT_LABELS[f] for f in FEATURES],
+    'Coefficient': lr.coef_
+}).sort_values('Coefficient'))
+
+cv_lr = cross_val_score(lr, Xs, y, cv=kf, scoring='r2')
+r2_lr = r2_score(y, lr.predict(Xs))
+rmse_lr = np.sqrt(mean_squared_error(y, lr.predict(Xs)))
+
+coef_df = pd.DataFrame({
+    'Feature': [FEAT_LABELS[f] for f in FEATURES],
+    'Coefficient': lr.coef_,
+}).sort_values('Coefficient', ascending=True)
+
+fig, ax = plt.subplots(figsize=(8, 5))
+colors_c = [C_ENACTED if v<0 else C_NOPOLICY for v in coef_df['Coefficient']]
+ax.barh(range(len(coef_df)), coef_df['Coefficient'],
+        color=colors_c, alpha=0.88, edgecolor='white', height=0.65)
+for i, val in enumerate(coef_df['Coefficient']):
+    sign   = '+' if val>=0 else ''
+    inside = abs(val)>0.8
+    xp     = val/2 if inside else val+(0.08 if val>=0 else -0.08)
+    ha     = 'center' if inside else ('left' if val>=0 else 'right')
+    fc     = 'white' if inside else 'black'
+    ax.text(xp, i, f'{sign}{val:.2f}', ha=ha, va='center',
+            fontsize=9, fontweight='bold', color=fc)
+ax.axvline(0, color='black', linewidth=1.2)
+ax.set_yticks(range(len(coef_df)))
+ax.set_yticklabels(coef_df['Feature'], fontsize=10)
+ax.set_xlabel('Standardized Coefficient\n(negative = associated with lower female absenteeism)', fontsize=9)
+ax.set_title(f'Linear Regression — Standardized Coefficients\n'
+             f'R²={r2_lr:.3f} · RMSE={rmse_lr:.2f}pp · 5-Fold CV R²={cv_lr.mean():.3f}',
+             fontsize=11, fontweight='bold')
+ax.legend(handles=[
+    mpatches.Patch(color=C_ENACTED, alpha=0.88, label='Negative — reduces female absenteeism'),
+    mpatches.Patch(color=C_NOPOLICY, alpha=0.88, label='Positive — increases female absenteeism'),
+], fontsize=9, loc='lower right')
+plt.tight_layout()
+plt.show()
+```
+
+### Random forest
+
+A Random Forest Regressor (500 trees, minimum 2 samples per leaf) achieved a training R² of 0.779 and RMSE of 3.67pp, but an out-of-bag R² of 0.093 and a 5-fold CV mean R² of -0.085. The large gap between training and out-of-bag performance confirms overfitting consistent with the small sample size. The OOB R² of 0.093 represents the most conservative and honest estimate of generalization performance. Despite overfitting, the **feature importance rankings** are interpreted as descriptive findings: gender gap (0.543), ECODIS rate (0.174), and % K-12 reached (0.131) consistently outrank policy score and domain coverage, confirming that structural context dominates short-term policy effects.
+
+```{python}
+#| label: fig-rf-importance
+#| fig-cap: "Random Forest feature importance ranking. Gender gap between female and male absenteeism rates and poverty concentration (ECODIS rate) dominate, confirming that structural context explains more variance in female absenteeism than policy characteristics alone at the state level. The dashed line marks the median importance across all features."
+#| fig-width: 8
+#| fig-height: 5
+#| out-width: "100%"
+
+rf = RandomForestRegressor(n_estimators=500, min_samples_leaf=2,
+                            random_state=42, oob_score=True)
+rf.fit(X, y)
+cv_rf  = cross_val_score(rf, X, y, cv=kf, scoring='r2')
+r2_rf  = r2_score(y, rf.predict(X))
+rmse_rf = np.sqrt(mean_squared_error(y, rf.predict(X)))
+
+fi_df = pd.DataFrame({
+    'Feature': [FEAT_LABELS[f] for f in FEATURES],
+    'Importance': rf.feature_importances_,
+}).sort_values('Importance', ascending=True)
+
+fig, ax = plt.subplots(figsize=(8, 5))
+colors_fi = [C_ENACTED if v>fi_df['Importance'].median()
+             else C_NOPOLICY for v in fi_df['Importance']]
+ax.barh(range(len(fi_df)), fi_df['Importance'],
+        color=colors_fi, alpha=0.88, edgecolor='white', height=0.65)
+for i, val in enumerate(fi_df['Importance']):
+    ax.text(val+0.005, i, f'{val:.3f}', ha='left', va='center',
+            fontsize=9, fontweight='bold', color='black')
+ax.set_yticks(range(len(fi_df)))
+ax.set_yticklabels(fi_df['Feature'], fontsize=10)
+ax.set_xlabel('Feature importance (mean decrease in impurity)', fontsize=9)
+ax.set_title(f'Random Forest — Feature Importance\n'
+             f'Training R²={r2_rf:.3f} · OOB R²={rf.oob_score_:.3f} · '
+             f'5-Fold CV R²={cv_rf.mean():.3f} · RMSE={rmse_rf:.2f}pp',
+             fontsize=11, fontweight='bold')
+ax.axvline(fi_df['Importance'].median(), color='gray',
+           linewidth=1.0, linestyle='--', alpha=0.6)
+ax.text(fi_df['Importance'].median()+0.003, len(fi_df)-0.5,
+        'median', fontsize=8, color='gray', style='italic', va='top')
+ax.legend(handles=[
+    mpatches.Patch(color=C_ENACTED, alpha=0.88, label='Above median importance'),
+    mpatches.Patch(color=C_NOPOLICY, alpha=0.88, label='Below median importance'),
+], fontsize=9, loc='lower right')
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| label: tbl-model-comparison
+#| tbl-cap: "Regression model comparison — state-level ML pipeline (n=50 states). The large gap between training R² and cross-validation R² reflects overfitting expected at this sample size. OOB R² is the most conservative and honest generalization estimate."
+
+pd.DataFrame({
+    'Metric': ['Training R²','5-Fold CV R²','OOB R² (RF only)','RMSE','Top predictor'],
+    'Linear Regression': [
+        f'{r2_lr:.3f}', f'{cv_lr.mean():.3f}', '—',
+        f'{rmse_lr:.2f}pp', 'Gender gap (coef negative)'
+    ],
+    'Random Forest': [
+        f'{r2_rf:.3f}', f'{cv_rf.mean():.3f}',
+        f'{rf.oob_score_:.3f}', f'{rmse_rf:.2f}pp',
+        'Gender gap (imp 0.543)'
+    ],
+    'Interpretation': [
+        'In-sample fit', 'Overfitting — n=50 too small',
+        'Best honest estimate', 'Average prediction error',
+        'Consistent across both models'
+    ]
+}).set_index('Metric')
+```
+
+### Oregon case study: the implementation gap
+
+Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration — Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.
+
+An informational interview with a program specialist at the Oregon Department of Education's Menstrual Dignity Program [@oregon_specialist_2026] revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: **MHH legislation is necessary but insufficient**, and its impact depends critically on implementation fidelity at the school and district level.
+
+### K-means clustering
+
+K-means clustering was applied to the full 11-feature matrix (including the target variable) to identify natural groupings of states. The optimal number of clusters was selected using the elbow method and silhouette score across K=2 through K=10. Silhouette scores peaked at K=7 (score=0.262). The seven clusters reveal a more nuanced typology than the binary enacted/no-policy distinction: Funded Mandate states appear in five of the seven clusters, confirming that policy type alone is insufficient to predict outcomes.
+
+```{python}
+#| label: fig-tsne
+#| fig-cap: "t-SNE projection of the state-level feature space, colored by cluster membership. The 18 no-policy states (gray, C1) form a distinct mass on the right, cleanly separated from all enacted-policy clusters. Oregon and Nevada (red, C6 — the Paradox Cluster) sit isolated at top center, visually distinct from all other Funded Mandate states. Colorado, New Jersey, and North Carolina (dark blue, C5 — the Sweet Spot) anchor the lower left, combining strong policy with low poverty and achieving the best outcomes."
+#| fig-width: 9
+#| fig-height: 5
+#| out-width: "100%"
+
+CLUSTER_FEATS = FEATURES + ['target_female_rate']
+Xc    = ml_df[CLUSTER_FEATS].fillna(0)
+Xc_sc = StandardScaler().fit_transform(Xc)
+
+km = KMeans(n_clusters=7, random_state=42, n_init=50)
+ml_df['cluster'] = km.fit_predict(Xc_sc)
+
+CNAMES = {
+    0:'C0: Moderate implementation',
+    1:'C1: Policy void',
+    2:'C2: High poverty, low reach',
+    3:'C3: Low poverty, high reach ',
+    4:'C4: High reach, high absenteeism',
+    5:'C5: Strong policy, low poverty',
+    6:'C6: Strong policy, high absenteeism',
+}
+CCOLORS = ['#d95f02','#7570b3','#e7298a','#66a61e',
+            '#1b9e77','#a6761d','#2214e0']
+
+tsne = TSNE(n_components=2, perplexity=10, learning_rate='auto',
+            max_iter=2000, random_state=42, init='pca')
+coords = tsne.fit_transform(StandardScaler().fit_transform(
+    ml_df[CLUSTER_FEATS].fillna(0)))
+ml_df['tx'] = coords[:,0]
+ml_df['ty'] = coords[:,1]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+for c in range(7):
+    sub = ml_df[ml_df['cluster']==c]
+    ax.scatter(sub['tx'], sub['ty'], c=CCOLORS[c],
+               s=180, alpha=0.9, edgecolors='white', linewidth=0.8,
+               label=CNAMES[c], zorder=3)
+
+for _, row in ml_df.iterrows():
+    paradox = row['cluster']==6
+    ax.annotate(
+        row['state_name'].title(),
+        xy=(row['tx'], row['ty']), xytext=(5,5),
+        textcoords='offset points',
+        fontsize=6, color='#333',
+        bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
+                  edgecolor='none', alpha=0.7))
+
+ax.set_title('Do States With The  Same Policy Share The Same Outcomes?',
+             fontsize=13, fontweight='bold')
+ax.set_xlabel('t-SNE Dimension 1', fontsize=9)
+ax.set_ylabel('t-SNE Dimension 2', fontsize=9)
+ax.legend(fontsize=7, loc='upper left', title='Cluster', title_fontsize=8,
+          borderpad=1.0, labelspacing=0.6)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| label: tbl-clusters
+#| tbl-cap: "K-means cluster profiles (K=7) — state-level feature matrix (n=50 states). Avg female rate is the mean target variable per cluster. The Sweet Spot cluster (C5) achieves the best outcomes by combining strong policy with low poverty. The Paradox Cluster (C6) holds maximum domain coverage yet maximum absenteeism."
+
+cluster_summary = (
+    ml_df.groupby('cluster')
+    .agg(
+        n_states       =('state_name','count'),
+        avg_female_rate=('target_female_rate','mean'),
+        avg_policy_score=('policy_score','mean'),
+        avg_domain_score=('domain_score','mean'),
+        avg_pct_reached =('pct_k12_reached','mean'),
+        avg_ecodis      =('ecodis_rate','mean'),
+    ).round(1)
+)
+cluster_summary.index = [CNAMES[c] for c in cluster_summary.index]
+cluster_summary.columns = ['N states','Avg female rate (%)','Avg policy score',
+                            'Avg domain score','Avg % K-12 reached','Avg ECODIS rate']
+cluster_summary
+```
+

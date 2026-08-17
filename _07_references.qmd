@@ -1,0 +1,88 @@
+# References
+
+::: {#refs}
+:::
+
+@article{ballard_2025,
+  author    = {Ballard, Madeleine and {others}},
+  title     = {Menstrual health and hygiene in {US} {K-12} schools: A systematic policy review},
+  journal   = {Frontiers in Reproductive Health},
+  year      = {2025},
+  note      = {Volume and DOI pending publication}
+}
+
+@report{period_thinx_2025,
+  author      = {{PERIOD.} and {Thinx}},
+  title       = {2025 State of the period study},
+  institution = {PERIOD.},
+  year        = {2025},
+  url         = {https://period.org/uploads/2025-State-of-the-Period-Study.pdf}
+}
+
+@misc{us_dept_ed_2023,
+  author       = {{US Department of Education}},
+  title        = {{EDFacts} chronic absenteeism data ({Data Group 814})},
+  year         = {2021--2023},
+  howpublished = {ED Data Express},
+  url          = {https://eddataexpress.ed.gov}
+}
+
+@misc{nces_grf,
+  author       = {{National Center for Education Statistics}},
+  title        = {School {District} {Geographic} {Relationship} {Files}},
+  year         = {2021--2023},
+  howpublished = {NCES Education Demographic and Geographic Estimates (EDGE) program},
+  url          = {https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles}
+}
+
+@misc{nces_digest_2023,
+  author       = {{National Center for Education Statistics}},
+  title        = {Digest of {Education} {Statistics} 2023, {Table} 203.10},
+  year         = {2023},
+  howpublished = {US Department of Education},
+  url          = {https://nces.ed.gov/programs/digest/}
+}
+
+@law{essa_2015,
+  title  = {Every {Student} {Succeeds} {Act}},
+  year   = {2015},
+  number = {Pub. L. 114-95},
+  note   = {20 U.S.C. § 6301 et seq.}
+}
+
+@article{heckman_2006,
+  author  = {Heckman, James J.},
+  title   = {Skill formation and the economics of investing in disadvantaged children},
+  journal = {Science},
+  volume  = {312},
+  number  = {5782},
+  pages   = {1900--1902},
+  year    = {2006},
+  doi     = {10.1126/science.1128898}
+}
+
+@article{attendance_works_2019,
+  author      = {{Attendance Works} and {Everyone Graduates Center}},
+  title       = {Portraits of change: Aligning school and community resources to reduce chronic absence},
+  institution = {Attendance Works},
+  year        = {2019},
+  url         = {https://www.attendanceworks.org}
+}
+
+@article{holm_1979,
+  author  = {Holm, Sture},
+  title   = {A simple sequentially rejective multiple test procedure},
+  journal = {Scandinavian Journal of Statistics},
+  volume  = {6},
+  number  = {2},
+  pages   = {65--70},
+  year    = {1979}
+}
+
+@misc{oregon_specialist_2026,
+  author = {[Name withheld pending consent]},
+  title  = {Personal communication — {Oregon Department of Education Menstrual Dignity Program}},
+  year   = {2026},
+  month  = {July},
+  note   = {Informational interview conducted by Carolina Pinillos and Georgia Kirkpatrick}
+}
