@@ -11,9 +11,16 @@ format:
     theme:
       light: lightly
       dark: darkly
-fig-width: 8
-fig-height: 4
-fig-dpi: 150
+    fig-width: 8
+    fig-height: 4
+    fig-dpi: 150
+    fig-align: center
+    include-in-header:
+      text: |
+        <style>
+        img.figure-img { max-width: 100% !important; width: auto !important; height: auto !important; }
+        .cell-output-display img { max-width: 100% !important; width: auto !important; }
+        </style>
 execute:
   echo: true
   warning: false
