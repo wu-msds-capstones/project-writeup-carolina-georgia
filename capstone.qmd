@@ -1,16 +1,25 @@
 ---
-title: "Capstone Project"
-subtitle: Subtitle
-authors:
-  - Bob
-  - Jane
-bibliography: references.bib
-title-block-banner: true
-format: 
+
+title: "Menstrual Health Legislation and K-12 Chronic Absenteeism"
+subtitle: "Exploring the Association Between State Menstrual Health and Hygiene Policy and Female Student Absenteeism in US Public Schools"
+author:
+  - name: Carolina Pinillos
+  - name: Georgia Kirkpatrick
+jupyter: capstone
+date: today
+format:
   html:
     theme:
       light: lightly
       dark: darkly
+fig-width: 8
+fig-height: 4
+fig-dpi: 150
+execute:
+  echo: true
+  warning: false
+  message: false
+bibliography: references.bib
 ---
 
 {{< include _01_intro.qmd >}}
