@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 
 
 # ── Database connection 
-DB_PATH = r"C:\Users\cpini\Downloads\capstone_traditional.db"
+DB_PATH = "./capstone_traditional.db"
 conn = sqlite3.connect(DB_PATH)
 
 # ── Project color palette 
