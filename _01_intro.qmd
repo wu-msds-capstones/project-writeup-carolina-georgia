@@ -23,32 +23,3 @@ Among the many root causes of chronic absenteeism, period poverty has received g
 In response to this barrier, a growing number of US states have enacted Menstrual Health and Hygiene (MHH) legislation requiring or funding the provision of free menstrual products in public school restrooms. As of August 2024, 32 states had enacted some form of this legislation, ranging from funded mandates to unfunded authorizations [@ballard_2025]. Despite this policy momentum, rigorous empirical evaluation of whether these laws relate to measurable changes in absenteeism remains limited.
 
 This project addresses that gap by integrating three years of federal chronic absenteeism data with a comprehensive state-level MHH legislation dataset to examine whether enacted-policy states show systematically different female absenteeism patterns. Districts in enacted-policy states do show a consistently smaller female share of chronic absenteeism than no-policy states, a pattern that holds across nearly every subgroup, year, and level of geographic detail we tested, but enacted-policy states also started from a higher overall absenteeism baseline, suggesting states already struggling with attendance were the ones motivated to act. We approach this as a correlational, exploratory analysis rather than a causal evaluation, acknowledging that the narrow observation window and the complexity of absenteeism root causes prevent strong causal claims. Our findings are intended to inform the design of future evaluations rather than to serve as final evidence of policy effectiveness.
-
-## Key vocabulary
-
-To follow this analysis, readers need familiarity with the following terms:
-
-| Term | Definition |
-|------|-----------|
-| **Chronic absenteeism** | Missing ≥10% of school days in a given year |
-| **LEA** | Local Education Agency, a school district |
-| **EDFacts** | Federal data system collecting LEA-level chronic absenteeism counts |
-| **Female share of absent** | Female chronically absent ÷ total chronically absent, as a percentage |
-| **Period poverty** | Inability to access menstrual products due to cost or availability |
-| **ECODIS** | Economically disadvantaged subgroup in EDFacts reporting |
-
-## MHH legislation landscape
-
-Beyond policy type, @ballard_2025 identifies seven MHH policy **domains** that legislation may address: (1) menstrual materials provision, (2) WASH facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:
-
-| Policy type | Code | Description |
-|-------------|------|-------------|
-| Funded Mandate | FM | State receives funds AND has a compliance mandate |
-| Appropriations | AP | Funds allocated; no compliance mandate |
-| Authorization | AT | Permission to spend existing funds; no new funds |
-| Unfunded Mandate | UM | Compliance required; zero funds, no authorization |
-| No enacted policy | — | No legislation of any kind |
-
-## Research question
-
-> Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?

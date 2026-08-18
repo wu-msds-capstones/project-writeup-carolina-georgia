@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -81,28 +81,29 @@ div.csl-indent {
 }</style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-1c59215f878e034bd7426c637fa661ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-534f9e6eb4fde8fa3495dc6c45b1673d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <style>
@@ -131,7 +132,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -387,15 +388,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#the-chronic-absenteeism-crisis" id="toc-the-chronic-absenteeism-crisis" class="nav-link" data-scroll-target="#the-chronic-absenteeism-crisis">The chronic absenteeism crisis</a></li>
   <li><a href="#period-poverty-as-an-absenteeism-driver" id="toc-period-poverty-as-an-absenteeism-driver" class="nav-link" data-scroll-target="#period-poverty-as-an-absenteeism-driver">Period poverty as an absenteeism driver</a></li>
-  <li><a href="#key-vocabulary" id="toc-key-vocabulary" class="nav-link" data-scroll-target="#key-vocabulary">Key vocabulary</a></li>
-  <li><a href="#mhh-legislation-landscape" id="toc-mhh-legislation-landscape" class="nav-link" data-scroll-target="#mhh-legislation-landscape">MHH legislation landscape</a></li>
-  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research question</a></li>
   </ul></li>
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
   <ul class="collapse">
-  <li><a href="#key-vocabulary-1" id="toc-key-vocabulary-1" class="nav-link" data-scroll-target="#key-vocabulary-1">Key vocabulary</a></li>
-  <li><a href="#mhh-legislation-landscape-1" id="toc-mhh-legislation-landscape-1" class="nav-link" data-scroll-target="#mhh-legislation-landscape-1">MHH legislation landscape</a></li>
-  <li><a href="#research-question-1" id="toc-research-question-1" class="nav-link" data-scroll-target="#research-question-1">Research question</a></li>
+  <li><a href="#key-vocabulary" id="toc-key-vocabulary" class="nav-link" data-scroll-target="#key-vocabulary">Key vocabulary</a></li>
+  <li><a href="#mhh-legislation-landscape" id="toc-mhh-legislation-landscape" class="nav-link" data-scroll-target="#mhh-legislation-landscape">MHH legislation landscape</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research question</a></li>
   </ul></li>
   <li><a href="#data-engineering" id="toc-data-engineering" class="nav-link" data-scroll-target="#data-engineering">Data Engineering</a>
   <ul class="collapse">
@@ -438,7 +436,12 @@ window.Quarto = {
   </ul></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a>
+  <ul class="collapse">
+  <li><a href="#legislation-alone-is-not-enough" id="toc-legislation-alone-is-not-enough" class="nav-link" data-scroll-target="#legislation-alone-is-not-enough">Legislation Alone is Not Enough</a></li>
+  <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -453,17 +456,17 @@ window.Quarto = {
   
 
 
-<div id="dbd7802d" class="cell" data-execution_count="1">
+<div id="41777b2e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Database connection </span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> <span class="st">"./capstone_traditional.db"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(DB_PATH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(DB_PATH)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="introduction" class="level1">
@@ -478,6 +481,9 @@ window.Quarto = {
 <p>In response to this barrier, a growing number of US states have enacted Menstrual Health and Hygiene (MHH) legislation requiring or funding the provision of free menstrual products in public school restrooms. As of August 2024, 32 states had enacted some form of this legislation, ranging from funded mandates to unfunded authorizations <span class="citation" data-cites="ballard_2025">(<a href="#ref-ballard_2025" role="doc-biblioref">Ballard et al. 2025</a>)</span>. Despite this policy momentum, rigorous empirical evaluation of whether these laws relate to measurable changes in absenteeism remains limited.</p>
 <p>This project addresses that gap by integrating three years of federal chronic absenteeism data with a comprehensive state-level MHH legislation dataset to examine whether enacted-policy states show systematically different female absenteeism patterns. Districts in enacted-policy states do show a consistently smaller female share of chronic absenteeism than no-policy states, a pattern that holds across nearly every subgroup, year, and level of geographic detail we tested, but enacted-policy states also started from a higher overall absenteeism baseline, suggesting states already struggling with attendance were the ones motivated to act. We approach this as a correlational, exploratory analysis rather than a causal evaluation, acknowledging that the narrow observation window and the complexity of absenteeism root causes prevent strong causal claims. Our findings are intended to inform the design of future evaluations rather than to serve as final evidence of policy effectiveness.</p>
 </section>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
 <section id="key-vocabulary" class="level2">
 <h2 class="anchored" data-anchor-id="key-vocabulary">Key vocabulary</h2>
 <p>To follow this analysis, readers need familiarity with the following terms:</p>
@@ -507,7 +513,7 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td><strong>Female share of absent</strong></td>
-<td>Female chronically absent ÷ total chronically absent, as a percentage</td>
+<td>Female students chronically absent ÷ total students chronically absent, as a percentage</td>
 </tr>
 <tr class="odd">
 <td><strong>Period poverty</strong></td>
@@ -522,7 +528,7 @@ window.Quarto = {
 </section>
 <section id="mhh-legislation-landscape" class="level2">
 <h2 class="anchored" data-anchor-id="mhh-legislation-landscape">MHH legislation landscape</h2>
-<p>Beyond policy type, <span class="citation" data-cites="ballard_2025">Ballard et al. (<a href="#ref-ballard_2025" role="doc-biblioref">2025</a>)</span> identifies seven MHH policy <strong>domains</strong> that legislation may address: (1) menstrual materials provision, (2) WASH facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:</p>
+<p>Beyond policy type, <span class="citation" data-cites="ballard_2025">Ballard et al. (<a href="#ref-ballard_2025" role="doc-biblioref">2025</a>)</span> identify seven MHH policy domains that legislation may address: (1) menstrual materials provision, (2) water, sanitation, and hygiene (WASH) facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 40%">
@@ -570,106 +576,10 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?</p>
 </blockquote>
-</section>
-</section>
-<section id="background" class="level1">
-<h1>Background</h1>
-<section id="key-vocabulary-1" class="level3">
-<h3 class="anchored" data-anchor-id="key-vocabulary-1">Key vocabulary</h3>
-<p>To follow this analysis, readers need familiarity with the following terms:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 35%">
-<col style="width: 64%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Term</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Chronic absenteeism</strong></td>
-<td>Missing ≥10% of school days in a given year</td>
-</tr>
-<tr class="even">
-<td><strong>LEA</strong></td>
-<td>Local Education Agency, a school district</td>
-</tr>
-<tr class="odd">
-<td><strong>EDFacts</strong></td>
-<td>Federal data system collecting LEA-level chronic absenteeism counts</td>
-</tr>
-<tr class="even">
-<td><strong>Female share of absent</strong></td>
-<td>Female students chronically absent ÷ total students chronically absent, as a percentage</td>
-</tr>
-<tr class="odd">
-<td><strong>Period poverty</strong></td>
-<td>Inability to access menstrual products due to cost or availability</td>
-</tr>
-<tr class="even">
-<td><strong>ECODIS</strong></td>
-<td>Economically disadvantaged subgroup in EDFacts reporting</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="mhh-legislation-landscape-1" class="level3">
-<h3 class="anchored" data-anchor-id="mhh-legislation-landscape-1">MHH legislation landscape</h3>
-<p>Beyond policy type, <span class="citation" data-cites="ballard_2025">Ballard et al. (<a href="#ref-ballard_2025" role="doc-biblioref">2025</a>)</span> identify seven MHH policy domains that legislation may address: (1) menstrual materials provision, (2) water, sanitation, and hygiene (WASH) facilities, (3) knowledge and education, (4) care for discomfort and disorders, (5) supportive social environment, (6) MHH impact assessment, and (7) funding mechanism. Policy types vary substantially in their resource implications:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 40%">
-<col style="width: 18%">
-<col style="width: 40%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Policy type</th>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Funded Mandate</td>
-<td>FM</td>
-<td>State receives funds AND has a compliance mandate</td>
-</tr>
-<tr class="even">
-<td>Appropriations</td>
-<td>AP</td>
-<td>Funds allocated; no compliance mandate</td>
-</tr>
-<tr class="odd">
-<td>Authorization</td>
-<td>AT</td>
-<td>Permission to spend existing funds; no new funds</td>
-</tr>
-<tr class="even">
-<td>Unfunded Mandate</td>
-<td>UM</td>
-<td>Compliance required; zero funds, no authorization</td>
-</tr>
-<tr class="odd">
-<td>No enacted policy</td>
-<td>—</td>
-<td>No legislation of any kind</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="research-question-1" class="level3">
-<h3 class="anchored" data-anchor-id="research-question-1">Research question</h3>
-<blockquote class="blockquote">
-<p>Does statewide MHH legislation relate to the female share of chronic absenteeism in US public schools, and does any association hold consistently across demographic subgroups, school years, and levels of geographic aggregation?</p>
-</blockquote>
 <div id="setup-data" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -722,7 +632,7 @@ window.Quarto = {
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'axes.grid'</span>: <span class="va">True</span>,</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">'grid.alpha'</span>: <span class="fl">0.25</span>,</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">'grid.linestyle'</span>: <span class="st">'--'</span>,</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -749,12 +659,12 @@ window.Quarto = {
 <div class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'School year'</span>: [<span class="st">'2020–2021'</span>, <span class="st">'2021–2022'</span>, <span class="st">'2022–2023'</span>, <span class="st">'Total'</span>],</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Matched (traditional)'</span>: [<span class="dv">12839</span>, <span class="dv">12914</span>, <span class="dv">13039</span>, <span class="dv">38792</span>],</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Unmatched (non-geographic)'</span>: [<span class="dv">4685</span>, <span class="dv">4887</span>, <span class="dv">4957</span>, <span class="dv">14529</span>],</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Match rate'</span>: [<span class="st">'73%'</span>, <span class="st">'73%'</span>, <span class="st">'74%'</span>, <span class="st">'73%'</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'School year'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'School year'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-match-rates" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -762,11 +672,11 @@ window.Quarto = {
 Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public school districts are those successfully matched to a primary county via the NCES GRF crosswalk.
 </figcaption>
 <div aria-describedby="tbl-match-rates-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -783,25 +693,25 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2020–2021</td>
+<th data-quarto-table-cell-role="th">2020–2021</th>
 <td>12839</td>
 <td>4685</td>
 <td>73%</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2021–2022</td>
+<th data-quarto-table-cell-role="th">2021–2022</th>
 <td>12914</td>
 <td>4887</td>
 <td>73%</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2022–2023</td>
+<th data-quarto-table-cell-role="th">2022–2023</th>
 <td>13039</td>
 <td>4957</td>
 <td>74%</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Total</td>
+<th data-quarto-table-cell-role="th">Total</th>
 <td>38792</td>
 <td>14529</td>
 <td>73%</td>
@@ -825,7 +735,7 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>erDiagram</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>erDiagram</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  STATES ||--o{ LEAS : contains</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  STATES ||--o| MENSTRUAL_LEGISLATION : has</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  LEAS ||--o{ ABSENTEEISM_FACTS : reports</span>
@@ -867,7 +777,7 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    string domain_materials</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    string domain_wash</span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    string domain_funding</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -925,7 +835,7 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 <div class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Table'</span>: [<span class="st">'states'</span>, <span class="st">'leas'</span>, <span class="st">'absenteeism_facts'</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">'absenteeism_subgroups'</span>, <span class="st">'menstrual_legislation'</span>],</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Grain'</span>: [<span class="st">'One row per state'</span>, <span class="st">'One row per LEA'</span>,</span>
@@ -936,7 +846,7 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'subgroup_fact_id'</span>, <span class="st">'legislation_id'</span>],</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Foreign key(s)'</span>: [<span class="st">'—'</span>, <span class="st">'state_id → states'</span>, <span class="st">'lea_id → leas'</span>,</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'lea_id → leas'</span>, <span class="st">'state_id → states'</span>]</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Table'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Table'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-schema" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -944,11 +854,11 @@ Table&nbsp;1: GRF crosswalk match rates by school year. Traditional public schoo
 Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). The schema satisfies third normal form: each table contains only attributes dependent on its own primary key, with no repeating groups and no transitive dependencies.
 </figcaption>
 <div aria-describedby="tbl-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -965,31 +875,31 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">states</td>
+<th data-quarto-table-cell-role="th">states</th>
 <td>One row per state</td>
 <td>state_id</td>
 <td>—</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">leas</td>
+<th data-quarto-table-cell-role="th">leas</th>
 <td>One row per LEA</td>
 <td>lea_id</td>
 <td>state_id → states</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">absenteeism_facts</td>
+<th data-quarto-table-cell-role="th">absenteeism_facts</th>
 <td>One row per LEA per year</td>
 <td>fact_id</td>
 <td>lea_id → leas</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">absenteeism_subgroups</td>
+<th data-quarto-table-cell-role="th">absenteeism_subgroups</th>
 <td>One row per LEA per year per subgroup</td>
 <td>subgroup_fact_id</td>
 <td>lea_id → leas</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">menstrual_legislation</td>
+<th data-quarto-table-cell-role="th">menstrual_legislation</th>
 <td>One row per state</td>
 <td>legislation_id</td>
 <td>state_id → states</td>
@@ -1009,7 +919,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <div id="cell-db-validation" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Database integrity check — row counts per table</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>row_counts <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>row_counts <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT 'absenteeism_facts' AS Tables, COUNT(*) AS Rows FROM absenteeism_facts</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    UNION ALL SELECT 'absenteeism_subgroups', COUNT(*) FROM absenteeism_subgroups</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    UNION ALL SELECT 'leas', COUNT(*) FROM leas</span></span>
@@ -1025,50 +935,50 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        {<span class="st">'selector'</span>: <span class="st">'td'</span>, <span class="st">'props'</span>: [(<span class="st">'padding'</span>, <span class="st">'3px 16px'</span>)]},</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ])</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">format</span>({<span class="st">'rows'</span>: <span class="st">'</span><span class="sc">{:,}</span><span class="st">'</span>})</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="db-validation" class="cell-output cell-output-display" data-execution_count="28">
+<div id="db-validation" class="cell-output cell-output-display" data-execution_count="5">
 <style type="text/css">
-#T_22ae0 th {
+#T_f3100 th {
   font-size: 0.85em;
   text-align: left;
 }
-#T_22ae0 td {
+#T_f3100 td {
   padding: 3px 16px;
 }
-#T_22ae0_row0_col0, #T_22ae0_row0_col1, #T_22ae0_row1_col0, #T_22ae0_row1_col1, #T_22ae0_row2_col0, #T_22ae0_row2_col1, #T_22ae0_row3_col0, #T_22ae0_row3_col1, #T_22ae0_row4_col0, #T_22ae0_row4_col1 {
+#T_f3100_row0_col0, #T_f3100_row0_col1, #T_f3100_row1_col0, #T_f3100_row1_col1, #T_f3100_row2_col0, #T_f3100_row2_col1, #T_f3100_row3_col0, #T_f3100_row3_col1, #T_f3100_row4_col0, #T_f3100_row4_col1 {
   font-size: 0.85em;
   text-align: left;
 }
 </style>
 
-<table id="T_22ae0" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_f3100" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_22ae0_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Tables</th>
-<th id="T_22ae0_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Rows</th>
+<th id="T_f3100_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Tables</th>
+<th id="T_f3100_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Rows</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_22ae0_row0_col0" class="data row0 col0">absenteeism_facts</td>
-<td id="T_22ae0_row0_col1" class="data row0 col1">38602</td>
+<td id="T_f3100_row0_col0" class="data row0 col0">absenteeism_facts</td>
+<td id="T_f3100_row0_col1" class="data row0 col1">38602</td>
 </tr>
 <tr class="even">
-<td id="T_22ae0_row1_col0" class="data row1 col0">absenteeism_subgroups</td>
-<td id="T_22ae0_row1_col1" class="data row1 col1">324209</td>
+<td id="T_f3100_row1_col0" class="data row1 col0">absenteeism_subgroups</td>
+<td id="T_f3100_row1_col1" class="data row1 col1">324209</td>
 </tr>
 <tr class="odd">
-<td id="T_22ae0_row2_col0" class="data row2 col0">leas</td>
-<td id="T_22ae0_row2_col1" class="data row2 col1">12969</td>
+<td id="T_f3100_row2_col0" class="data row2 col0">leas</td>
+<td id="T_f3100_row2_col1" class="data row2 col1">12969</td>
 </tr>
 <tr class="even">
-<td id="T_22ae0_row3_col0" class="data row3 col0">states</td>
-<td id="T_22ae0_row3_col1" class="data row3 col1">52</td>
+<td id="T_f3100_row3_col0" class="data row3 col0">states</td>
+<td id="T_f3100_row3_col1" class="data row3 col1">52</td>
 </tr>
 <tr class="odd">
-<td id="T_22ae0_row4_col0" class="data row4 col0">menstrual_legislation</td>
-<td id="T_22ae0_row4_col1" class="data row4 col1">50</td>
+<td id="T_f3100_row4_col0" class="data row4 col0">menstrual_legislation</td>
+<td id="T_f3100_row4_col1" class="data row4 col1">50</td>
 </tr>
 </tbody>
 </table>
@@ -1129,7 +1039,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <div id="setup-analysis" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1182,7 +1092,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'axes.grid'</span>: <span class="va">True</span>,</span>
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">'grid.alpha'</span>: <span class="fl">0.25</span>,</span>
 <span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">'grid.linestyle'</span>: <span class="st">'--'</span>,</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -1201,7 +1111,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <div class="cell page-columns page-full" data-execution_count="7">
 <details class="code-fold">
 <summary>Subgroup t-test results table</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sg_all <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sg_all <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ag.school_year, ag.lea_id, ag.subgroup_code,</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">           ag.count_female, ag.count_total,</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">           s.state_name</span></span>
@@ -1283,7 +1193,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>        <span class="st">'p-value (raw)'</span>:             <span class="st">'</span><span class="sc">{:.6f}</span><span class="st">'</span>,</span>
 <span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a>        <span class="st">'p-value (Holm-Bonferroni)'</span>: <span class="st">'</span><span class="sc">{:.6f}</span><span class="st">'</span>,</span>
 <span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-subgroup-ttest" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-execution_count="7">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
@@ -1291,32 +1201,32 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism by demographic subgroup. Enacted-policy states are compared to no-policy states for each subgroup. Mean difference is computed as enacted minus no-policy, negative values indicate enacted states have a lower female share (favourable direction). Holm-Bonferroni adjusted p-values are shown alongside raw p-values.
 </figcaption>
 <div aria-describedby="tbl-subgroup-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="cell-output cell-output-display column-body" data-execution_count="30">
+<div class="cell-output cell-output-display column-body" data-execution_count="7">
 <style type="text/css">
-#T_d2c5d th {
+#T_98f51 th {
   font-size: 0.78em;
 }
-#T_d2c5d td {
+#T_98f51 td {
   padding: 2px 6px;
 }
-#T_d2c5d_row0_col0, #T_d2c5d_row0_col1, #T_d2c5d_row0_col2, #T_d2c5d_row0_col3, #T_d2c5d_row0_col4, #T_d2c5d_row0_col5, #T_d2c5d_row0_col6, #T_d2c5d_row0_col7, #T_d2c5d_row0_col8, #T_d2c5d_row1_col0, #T_d2c5d_row1_col1, #T_d2c5d_row1_col2, #T_d2c5d_row1_col3, #T_d2c5d_row1_col4, #T_d2c5d_row1_col5, #T_d2c5d_row1_col6, #T_d2c5d_row1_col7, #T_d2c5d_row1_col8, #T_d2c5d_row2_col0, #T_d2c5d_row2_col1, #T_d2c5d_row2_col2, #T_d2c5d_row2_col3, #T_d2c5d_row2_col4, #T_d2c5d_row2_col5, #T_d2c5d_row2_col6, #T_d2c5d_row2_col7, #T_d2c5d_row2_col8, #T_d2c5d_row3_col0, #T_d2c5d_row3_col1, #T_d2c5d_row3_col2, #T_d2c5d_row3_col3, #T_d2c5d_row3_col4, #T_d2c5d_row3_col5, #T_d2c5d_row3_col6, #T_d2c5d_row3_col7, #T_d2c5d_row3_col8, #T_d2c5d_row4_col0, #T_d2c5d_row4_col1, #T_d2c5d_row4_col2, #T_d2c5d_row4_col3, #T_d2c5d_row4_col4, #T_d2c5d_row4_col5, #T_d2c5d_row4_col6, #T_d2c5d_row4_col7, #T_d2c5d_row4_col8, #T_d2c5d_row5_col0, #T_d2c5d_row5_col1, #T_d2c5d_row5_col2, #T_d2c5d_row5_col3, #T_d2c5d_row5_col4, #T_d2c5d_row5_col5, #T_d2c5d_row5_col6, #T_d2c5d_row5_col7, #T_d2c5d_row5_col8, #T_d2c5d_row6_col0, #T_d2c5d_row6_col1, #T_d2c5d_row6_col2, #T_d2c5d_row6_col3, #T_d2c5d_row6_col4, #T_d2c5d_row6_col5, #T_d2c5d_row6_col6, #T_d2c5d_row6_col7, #T_d2c5d_row6_col8, #T_d2c5d_row7_col0, #T_d2c5d_row7_col1, #T_d2c5d_row7_col2, #T_d2c5d_row7_col3, #T_d2c5d_row7_col4, #T_d2c5d_row7_col5, #T_d2c5d_row7_col6, #T_d2c5d_row7_col7, #T_d2c5d_row7_col8, #T_d2c5d_row8_col0, #T_d2c5d_row8_col1, #T_d2c5d_row8_col2, #T_d2c5d_row8_col3, #T_d2c5d_row8_col4, #T_d2c5d_row8_col5, #T_d2c5d_row8_col6, #T_d2c5d_row8_col7, #T_d2c5d_row8_col8, #T_d2c5d_row9_col0, #T_d2c5d_row9_col1, #T_d2c5d_row9_col2, #T_d2c5d_row9_col3, #T_d2c5d_row9_col4, #T_d2c5d_row9_col5, #T_d2c5d_row9_col6, #T_d2c5d_row9_col7, #T_d2c5d_row9_col8, #T_d2c5d_row10_col0, #T_d2c5d_row10_col1, #T_d2c5d_row10_col2, #T_d2c5d_row10_col3, #T_d2c5d_row10_col4, #T_d2c5d_row10_col5, #T_d2c5d_row10_col6, #T_d2c5d_row10_col7, #T_d2c5d_row10_col8, #T_d2c5d_row11_col0, #T_d2c5d_row11_col1, #T_d2c5d_row11_col2, #T_d2c5d_row11_col3, #T_d2c5d_row11_col4, #T_d2c5d_row11_col5, #T_d2c5d_row11_col6, #T_d2c5d_row11_col7, #T_d2c5d_row11_col8 {
+#T_98f51_row0_col0, #T_98f51_row0_col1, #T_98f51_row0_col2, #T_98f51_row0_col3, #T_98f51_row0_col4, #T_98f51_row0_col5, #T_98f51_row0_col6, #T_98f51_row0_col7, #T_98f51_row0_col8, #T_98f51_row1_col0, #T_98f51_row1_col1, #T_98f51_row1_col2, #T_98f51_row1_col3, #T_98f51_row1_col4, #T_98f51_row1_col5, #T_98f51_row1_col6, #T_98f51_row1_col7, #T_98f51_row1_col8, #T_98f51_row2_col0, #T_98f51_row2_col1, #T_98f51_row2_col2, #T_98f51_row2_col3, #T_98f51_row2_col4, #T_98f51_row2_col5, #T_98f51_row2_col6, #T_98f51_row2_col7, #T_98f51_row2_col8, #T_98f51_row3_col0, #T_98f51_row3_col1, #T_98f51_row3_col2, #T_98f51_row3_col3, #T_98f51_row3_col4, #T_98f51_row3_col5, #T_98f51_row3_col6, #T_98f51_row3_col7, #T_98f51_row3_col8, #T_98f51_row4_col0, #T_98f51_row4_col1, #T_98f51_row4_col2, #T_98f51_row4_col3, #T_98f51_row4_col4, #T_98f51_row4_col5, #T_98f51_row4_col6, #T_98f51_row4_col7, #T_98f51_row4_col8, #T_98f51_row5_col0, #T_98f51_row5_col1, #T_98f51_row5_col2, #T_98f51_row5_col3, #T_98f51_row5_col4, #T_98f51_row5_col5, #T_98f51_row5_col6, #T_98f51_row5_col7, #T_98f51_row5_col8, #T_98f51_row6_col0, #T_98f51_row6_col1, #T_98f51_row6_col2, #T_98f51_row6_col3, #T_98f51_row6_col4, #T_98f51_row6_col5, #T_98f51_row6_col6, #T_98f51_row6_col7, #T_98f51_row6_col8, #T_98f51_row7_col0, #T_98f51_row7_col1, #T_98f51_row7_col2, #T_98f51_row7_col3, #T_98f51_row7_col4, #T_98f51_row7_col5, #T_98f51_row7_col6, #T_98f51_row7_col7, #T_98f51_row7_col8, #T_98f51_row8_col0, #T_98f51_row8_col1, #T_98f51_row8_col2, #T_98f51_row8_col3, #T_98f51_row8_col4, #T_98f51_row8_col5, #T_98f51_row8_col6, #T_98f51_row8_col7, #T_98f51_row8_col8, #T_98f51_row9_col0, #T_98f51_row9_col1, #T_98f51_row9_col2, #T_98f51_row9_col3, #T_98f51_row9_col4, #T_98f51_row9_col5, #T_98f51_row9_col6, #T_98f51_row9_col7, #T_98f51_row9_col8, #T_98f51_row10_col0, #T_98f51_row10_col1, #T_98f51_row10_col2, #T_98f51_row10_col3, #T_98f51_row10_col4, #T_98f51_row10_col5, #T_98f51_row10_col6, #T_98f51_row10_col7, #T_98f51_row10_col8, #T_98f51_row11_col0, #T_98f51_row11_col1, #T_98f51_row11_col2, #T_98f51_row11_col3, #T_98f51_row11_col4, #T_98f51_row11_col5, #T_98f51_row11_col6, #T_98f51_row11_col7, #T_98f51_row11_col8 {
   font-size: 0.75em;
 }
 </style>
 
-<table id="T_d2c5d" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_98f51" class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_d2c5d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">n (enacted)</th>
-<th id="T_d2c5d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n (no policy)</th>
-<th id="T_d2c5d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Mean (enacted)</th>
-<th id="T_d2c5d_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Mean (no policy)</th>
-<th id="T_d2c5d_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Mean difference</th>
-<th id="T_d2c5d_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">t-statistic</th>
-<th id="T_d2c5d_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">p-value (raw)</th>
-<th id="T_d2c5d_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">p-value (Holm-Bonferroni)</th>
-<th id="T_d2c5d_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">Significant (α=0.05)</th>
+<th id="T_98f51_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">n (enacted)</th>
+<th id="T_98f51_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n (no policy)</th>
+<th id="T_98f51_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Mean (enacted)</th>
+<th id="T_98f51_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Mean (no policy)</th>
+<th id="T_98f51_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Mean difference</th>
+<th id="T_98f51_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">t-statistic</th>
+<th id="T_98f51_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">p-value (raw)</th>
+<th id="T_98f51_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">p-value (Holm-Bonferroni)</th>
+<th id="T_98f51_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">Significant (α=0.05)</th>
 </tr>
 <tr class="even">
 <th class="index_name level0" data-quarto-table-cell-role="th">Subgroup</th>
@@ -1333,148 +1243,148 @@ Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism b
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_d2c5d_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Asian</td>
-<td id="T_d2c5d_row0_col0" class="data row0 col0">12204</td>
-<td id="T_d2c5d_row0_col1" class="data row0 col1">4257</td>
-<td id="T_d2c5d_row0_col2" class="data row0 col2">55.15</td>
-<td id="T_d2c5d_row0_col3" class="data row0 col3">59.60</td>
-<td id="T_d2c5d_row0_col4" class="data row0 col4">-4.45</td>
-<td id="T_d2c5d_row0_col5" class="data row0 col5">-9.352</td>
-<td id="T_d2c5d_row0_col6" class="data row0 col6">0.000000</td>
-<td id="T_d2c5d_row0_col7" class="data row0 col7">0.000000</td>
-<td id="T_d2c5d_row0_col8" class="data row0 col8">✓</td>
+<th id="T_98f51_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Asian</th>
+<td id="T_98f51_row0_col0" class="data row0 col0">12204</td>
+<td id="T_98f51_row0_col1" class="data row0 col1">4257</td>
+<td id="T_98f51_row0_col2" class="data row0 col2">55.15</td>
+<td id="T_98f51_row0_col3" class="data row0 col3">59.60</td>
+<td id="T_98f51_row0_col4" class="data row0 col4">-4.45</td>
+<td id="T_98f51_row0_col5" class="data row0 col5">-9.352</td>
+<td id="T_98f51_row0_col6" class="data row0 col6">0.000000</td>
+<td id="T_98f51_row0_col7" class="data row0 col7">0.000000</td>
+<td id="T_98f51_row0_col8" class="data row0 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Black or African American</td>
-<td id="T_d2c5d_row1_col0" class="data row1 col0">17092</td>
-<td id="T_d2c5d_row1_col1" class="data row1 col1">7431</td>
-<td id="T_d2c5d_row1_col2" class="data row1 col2">52.58</td>
-<td id="T_d2c5d_row1_col3" class="data row1 col3">54.55</td>
-<td id="T_d2c5d_row1_col4" class="data row1 col4">-1.97</td>
-<td id="T_d2c5d_row1_col5" class="data row1 col5">-6.256</td>
-<td id="T_d2c5d_row1_col6" class="data row1 col6">0.000000</td>
-<td id="T_d2c5d_row1_col7" class="data row1 col7">0.000000</td>
-<td id="T_d2c5d_row1_col8" class="data row1 col8">✓</td>
+<th id="T_98f51_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Black or African American</th>
+<td id="T_98f51_row1_col0" class="data row1 col0">17092</td>
+<td id="T_98f51_row1_col1" class="data row1 col1">7431</td>
+<td id="T_98f51_row1_col2" class="data row1 col2">52.58</td>
+<td id="T_98f51_row1_col3" class="data row1 col3">54.55</td>
+<td id="T_98f51_row1_col4" class="data row1 col4">-1.97</td>
+<td id="T_98f51_row1_col5" class="data row1 col5">-6.256</td>
+<td id="T_98f51_row1_col6" class="data row1 col6">0.000000</td>
+<td id="T_98f51_row1_col7" class="data row1 col7">0.000000</td>
+<td id="T_98f51_row1_col8" class="data row1 col8">✓</td>
 </tr>
 <tr class="odd">
-<td id="T_d2c5d_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hispanic / Latino</td>
-<td id="T_d2c5d_row2_col0" class="data row2 col0">21933</td>
-<td id="T_d2c5d_row2_col1" class="data row2 col1">11301</td>
-<td id="T_d2c5d_row2_col2" class="data row2 col2">51.11</td>
-<td id="T_d2c5d_row2_col3" class="data row2 col3">52.41</td>
-<td id="T_d2c5d_row2_col4" class="data row2 col4">-1.30</td>
-<td id="T_d2c5d_row2_col5" class="data row2 col5">-6.359</td>
-<td id="T_d2c5d_row2_col6" class="data row2 col6">0.000000</td>
-<td id="T_d2c5d_row2_col7" class="data row2 col7">0.000000</td>
-<td id="T_d2c5d_row2_col8" class="data row2 col8">✓</td>
+<th id="T_98f51_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hispanic / Latino</th>
+<td id="T_98f51_row2_col0" class="data row2 col0">21933</td>
+<td id="T_98f51_row2_col1" class="data row2 col1">11301</td>
+<td id="T_98f51_row2_col2" class="data row2 col2">51.11</td>
+<td id="T_98f51_row2_col3" class="data row2 col3">52.41</td>
+<td id="T_98f51_row2_col4" class="data row2 col4">-1.30</td>
+<td id="T_98f51_row2_col5" class="data row2 col5">-6.359</td>
+<td id="T_98f51_row2_col6" class="data row2 col6">0.000000</td>
+<td id="T_98f51_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_98f51_row2_col8" class="data row2 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Multiracial</td>
-<td id="T_d2c5d_row3_col0" class="data row3 col0">20071</td>
-<td id="T_d2c5d_row3_col1" class="data row3 col1">9989</td>
-<td id="T_d2c5d_row3_col2" class="data row3 col2">52.10</td>
-<td id="T_d2c5d_row3_col3" class="data row3 col3">54.25</td>
-<td id="T_d2c5d_row3_col4" class="data row3 col4">-2.15</td>
-<td id="T_d2c5d_row3_col5" class="data row3 col5">-8.447</td>
-<td id="T_d2c5d_row3_col6" class="data row3 col6">0.000000</td>
-<td id="T_d2c5d_row3_col7" class="data row3 col7">0.000000</td>
-<td id="T_d2c5d_row3_col8" class="data row3 col8">✓</td>
+<th id="T_98f51_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Multiracial</th>
+<td id="T_98f51_row3_col0" class="data row3 col0">20071</td>
+<td id="T_98f51_row3_col1" class="data row3 col1">9989</td>
+<td id="T_98f51_row3_col2" class="data row3 col2">52.10</td>
+<td id="T_98f51_row3_col3" class="data row3 col3">54.25</td>
+<td id="T_98f51_row3_col4" class="data row3 col4">-2.15</td>
+<td id="T_98f51_row3_col5" class="data row3 col5">-8.447</td>
+<td id="T_98f51_row3_col6" class="data row3 col6">0.000000</td>
+<td id="T_98f51_row3_col7" class="data row3 col7">0.000000</td>
+<td id="T_98f51_row3_col8" class="data row3 col8">✓</td>
 </tr>
 <tr class="odd">
-<td id="T_d2c5d_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Children w/ Disabilities (IDEA)</td>
-<td id="T_d2c5d_row4_col0" class="data row4 col0">23746</td>
-<td id="T_d2c5d_row4_col1" class="data row4 col1">12280</td>
-<td id="T_d2c5d_row4_col2" class="data row4 col2">37.35</td>
-<td id="T_d2c5d_row4_col3" class="data row4 col3">39.41</td>
-<td id="T_d2c5d_row4_col4" class="data row4 col4">-2.06</td>
-<td id="T_d2c5d_row4_col5" class="data row4 col5">-13.666</td>
-<td id="T_d2c5d_row4_col6" class="data row4 col6">0.000000</td>
-<td id="T_d2c5d_row4_col7" class="data row4 col7">0.000000</td>
-<td id="T_d2c5d_row4_col8" class="data row4 col8">✓</td>
+<th id="T_98f51_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Children w/ Disabilities (IDEA)</th>
+<td id="T_98f51_row4_col0" class="data row4 col0">23746</td>
+<td id="T_98f51_row4_col1" class="data row4 col1">12280</td>
+<td id="T_98f51_row4_col2" class="data row4 col2">37.35</td>
+<td id="T_98f51_row4_col3" class="data row4 col3">39.41</td>
+<td id="T_98f51_row4_col4" class="data row4 col4">-2.06</td>
+<td id="T_98f51_row4_col5" class="data row4 col5">-13.666</td>
+<td id="T_98f51_row4_col6" class="data row4 col6">0.000000</td>
+<td id="T_98f51_row4_col7" class="data row4 col7">0.000000</td>
+<td id="T_98f51_row4_col8" class="data row4 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">White</td>
-<td id="T_d2c5d_row5_col0" class="data row5 col0">24468</td>
-<td id="T_d2c5d_row5_col1" class="data row5 col1">13130</td>
-<td id="T_d2c5d_row5_col2" class="data row5 col2">48.45</td>
-<td id="T_d2c5d_row5_col3" class="data row5 col3">49.62</td>
-<td id="T_d2c5d_row5_col4" class="data row5 col4">-1.17</td>
-<td id="T_d2c5d_row5_col5" class="data row5 col5">-10.652</td>
-<td id="T_d2c5d_row5_col6" class="data row5 col6">0.000000</td>
-<td id="T_d2c5d_row5_col7" class="data row5 col7">0.000000</td>
-<td id="T_d2c5d_row5_col8" class="data row5 col8">✓</td>
+<th id="T_98f51_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">White</th>
+<td id="T_98f51_row5_col0" class="data row5 col0">24468</td>
+<td id="T_98f51_row5_col1" class="data row5 col1">13130</td>
+<td id="T_98f51_row5_col2" class="data row5 col2">48.45</td>
+<td id="T_98f51_row5_col3" class="data row5 col3">49.62</td>
+<td id="T_98f51_row5_col4" class="data row5 col4">-1.17</td>
+<td id="T_98f51_row5_col5" class="data row5 col5">-10.652</td>
+<td id="T_98f51_row5_col6" class="data row5 col6">0.000000</td>
+<td id="T_98f51_row5_col7" class="data row5 col7">0.000000</td>
+<td id="T_98f51_row5_col8" class="data row5 col8">✓</td>
 </tr>
 <tr class="odd">
-<td id="T_d2c5d_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">English Learner</td>
-<td id="T_d2c5d_row6_col0" class="data row6 col0">16206</td>
-<td id="T_d2c5d_row6_col1" class="data row6 col1">7704</td>
-<td id="T_d2c5d_row6_col2" class="data row6 col2">49.41</td>
-<td id="T_d2c5d_row6_col3" class="data row6 col3">51.86</td>
-<td id="T_d2c5d_row6_col4" class="data row6 col4">-2.44</td>
-<td id="T_d2c5d_row6_col5" class="data row6 col5">-8.478</td>
-<td id="T_d2c5d_row6_col6" class="data row6 col6">0.000000</td>
-<td id="T_d2c5d_row6_col7" class="data row6 col7">0.000000</td>
-<td id="T_d2c5d_row6_col8" class="data row6 col8">✓</td>
+<th id="T_98f51_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">English Learner</th>
+<td id="T_98f51_row6_col0" class="data row6 col0">16206</td>
+<td id="T_98f51_row6_col1" class="data row6 col1">7704</td>
+<td id="T_98f51_row6_col2" class="data row6 col2">49.41</td>
+<td id="T_98f51_row6_col3" class="data row6 col3">51.86</td>
+<td id="T_98f51_row6_col4" class="data row6 col4">-2.44</td>
+<td id="T_98f51_row6_col5" class="data row6 col5">-8.478</td>
+<td id="T_98f51_row6_col6" class="data row6 col6">0.000000</td>
+<td id="T_98f51_row6_col7" class="data row6 col7">0.000000</td>
+<td id="T_98f51_row6_col8" class="data row6 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Section 504 Disability</td>
-<td id="T_d2c5d_row7_col0" class="data row7 col0">14496</td>
-<td id="T_d2c5d_row7_col1" class="data row7 col1">9225</td>
-<td id="T_d2c5d_row7_col2" class="data row7 col2">49.18</td>
-<td id="T_d2c5d_row7_col3" class="data row7 col3">50.85</td>
-<td id="T_d2c5d_row7_col4" class="data row7 col4">-1.66</td>
-<td id="T_d2c5d_row7_col5" class="data row7 col5">-6.201</td>
-<td id="T_d2c5d_row7_col6" class="data row7 col6">0.000000</td>
-<td id="T_d2c5d_row7_col7" class="data row7 col7">0.000000</td>
-<td id="T_d2c5d_row7_col8" class="data row7 col8">✓</td>
+<th id="T_98f51_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Section 504 Disability</th>
+<td id="T_98f51_row7_col0" class="data row7 col0">14496</td>
+<td id="T_98f51_row7_col1" class="data row7 col1">9225</td>
+<td id="T_98f51_row7_col2" class="data row7 col2">49.18</td>
+<td id="T_98f51_row7_col3" class="data row7 col3">50.85</td>
+<td id="T_98f51_row7_col4" class="data row7 col4">-1.66</td>
+<td id="T_98f51_row7_col5" class="data row7 col5">-6.201</td>
+<td id="T_98f51_row7_col6" class="data row7 col6">0.000000</td>
+<td id="T_98f51_row7_col7" class="data row7 col7">0.000000</td>
+<td id="T_98f51_row7_col8" class="data row7 col8">✓</td>
 </tr>
 <tr class="odd">
-<td id="T_d2c5d_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Homeless</td>
-<td id="T_d2c5d_row8_col0" class="data row8 col0">17706</td>
-<td id="T_d2c5d_row8_col1" class="data row8 col1">7575</td>
-<td id="T_d2c5d_row8_col2" class="data row8 col2">52.75</td>
-<td id="T_d2c5d_row8_col3" class="data row8 col3">55.08</td>
-<td id="T_d2c5d_row8_col4" class="data row8 col4">-2.33</td>
-<td id="T_d2c5d_row8_col5" class="data row8 col5">-8.087</td>
-<td id="T_d2c5d_row8_col6" class="data row8 col6">0.000000</td>
-<td id="T_d2c5d_row8_col7" class="data row8 col7">0.000000</td>
-<td id="T_d2c5d_row8_col8" class="data row8 col8">✓</td>
+<th id="T_98f51_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Homeless</th>
+<td id="T_98f51_row8_col0" class="data row8 col0">17706</td>
+<td id="T_98f51_row8_col1" class="data row8 col1">7575</td>
+<td id="T_98f51_row8_col2" class="data row8 col2">52.75</td>
+<td id="T_98f51_row8_col3" class="data row8 col3">55.08</td>
+<td id="T_98f51_row8_col4" class="data row8 col4">-2.33</td>
+<td id="T_98f51_row8_col5" class="data row8 col5">-8.087</td>
+<td id="T_98f51_row8_col6" class="data row8 col6">0.000000</td>
+<td id="T_98f51_row8_col7" class="data row8 col7">0.000000</td>
+<td id="T_98f51_row8_col8" class="data row8 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">Economically Disadvantaged</td>
-<td id="T_d2c5d_row9_col0" class="data row9 col0">8098</td>
-<td id="T_d2c5d_row9_col1" class="data row9 col1">4462</td>
-<td id="T_d2c5d_row9_col2" class="data row9 col2">49.08</td>
-<td id="T_d2c5d_row9_col3" class="data row9 col3">50.16</td>
-<td id="T_d2c5d_row9_col4" class="data row9 col4">-1.08</td>
-<td id="T_d2c5d_row9_col5" class="data row9 col5">-6.338</td>
-<td id="T_d2c5d_row9_col6" class="data row9 col6">0.000000</td>
-<td id="T_d2c5d_row9_col7" class="data row9 col7">0.000000</td>
-<td id="T_d2c5d_row9_col8" class="data row9 col8">✓</td>
+<th id="T_98f51_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">Economically Disadvantaged</th>
+<td id="T_98f51_row9_col0" class="data row9 col0">8098</td>
+<td id="T_98f51_row9_col1" class="data row9 col1">4462</td>
+<td id="T_98f51_row9_col2" class="data row9 col2">49.08</td>
+<td id="T_98f51_row9_col3" class="data row9 col3">50.16</td>
+<td id="T_98f51_row9_col4" class="data row9 col4">-1.08</td>
+<td id="T_98f51_row9_col5" class="data row9 col5">-6.338</td>
+<td id="T_98f51_row9_col6" class="data row9 col6">0.000000</td>
+<td id="T_98f51_row9_col7" class="data row9 col7">0.000000</td>
+<td id="T_98f51_row9_col8" class="data row9 col8">✓</td>
 </tr>
 <tr class="odd">
-<td id="T_d2c5d_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Pacific Islander</td>
-<td id="T_d2c5d_row10_col0" class="data row10 col0">5755</td>
-<td id="T_d2c5d_row10_col1" class="data row10 col1">2089</td>
-<td id="T_d2c5d_row10_col2" class="data row10 col2">62.87</td>
-<td id="T_d2c5d_row10_col3" class="data row10 col3">65.82</td>
-<td id="T_d2c5d_row10_col4" class="data row10 col4">-2.94</td>
-<td id="T_d2c5d_row10_col5" class="data row10 col5">-3.852</td>
-<td id="T_d2c5d_row10_col6" class="data row10 col6">0.000119</td>
-<td id="T_d2c5d_row10_col7" class="data row10 col7">0.000238</td>
-<td id="T_d2c5d_row10_col8" class="data row10 col8">✓</td>
+<th id="T_98f51_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Pacific Islander</th>
+<td id="T_98f51_row10_col0" class="data row10 col0">5755</td>
+<td id="T_98f51_row10_col1" class="data row10 col1">2089</td>
+<td id="T_98f51_row10_col2" class="data row10 col2">62.87</td>
+<td id="T_98f51_row10_col3" class="data row10 col3">65.82</td>
+<td id="T_98f51_row10_col4" class="data row10 col4">-2.94</td>
+<td id="T_98f51_row10_col5" class="data row10 col5">-3.852</td>
+<td id="T_98f51_row10_col6" class="data row10 col6">0.000119</td>
+<td id="T_98f51_row10_col7" class="data row10 col7">0.000238</td>
+<td id="T_98f51_row10_col8" class="data row10 col8">✓</td>
 </tr>
 <tr class="even">
-<td id="T_d2c5d_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">American Indian / Alaska Native</td>
-<td id="T_d2c5d_row11_col0" class="data row11 col0">10510</td>
-<td id="T_d2c5d_row11_col1" class="data row11 col1">6247</td>
-<td id="T_d2c5d_row11_col2" class="data row11 col2">60.04</td>
-<td id="T_d2c5d_row11_col3" class="data row11 col3">59.30</td>
-<td id="T_d2c5d_row11_col4" class="data row11 col4">0.74</td>
-<td id="T_d2c5d_row11_col5" class="data row11 col5">1.765</td>
-<td id="T_d2c5d_row11_col6" class="data row11 col6">0.077626</td>
-<td id="T_d2c5d_row11_col7" class="data row11 col7">0.077626</td>
-<td id="T_d2c5d_row11_col8" class="data row11 col8">✗</td>
+<th id="T_98f51_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">American Indian / Alaska Native</th>
+<td id="T_98f51_row11_col0" class="data row11 col0">10510</td>
+<td id="T_98f51_row11_col1" class="data row11 col1">6247</td>
+<td id="T_98f51_row11_col2" class="data row11 col2">60.04</td>
+<td id="T_98f51_row11_col3" class="data row11 col3">59.30</td>
+<td id="T_98f51_row11_col4" class="data row11 col4">0.74</td>
+<td id="T_98f51_row11_col5" class="data row11 col5">1.765</td>
+<td id="T_98f51_row11_col6" class="data row11 col6">0.077626</td>
+<td id="T_98f51_row11_col7" class="data row11 col7">0.077626</td>
+<td id="T_98f51_row11_col8" class="data row11 col8">✗</td>
 </tr>
 </tbody>
 </table>
@@ -1494,7 +1404,7 @@ Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism b
 <div id="cell-fig-overall-trend" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="8">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT af.school_year,</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">           s.state_name,</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">           af.absenteeism_rate</span></span>
@@ -1537,7 +1447,7 @@ Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism b
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">35</span>)</span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-overall-trend" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1560,7 +1470,7 @@ Figure&nbsp;1: Average chronic absenteeism rate by legislation status and school
 <div id="cell-fig-us-map" class="cell" data-fig-height="6" data-fig-width="9" data-execution_count="9">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull data from database </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull data from database </span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sg_map <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.state_name,</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">           ag.lea_id,</span></span>
@@ -1694,7 +1604,7 @@ Figure&nbsp;1: Average chronic absenteeism rate by legislation status and school
 <span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-us-map" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1716,7 +1626,7 @@ Figure&nbsp;2: Female share of chronic absenteeism by state and MHH policy type,
 <div id="cell-fig-policy-type-bars" class="cell" data-fig-height="8" data-fig-width="9" data-execution_count="10">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull legislation from database </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull legislation from database </span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>legis_db <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.state_name, ml.policy_type</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM menstrual_legislation ml</span></span>
@@ -1883,7 +1793,7 @@ Figure&nbsp;2: Female share of chronic absenteeism by state and MHH policy type,
 <span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-policy-type-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1904,7 +1814,7 @@ Figure&nbsp;3: Female chronic absenteeism rate by state and MHH policy type, sch
 <div id="cell-fig-female-share-kde" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="11">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sg <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sg <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ag.school_year,</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">           ag.lea_id,</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">           s.state_name,</span></span>
@@ -1969,7 +1879,7 @@ Figure&nbsp;3: Female chronic absenteeism rate by state and MHH policy type, sch
 <span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(bottom<span class="op">=</span><span class="fl">0.22</span>)</span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-female-share-kde" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1990,7 +1900,7 @@ Figure&nbsp;4: Distribution of district-level female share of chronic absenteeis
 <div id="cell-fig-female-male-bars" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="12">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Pull data from database </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Pull data from database </span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>fm_raw <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT af.school_year,</span></span>
@@ -2151,7 +2061,7 @@ Figure&nbsp;4: Distribution of district-level female share of chronic absenteeis
 <span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-female-male-bars" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2174,7 +2084,7 @@ Figure&nbsp;5: Female and male chronic absenteeism rates by school year and legi
 <div id="cell-fig-subgroup" class="cell" data-fig-height="5" data-fig-width="7" data-execution_count="13">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SUBGROUP_LABELS <span class="op">=</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SUBGROUP_LABELS <span class="op">=</span> {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AM7'</span>:         <span class="st">'American Indian / Alaska Native'</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AS7'</span>:         <span class="st">'Asian'</span>,</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'BL7'</span>:         <span class="st">'Black or African American'</span>,</span>
@@ -2268,7 +2178,7 @@ Figure&nbsp;5: Female and male chronic absenteeism rates by school year and legi
 <span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(bottom<span class="op">=</span><span class="fl">0.18</span>)</span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-subgroup" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2290,7 +2200,7 @@ Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Ne
 <div class="cell" data-fig-height="6" data-fig-width="9" data-execution_count="14">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>subgroup_codes <span class="op">=</span> [<span class="st">'AM7'</span>,<span class="st">'AS7'</span>,<span class="st">'PI7'</span>,<span class="st">'BL7'</span>,<span class="st">'HI7'</span>,<span class="st">'MU7'</span>,<span class="st">'WH7'</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>subgroup_codes <span class="op">=</span> [<span class="st">'AM7'</span>,<span class="st">'AS7'</span>,<span class="st">'PI7'</span>,<span class="st">'BL7'</span>,<span class="st">'HI7'</span>,<span class="st">'MU7'</span>,<span class="st">'WH7'</span>,</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">'WDIS'</span>,<span class="st">'DISAB504STAT'</span>,<span class="st">'LEP'</span>,<span class="st">'HOM'</span>,<span class="st">'ECODIS'</span>]</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>subgroup_labels <span class="op">=</span> {</span>
@@ -2436,9 +2346,9 @@ Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Ne
 <span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>    ax.spines[<span class="st">'right'</span>].set_visible(<span class="va">False</span>)</span>
 <span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="fig-subgroup-by-year" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-width="9" data-fig-height="6" data-execution_count="14">
+<div id="fig-subgroup-by-year" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-height="6" data-fig-width="9" data-execution_count="14">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-subgroup-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
@@ -2494,7 +2404,7 @@ Figure&nbsp;7
 <div class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Finding'</span>: [</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Children w/ disabilities (IDEA)'</span>, <span class="st">'White'</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Economically disadvantaged'</span>, <span class="st">'Hispanic / Latino'</span>,</span>
@@ -2523,7 +2433,7 @@ Figure&nbsp;7
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Direction reversal at county'</span>,<span class="st">'Robust across all three'</span>,</span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Robust across all three'</span>,<span class="st">'Not robust — charter-inflated'</span></span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Finding'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Finding'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-robustness" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="15">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2531,11 +2441,11 @@ Figure&nbsp;7
 Table&nbsp;4: Three-way robustness check across levels of geographic aggregation. ‘Sig.’ = statistically significant after Welch’s t-test (p &lt; 0.05). Direction indicates whether enacted-policy states show higher or lower female share relative to no-policy states.
 </figcaption>
 <div aria-describedby="tbl-robustness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2554,70 +2464,70 @@ Table&nbsp;4: Three-way robustness check across levels of geographic aggregation
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Children w/ disabilities (IDEA)</td>
+<th data-quarto-table-cell-role="th">Children w/ disabilities (IDEA)</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">White</td>
+<th data-quarto-table-cell-role="th">White</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Economically disadvantaged</td>
+<th data-quarto-table-cell-role="th">Economically disadvantaged</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Hispanic / Latino</td>
+<th data-quarto-table-cell-role="th">Hispanic / Latino</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Asian</td>
+<th data-quarto-table-cell-role="th">Asian</th>
 <td>Sig., negative (largest effect)</td>
 <td>Sig., negative</td>
 <td>Not significant</td>
 <td>LEA-grain robust</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">English learner</td>
+<th data-quarto-table-cell-role="th">English learner</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Not significant</td>
 <td>LEA-grain robust</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Black or African American</td>
+<th data-quarto-table-cell-role="th">Black or African American</th>
 <td>Sig., negative</td>
 <td>Sig., negative</td>
 <td>Sig., positive</td>
 <td>Direction reversal at county</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Overall rate trend</td>
+<th data-quarto-table-cell-role="th">Overall rate trend</th>
 <td>Enacted higher</td>
 <td>Enacted higher</td>
 <td>Enacted higher</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Female share trend</td>
+<th data-quarto-table-cell-role="th">Female share trend</th>
 <td>Enacted lower</td>
 <td>Enacted lower</td>
 <td>Enacted lower</td>
 <td>Robust across all three</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Funding correlation</td>
+<th data-quarto-table-cell-role="th">Funding correlation</th>
 <td>r = 0.429</td>
 <td>r = 0.176</td>
 <td>r = 0.178</td>
@@ -2650,7 +2560,7 @@ Table&nbsp;4: Three-way robustness check across levels of geographic aggregation
 <div class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Build state-level ML feature matrix from database</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>state_yr <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>state_yr <span class="op">=</span> pd.read_sql(<span class="st">"""</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.state_name, af.school_year,</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">           AVG(af.absenteeism_rate)          AS avg_rate,</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">           SUM(af.total_students_enrollment) AS total_enroll,</span></span>
@@ -2780,7 +2690,7 @@ Table&nbsp;4: Three-way robustness check across levels of geographic aggregation
 <span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Min'</span>:  <span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>,</span>
 <span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Max'</span>:  <span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>,</span>
 <span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-ml-features" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="16">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -2788,104 +2698,104 @@ Table&nbsp;4: Three-way robustness check across levels of geographic aggregation
 Table&nbsp;5: Feature matrix summary statistics for the state-level machine learning pipeline (n=50 states). Each row represents one of the 10 features used in Linear Regression, Random Forest, and K-means clustering. Policy score ranges from 0 (no enacted policy) to 4 (Funded Mandate). Domain coverage score counts how many of the 7 MHH policy domains the state legislation addresses. ECODIS rate reflects the average female share of chronically absent economically disadvantaged students. Gender gap is the deviation of the female share from 50%, expressed in percentage points.
 </figcaption>
 <div aria-describedby="tbl-ml-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <style type="text/css">
-#T_4e05b th {
+#T_4ee44 th {
   font-size: 0.85em;
   text-align: center;
 }
-#T_4e05b td:first-child {
+#T_4ee44 td:first-child {
   text-align: left;
 }
-#T_4e05b td {
+#T_4ee44 td {
   padding: 3px 10px;
 }
-#T_4e05b_row0_col0, #T_4e05b_row0_col1, #T_4e05b_row0_col2, #T_4e05b_row0_col3, #T_4e05b_row0_col4, #T_4e05b_row1_col0, #T_4e05b_row1_col1, #T_4e05b_row1_col2, #T_4e05b_row1_col3, #T_4e05b_row1_col4, #T_4e05b_row2_col0, #T_4e05b_row2_col1, #T_4e05b_row2_col2, #T_4e05b_row2_col3, #T_4e05b_row2_col4, #T_4e05b_row3_col0, #T_4e05b_row3_col1, #T_4e05b_row3_col2, #T_4e05b_row3_col3, #T_4e05b_row3_col4, #T_4e05b_row4_col0, #T_4e05b_row4_col1, #T_4e05b_row4_col2, #T_4e05b_row4_col3, #T_4e05b_row4_col4, #T_4e05b_row5_col0, #T_4e05b_row5_col1, #T_4e05b_row5_col2, #T_4e05b_row5_col3, #T_4e05b_row5_col4, #T_4e05b_row6_col0, #T_4e05b_row6_col1, #T_4e05b_row6_col2, #T_4e05b_row6_col3, #T_4e05b_row6_col4, #T_4e05b_row7_col0, #T_4e05b_row7_col1, #T_4e05b_row7_col2, #T_4e05b_row7_col3, #T_4e05b_row7_col4, #T_4e05b_row8_col0, #T_4e05b_row8_col1, #T_4e05b_row8_col2, #T_4e05b_row8_col3, #T_4e05b_row8_col4, #T_4e05b_row9_col0, #T_4e05b_row9_col1, #T_4e05b_row9_col2, #T_4e05b_row9_col3, #T_4e05b_row9_col4 {
+#T_4ee44_row0_col0, #T_4ee44_row0_col1, #T_4ee44_row0_col2, #T_4ee44_row0_col3, #T_4ee44_row0_col4, #T_4ee44_row1_col0, #T_4ee44_row1_col1, #T_4ee44_row1_col2, #T_4ee44_row1_col3, #T_4ee44_row1_col4, #T_4ee44_row2_col0, #T_4ee44_row2_col1, #T_4ee44_row2_col2, #T_4ee44_row2_col3, #T_4ee44_row2_col4, #T_4ee44_row3_col0, #T_4ee44_row3_col1, #T_4ee44_row3_col2, #T_4ee44_row3_col3, #T_4ee44_row3_col4, #T_4ee44_row4_col0, #T_4ee44_row4_col1, #T_4ee44_row4_col2, #T_4ee44_row4_col3, #T_4ee44_row4_col4, #T_4ee44_row5_col0, #T_4ee44_row5_col1, #T_4ee44_row5_col2, #T_4ee44_row5_col3, #T_4ee44_row5_col4, #T_4ee44_row6_col0, #T_4ee44_row6_col1, #T_4ee44_row6_col2, #T_4ee44_row6_col3, #T_4ee44_row6_col4, #T_4ee44_row7_col0, #T_4ee44_row7_col1, #T_4ee44_row7_col2, #T_4ee44_row7_col3, #T_4ee44_row7_col4, #T_4ee44_row8_col0, #T_4ee44_row8_col1, #T_4ee44_row8_col2, #T_4ee44_row8_col3, #T_4ee44_row8_col4, #T_4ee44_row9_col0, #T_4ee44_row9_col1, #T_4ee44_row9_col2, #T_4ee44_row9_col3, #T_4ee44_row9_col4 {
   font-size: 0.82em;
   text-align: right;
 }
 </style>
 
-<table id="T_4e05b" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_4ee44" class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_4e05b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Feature</th>
-<th id="T_4e05b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Mean</th>
-<th id="T_4e05b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Std</th>
-<th id="T_4e05b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Min</th>
-<th id="T_4e05b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Max</th>
+<th id="T_4ee44_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Feature</th>
+<th id="T_4ee44_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Mean</th>
+<th id="T_4ee44_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Std</th>
+<th id="T_4ee44_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Min</th>
+<th id="T_4ee44_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Max</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_4e05b_row0_col0" class="data row0 col0">Policy score</td>
-<td id="T_4e05b_row0_col1" class="data row0 col1">1.72</td>
-<td id="T_4e05b_row0_col2" class="data row0 col2">1.64</td>
-<td id="T_4e05b_row0_col3" class="data row0 col3">0.00</td>
-<td id="T_4e05b_row0_col4" class="data row0 col4">4.00</td>
+<td id="T_4ee44_row0_col0" class="data row0 col0">Policy score</td>
+<td id="T_4ee44_row0_col1" class="data row0 col1">1.72</td>
+<td id="T_4ee44_row0_col2" class="data row0 col2">1.64</td>
+<td id="T_4ee44_row0_col3" class="data row0 col3">0.00</td>
+<td id="T_4ee44_row0_col4" class="data row0 col4">4.00</td>
 </tr>
 <tr class="even">
-<td id="T_4e05b_row1_col0" class="data row1 col0">Years enacted</td>
-<td id="T_4e05b_row1_col1" class="data row1 col1">1.16</td>
-<td id="T_4e05b_row1_col2" class="data row1 col2">1.65</td>
-<td id="T_4e05b_row1_col3" class="data row1 col3">0.00</td>
-<td id="T_4e05b_row1_col4" class="data row1 col4">6.00</td>
+<td id="T_4ee44_row1_col0" class="data row1 col0">Years enacted</td>
+<td id="T_4ee44_row1_col1" class="data row1 col1">1.16</td>
+<td id="T_4ee44_row1_col2" class="data row1 col2">1.65</td>
+<td id="T_4ee44_row1_col3" class="data row1 col3">0.00</td>
+<td id="T_4ee44_row1_col4" class="data row1 col4">6.00</td>
 </tr>
 <tr class="odd">
-<td id="T_4e05b_row2_col0" class="data row2 col0">Funding amount ($)</td>
-<td id="T_4e05b_row2_col1" class="data row2 col1">562000.00</td>
-<td id="T_4e05b_row2_col2" class="data row2 col2">1221848.72</td>
-<td id="T_4e05b_row2_col3" class="data row2 col3">0.00</td>
-<td id="T_4e05b_row2_col4" class="data row2 col4">5600000.00</td>
+<td id="T_4ee44_row2_col0" class="data row2 col0">Funding amount ($)</td>
+<td id="T_4ee44_row2_col1" class="data row2 col1">562000.00</td>
+<td id="T_4ee44_row2_col2" class="data row2 col2">1221848.72</td>
+<td id="T_4ee44_row2_col3" class="data row2 col3">0.00</td>
+<td id="T_4ee44_row2_col4" class="data row2 col4">5600000.00</td>
 </tr>
 <tr class="even">
-<td id="T_4e05b_row3_col0" class="data row3 col0">% K-12 reached</td>
-<td id="T_4e05b_row3_col1" class="data row3 col1">34.34</td>
-<td id="T_4e05b_row3_col2" class="data row3 col2">36.23</td>
-<td id="T_4e05b_row3_col3" class="data row3 col3">0.00</td>
-<td id="T_4e05b_row3_col4" class="data row3 col4">98.00</td>
+<td id="T_4ee44_row3_col0" class="data row3 col0">% K-12 reached</td>
+<td id="T_4ee44_row3_col1" class="data row3 col1">34.34</td>
+<td id="T_4ee44_row3_col2" class="data row3 col2">36.23</td>
+<td id="T_4ee44_row3_col3" class="data row3 col3">0.00</td>
+<td id="T_4ee44_row3_col4" class="data row3 col4">98.00</td>
 </tr>
 <tr class="odd">
-<td id="T_4e05b_row4_col0" class="data row4 col0">Domain coverage score</td>
-<td id="T_4e05b_row4_col1" class="data row4 col1">1.64</td>
-<td id="T_4e05b_row4_col2" class="data row4 col2">1.55</td>
-<td id="T_4e05b_row4_col3" class="data row4 col3">0.00</td>
-<td id="T_4e05b_row4_col4" class="data row4 col4">5.00</td>
+<td id="T_4ee44_row4_col0" class="data row4 col0">Domain coverage score</td>
+<td id="T_4ee44_row4_col1" class="data row4 col1">1.64</td>
+<td id="T_4ee44_row4_col2" class="data row4 col2">1.55</td>
+<td id="T_4ee44_row4_col3" class="data row4 col3">0.00</td>
+<td id="T_4ee44_row4_col4" class="data row4 col4">5.00</td>
 </tr>
 <tr class="even">
-<td id="T_4e05b_row5_col0" class="data row5 col0">Domain: Knowledge</td>
-<td id="T_4e05b_row5_col1" class="data row5 col1">0.04</td>
-<td id="T_4e05b_row5_col2" class="data row5 col2">0.20</td>
-<td id="T_4e05b_row5_col3" class="data row5 col3">0.00</td>
-<td id="T_4e05b_row5_col4" class="data row5 col4">1.00</td>
+<td id="T_4ee44_row5_col0" class="data row5 col0">Domain: Knowledge</td>
+<td id="T_4ee44_row5_col1" class="data row5 col1">0.04</td>
+<td id="T_4ee44_row5_col2" class="data row5 col2">0.20</td>
+<td id="T_4ee44_row5_col3" class="data row5 col3">0.00</td>
+<td id="T_4ee44_row5_col4" class="data row5 col4">1.00</td>
 </tr>
 <tr class="odd">
-<td id="T_4e05b_row6_col0" class="data row6 col0">Domain: Social environment</td>
-<td id="T_4e05b_row6_col1" class="data row6 col1">0.18</td>
-<td id="T_4e05b_row6_col2" class="data row6 col2">0.39</td>
-<td id="T_4e05b_row6_col3" class="data row6 col3">0.00</td>
-<td id="T_4e05b_row6_col4" class="data row6 col4">1.00</td>
+<td id="T_4ee44_row6_col0" class="data row6 col0">Domain: Social environment</td>
+<td id="T_4ee44_row6_col1" class="data row6 col1">0.18</td>
+<td id="T_4ee44_row6_col2" class="data row6 col2">0.39</td>
+<td id="T_4ee44_row6_col3" class="data row6 col3">0.00</td>
+<td id="T_4ee44_row6_col4" class="data row6 col4">1.00</td>
 </tr>
 <tr class="even">
-<td id="T_4e05b_row7_col0" class="data row7 col0">Domain: MHH impact</td>
-<td id="T_4e05b_row7_col1" class="data row7 col1">0.08</td>
-<td id="T_4e05b_row7_col2" class="data row7 col2">0.27</td>
-<td id="T_4e05b_row7_col3" class="data row7 col3">0.00</td>
-<td id="T_4e05b_row7_col4" class="data row7 col4">1.00</td>
+<td id="T_4ee44_row7_col0" class="data row7 col0">Domain: MHH impact</td>
+<td id="T_4ee44_row7_col1" class="data row7 col1">0.08</td>
+<td id="T_4ee44_row7_col2" class="data row7 col2">0.27</td>
+<td id="T_4ee44_row7_col3" class="data row7 col3">0.00</td>
+<td id="T_4ee44_row7_col4" class="data row7 col4">1.00</td>
 </tr>
 <tr class="odd">
-<td id="T_4e05b_row8_col0" class="data row8 col0">ECODIS rate (poverty)</td>
-<td id="T_4e05b_row8_col1" class="data row8 col1">49.44</td>
-<td id="T_4e05b_row8_col2" class="data row8 col2">1.31</td>
-<td id="T_4e05b_row8_col3" class="data row8 col3">46.35</td>
-<td id="T_4e05b_row8_col4" class="data row8 col4">53.62</td>
+<td id="T_4ee44_row8_col0" class="data row8 col0">ECODIS rate (poverty)</td>
+<td id="T_4ee44_row8_col1" class="data row8 col1">49.44</td>
+<td id="T_4ee44_row8_col2" class="data row8 col2">1.31</td>
+<td id="T_4ee44_row8_col3" class="data row8 col3">46.35</td>
+<td id="T_4ee44_row8_col4" class="data row8 col4">53.62</td>
 </tr>
 <tr class="even">
-<td id="T_4e05b_row9_col0" class="data row9 col0">Gender gap (2022–23)</td>
-<td id="T_4e05b_row9_col1" class="data row9 col1">-2.22</td>
-<td id="T_4e05b_row9_col2" class="data row9 col2">0.67</td>
-<td id="T_4e05b_row9_col3" class="data row9 col3">-3.94</td>
-<td id="T_4e05b_row9_col4" class="data row9 col4">-0.70</td>
+<td id="T_4ee44_row9_col0" class="data row9 col0">Gender gap (2022–23)</td>
+<td id="T_4ee44_row9_col1" class="data row9 col1">-2.22</td>
+<td id="T_4ee44_row9_col2" class="data row9 col2">0.67</td>
+<td id="T_4ee44_row9_col3" class="data row9 col3">-3.94</td>
+<td id="T_4ee44_row9_col4" class="data row9 col4">-0.70</td>
 </tr>
 </tbody>
 </table>
@@ -2901,7 +2811,7 @@ Table&nbsp;5: Feature matrix summary statistics for the state-level machine lear
 <div id="cell-fig-lr-coef" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="17">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X  <span class="op">=</span> ml_df[FEATURES].fillna(<span class="dv">0</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X  <span class="op">=</span> ml_df[FEATURES].fillna(<span class="dv">0</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y  <span class="op">=</span> ml_df[<span class="st">'target_female_rate'</span>]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Xs <span class="op">=</span> sc.fit_transform(X)</span>
@@ -2942,7 +2852,7 @@ Table&nbsp;5: Feature matrix summary statistics for the state-level machine lear
 <span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span>C_NOPOLICY, alpha<span class="op">=</span><span class="fl">0.88</span>, label<span class="op">=</span><span class="st">'Positive — increases female absenteeism'</span>),</span>
 <span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
 <span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-lr-coef" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -2964,7 +2874,7 @@ Figure&nbsp;8: Linear regression standardized coefficients (n=50 states). Green 
 <div id="cell-fig-rf-importance" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="18">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">500</span>, min_samples_leaf<span class="op">=</span><span class="dv">2</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">500</span>, min_samples_leaf<span class="op">=</span><span class="dv">2</span>,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                            random_state<span class="op">=</span><span class="dv">42</span>, oob_score<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rf.fit(X, y)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>cv_rf  <span class="op">=</span> cross_val_score(rf, X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">'r2'</span>)</span>
@@ -2998,7 +2908,7 @@ Figure&nbsp;8: Linear regression standardized coefficients (n=50 states). Green 
 <span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span>C_NOPOLICY, alpha<span class="op">=</span><span class="fl">0.88</span>, label<span class="op">=</span><span class="st">'Below median importance'</span>),</span>
 <span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
 <span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-rf-importance" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3016,7 +2926,7 @@ Figure&nbsp;9: Random Forest feature importance ranking. Gender gap between fema
 <div class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Metric'</span>: [<span class="st">'Training R²'</span>,<span class="st">'5-Fold CV R²'</span>,<span class="st">'OOB R² (RF only)'</span>,<span class="st">'RMSE'</span>,<span class="st">'Top predictor'</span>],</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Linear Regression'</span>: [</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'</span><span class="sc">{</span>r2_lr<span class="sc">:.3f}</span><span class="ss">'</span>, <span class="ss">f'</span><span class="sc">{</span>cv_lr<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">'</span>, <span class="st">'—'</span>,</span>
@@ -3032,7 +2942,7 @@ Figure&nbsp;9: Random Forest feature importance ranking. Gender gap between fema
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Best honest estimate'</span>, <span class="st">'Average prediction error'</span>,</span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Consistent across both models'</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Metric'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>}).set_index(<span class="st">'Metric'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-model-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="19">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -3040,11 +2950,11 @@ Figure&nbsp;9: Random Forest feature importance ranking. Gender gap between fema
 Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states). The large gap between training R² and cross-validation R² reflects overfitting expected at this sample size. OOB R² is the most conservative and honest generalization estimate.
 </figcaption>
 <div aria-describedby="tbl-model-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -3061,31 +2971,31 @@ Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states)
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Training R²</td>
+<th data-quarto-table-cell-role="th">Training R²</th>
 <td>0.281</td>
 <td>0.722</td>
 <td>In-sample fit</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5-Fold CV R²</td>
+<th data-quarto-table-cell-role="th">5-Fold CV R²</th>
 <td>-0.205</td>
 <td>-0.229</td>
 <td>Overfitting — n=50 too small</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">OOB R² (RF only)</td>
+<th data-quarto-table-cell-role="th">OOB R² (RF only)</th>
 <td>—</td>
 <td>-0.097</td>
 <td>Best honest estimate</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">RMSE</td>
+<th data-quarto-table-cell-role="th">RMSE</th>
 <td>5.66pp</td>
 <td>3.52pp</td>
 <td>Average prediction error</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Top predictor</td>
+<th data-quarto-table-cell-role="th">Top predictor</th>
 <td>Gender gap (coef negative)</td>
 <td>Gender gap (imp 0.543)</td>
 <td>Consistent across both models</td>
@@ -3103,7 +3013,7 @@ Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states)
 <section id="oregon-case-study-the-implementation-gap" class="level3">
 <h3 class="anchored" data-anchor-id="oregon-case-study-the-implementation-gap">Oregon Case Study: The Implementation Gap</h3>
 <p>Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration, Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.</p>
-<p>An informational interview with a program specialist at the Oregon Department of Education’s Menstrual Dignity Program <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">consent] 2026</a>)</span> revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: <strong>MHH legislation is necessary but insufficient</strong>, and its impact depends critically on implementation fidelity at the school and district level.</p>
+<p>Policy on paper is not policy in practice. An informational interview with a program specialist at the Oregon Department of Education’s Menstrual Dignity Program <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">consent] 2026</a>)</span> revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: MHH legislation is necessary but insufficient, and its impact depends critically on implementation fidelity at the school and district levels.</p>
 </section>
 <section id="k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h3>
@@ -3111,7 +3021,7 @@ Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states)
 <div id="cell-fig-tsne" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="20">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>CLUSTER_FEATS <span class="op">=</span> FEATURES <span class="op">+</span> [<span class="st">'target_female_rate'</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>CLUSTER_FEATS <span class="op">=</span> FEATURES <span class="op">+</span> [<span class="st">'target_female_rate'</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Xc    <span class="op">=</span> ml_df[CLUSTER_FEATS].fillna(<span class="dv">0</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Xc_sc <span class="op">=</span> StandardScaler().fit_transform(Xc)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3161,7 +3071,7 @@ Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states)
 <span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">7</span>, loc<span class="op">=</span><span class="st">'upper left'</span>, title<span class="op">=</span><span class="st">'Cluster'</span>, title_fontsize<span class="op">=</span><span class="dv">8</span>,</span>
 <span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>          borderpad<span class="op">=</span><span class="fl">1.0</span>, labelspacing<span class="op">=</span><span class="fl">0.6</span>)</span>
 <span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-tsne" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -3179,7 +3089,7 @@ Figure&nbsp;10: This t‑SNE projection highlights two contrasting clusters of s
 <div class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cluster_summary <span class="op">=</span> (</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cluster_summary <span class="op">=</span> (</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    ml_df.groupby(<span class="st">'cluster'</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        n_states       <span class="op">=</span>(<span class="st">'state_name'</span>,<span class="st">'count'</span>),</span>
@@ -3193,7 +3103,7 @@ Figure&nbsp;10: This t‑SNE projection highlights two contrasting clusters of s
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>cluster_summary.index <span class="op">=</span> [CNAMES[c] <span class="cf">for</span> c <span class="kw">in</span> cluster_summary.index]</span>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>cluster_summary.columns <span class="op">=</span> [<span class="st">'N states'</span>,<span class="st">'Avg female rate (%)'</span>,<span class="st">'Avg policy score'</span>,</span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'Avg domain score'</span>,<span class="st">'Avg % K-12 reached'</span>,<span class="st">'Avg ECODIS rate'</span>]</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>cluster_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>cluster_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-clusters" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="21">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -3201,11 +3111,11 @@ Figure&nbsp;10: This t‑SNE projection highlights two contrasting clusters of s
 Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 states). Average female rate is the mean target variable per cluster. The cluster C5 (Strong policy, low poverty) achieves the best outcomes by combining strong policy with low poverty. The cluster C6 (Strong policy, high absenteeism) holds maximum domain coverage yet maximum absenteeism.
 </figcaption>
 <div aria-describedby="tbl-clusters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -3219,7 +3129,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">C0: Moderate implementation</td>
+<th data-quarto-table-cell-role="th">C0: Moderate implementation</th>
 <td>5</td>
 <td>28.2</td>
 <td>0.2</td>
@@ -3228,7 +3138,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>52.3</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">C1: Policy void</td>
+<th data-quarto-table-cell-role="th">C1: Policy void</th>
 <td>12</td>
 <td>28.8</td>
 <td>3.4</td>
@@ -3237,7 +3147,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>49.1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">C2: High poverty, low reach</td>
+<th data-quarto-table-cell-role="th">C2: High poverty, low reach</th>
 <td>8</td>
 <td>26.5</td>
 <td>1.4</td>
@@ -3246,7 +3156,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>49.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">C3: Low poverty, high reach</td>
+<th data-quarto-table-cell-role="th">C3: Low poverty, high reach</th>
 <td>2</td>
 <td>41.0</td>
 <td>2.5</td>
@@ -3255,7 +3165,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>48.4</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">C4: High reach, high absenteeism</td>
+<th data-quarto-table-cell-role="th">C4: High reach, high absenteeism</th>
 <td>14</td>
 <td>25.2</td>
 <td>0.0</td>
@@ -3264,7 +3174,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>49.5</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">C5: Strong policy, low poverty</td>
+<th data-quarto-table-cell-role="th">C5: Strong policy, low poverty</th>
 <td>3</td>
 <td>25.7</td>
 <td>3.7</td>
@@ -3273,7 +3183,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <td>48.6</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">C6: Strong policy, high absenteeism</td>
+<th data-quarto-table-cell-role="th">C6: Strong policy, high absenteeism</th>
 <td>6</td>
 <td>25.2</td>
 <td>2.8</td>
@@ -3303,10 +3213,21 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 </section>
 <section id="conclusions" class="level1">
 <h1>Conclusions</h1>
-<p>The one takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association survives every analytical lens applied to it. This does not prove the policy works causally, but it is precisely the kind of early, consistent, multi-method signal that justifies continued investment in both the policy and its evaluation.</p>
-<p><strong>Policy type alone is not enough.</strong> Enacting a law is the floor, not the ceiling. Implementation fidelity, whether schools actually stock products and whether allocated funds are actually spent, determines outcomes more than what the legislation requires. Our case study for Oregon State makes this concrete: Oregon and Nevada hold the strongest policy configurations in the nation and the worst outcomes among enacted states.</p>
+<section id="legislation-alone-is-not-enough" class="level2">
+<h2 class="anchored" data-anchor-id="legislation-alone-is-not-enough">Legislation Alone is Not Enough</h2>
+<p>The principal takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association is apparent under every analytical lens we applied to it. This does not prove the policy works causally, but it justifies continued investment in both the policy and its evaluation.</p>
+<p>Enacting a law is the baseline, not the goal. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent - determines outcomes more than what the legislation requires. Our case study for Oregon confirms this: Oregon, along with Nevada, holds the strongest policy configurations in the nation, yet has the worst chronic absenteeism outcomes among all enacted-policy states.</p>
 <p>Our specific recommendation is that states without enacted legislation should treat the ECODIS finding as their highest-priority decision point. Economically disadvantaged female students are both the most likely to face period-poverty barriers due to cost and the group showing the most consistent association with the legislation signal across all analytical versions.</p>
-<p><strong>Future work</strong> should: (1) extend to 2023–2025 school years for a within-state difference-in-differences design; (2) develop a district-level implementation fidelity measure using product purchase records and reimbursement claim rates; (3) replicate the ML pipeline at the LEA level (n≈12,800) for stable, generalizable regression estimates; and (4) explicitly include transgender and non-binary students in both data collection and analysis frameworks.</p>
+</section>
+<section id="data-access" class="level2">
+<h2 class="anchored" data-anchor-id="data-access">Data Access</h2>
+<p>This project’s biggest constraint wasn’t analytical — it was access. Despite ESSA requiring every state to report chronic absenteeism data, we found that the data infrastructure for actually using it is inconsistent at best: many states’ data was difficult to locate, incomplete, or published in formats that made cross-state comparison labor-intensive rather than straightforward. A more standardized, consistently formatted, and centrally accessible chronic absenteeism reporting system — ideally one that doesn’t require researchers to individually track down 50 different state education department portals — would meaningfully lower the barrier to studies like this one, and would let future work extend well beyond the three-year window we were limited to here. Access to data shouldn’t be the hardest part of studying a law meant to help students.</p>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>Future work should: (1) extend to 2023–2025 school years for a within-state difference-in-differences design; (2) develop a district-level implementation fidelity measure using product purchase records and reimbursement claim rates; (3) replicate the ML pipeline at the LEA level (n≈12,800) for stable, generalizable regression estimates; and (4) explicitly include transgender and non-binary students in both data collection and analysis frameworks.</p>
+<p>This returns us to our original question: yes, MHH legislation is associated with meaningfully different absenteeism outcomes, but ‘yes’ comes with real asterisks this project has tried to make visible rather than hide.</p>
+</section>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
@@ -3410,13 +3331,14 @@ US Department of Education. 2021--2023. <span>“<span>EDFacts</span> Chronic Ab
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
