@@ -985,7 +985,7 @@ def plot_subgroup_year(year, sg_raw):
                 color    = '#999999'
             max_val = pivot.loc[label].max()
             ax.text(max_val + 0.003, i, sig_text,
-                    va='center', ha='left', fontsize=4,
+                    va='center', ha='left', fontsize=7,
                     color=color, style='italic')
 
     ecodis_label = subgroup_labels.get('ECODIS', 'Economically disadvantaged')
