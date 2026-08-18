@@ -885,7 +885,6 @@ plt.show()
 ```{python}
 
 #| label: fig-subgroup-by-year
-#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Green bars show enacted-policy states; gold bars show no-policy states. Significance labels reflect Welch's t-test p-values. During the school year 2022 - 2023 the economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
@@ -998,7 +997,7 @@ for year in years:
                 color    = '#999999'
             max_val = pivot.loc[label].max()
             ax.text(max_val + 0.003, i, sig_text,
-                    va='center', ha='left', fontsize=4,
+                    va='center', ha='left', fontsize=7,
                     color=color, style='italic')
 
     # ECODIS highlight annotation
@@ -1036,6 +1035,20 @@ for year in years:
     ax.spines['right'].set_visible(False)
 
     plt.tight_layout()
+
+    # Add caption only on last chart
+    if year == '2022-2023':
+        fig.text(0.5, -0.04,
+            "Figure: Female share of chronic absenteeism by demographic subgroup and school year.\n"
+            "Enacted-policy states vs no-policy states. Significance labels reflect Welch's t-test\n"
+            "p-values (Holm-Bonferroni corrected). ECODIS annotated as the group most directly\n"
+            "linked to period poverty as a cost barrier. Traditional Public School Districts Only.",
+            ha='center', va='top', fontsize=7, color='#444444',
+            wrap=True)
+        plt.subplots_adjust(bottom=0.12)
+
+    plt.tight_layout()
+    plt.show()
     plt.show()
 
 ```
@@ -1243,11 +1256,11 @@ feat_table = pd.DataFrame({
 
 ### Linear regression
 
-A linear regression using the clean 10-feature set explained 36.1% of the variance in the target (R²=0.361, RMSE=6.24pp). Five-fold cross-validation returned a mean CV R² of -0.505, indicating that the model does not generalize to unseen states, as expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. **The policy score has a positive standardized coefficient (+1.02)**, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. The **strongest negative coefficient belongs to domain coverage score (-1.44)**, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.
+A linear regression using the clean 10-feature set explained 28.1% of the variance in the target (R²=0.281, RMSE=5.66pp). Five-fold cross-validation returned a mean CV R² of -0.205, indicating that the model does not generalize to unseen states, as expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. **The policy score has a positive standardized coefficient (+1.02)**, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias — states with higher baseline absenteeism were more motivated to enact stronger legislation. **The strongest negative coefficient belongs to domain coverage score (-1.44)**, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.
 
 ```{python}
 #| label: fig-lr-coef
-#| fig-cap: "Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. The policy score is positive (+1.02), likely reflecting selection bias: states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone."
+#| fig-cap: "Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. The policy score is positive (+1.02), likely reflecting selection bias: states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-1.44), suggesting policy breadth matters more than policy strength alone."
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: "100%"
@@ -1298,7 +1311,8 @@ plt.show()
 
 ### Random forest
 
-A Random Forest Regressor (500 trees, minimum 2 samples per leaf) achieved a training R² of 0.779 and RMSE of 3.67pp, but an out-of-bag R² of 0.093 and a 5-fold CV mean R² of -0.085. The large gap between training and out-of-bag performance confirms overfitting consistent with the small sample size. The OOB R² of 0.093 represents the most conservative and honest estimate of generalization performance. Despite overfitting, the **feature importance rankings** are interpreted as descriptive findings: gender gap (0.543), ECODIS rate (0.174), and % K-12 reached (0.131) consistently outrank policy score and domain coverage, confirming that structural context dominates short-term policy effects.
+A Random Forest Regressor (500 trees, minimum 2 samples per leaf) achieved a training R² of 0.722 and RMSE of 3.52pp, but an out-of-bag R² of -0.097 and a 5-fold CV mean R² of -0.230. The large gap between training and out-of-bag performance confirms overfitting consistent with the small sample size. Both the OOB R² and CV R² are negative, meaning the model performs worse than simply predicting the mean for every state, expected behavior with n=50 and 10 features. Despite overfitting, **the feature importance rankings** are interpreted as descriptive findings: gender gap (0.543), ECODIS rate (0.174), and % K-12 reached (0.131) consistently outrank policy score and domain coverage, confirming that structural context dominates short-term policy effects.
+
 
 ```{python}
 #| label: fig-rf-importance
@@ -1375,11 +1389,11 @@ Policy on paper is not policy in practice. An informational interview with a pro
 
 ### K-means clustering
 
-K-means clustering was applied to the full 11-feature matrix (including the target variable) to identify natural groupings of states. The optimal number of clusters was selected using the elbow method and silhouette score across K=2 through K=10. Silhouette scores peaked at K=7 (score=0.262). The seven clusters reveal a more nuanced typology than the binary enacted/no-policy distinction: Funded Mandate states appear in five of the seven clusters, confirming that policy type alone is insufficient to predict outcomes.
+K-means clustering was applied to the full 11-feature matrix (the 10 model features plus the target variable) to identify natural groupings of states. The optimal number of clusters was selected using silhouette scores across K=2 through K=10, peaking at K=7 (score=0.262). The seven clusters reveal a more nuanced typology than the binary enacted/no-policy distinction. Notably, C3 (Nevada and Oregon) is the paradox cluster, both states have strong domain coverage (score=5.0) and high implementation reach (63.5%) yet record the highest female absenteeism of any enacted-policy cluster at 41.1%. At the other extreme, C5 (Colorado, New Jersey, North Carolina) combines the highest policy score (3.67) with the lowest female absenteeism (25.7%), confirming that strong policy paired with low poverty produces the best outcomes. Funded Mandate states appear across five of the seven clusters, confirming that policy type alone is insufficient to predict outcomes.
 
 ```{python}
 #| label: fig-tsne
-#| fig-cap: "This t‑SNE projection highlights two contrasting clusters of states with strong MHH legislation: Cluster 5, where low-poverty conditions align with lower female-specific chronic absenteeism, and Cluster 6, where similar policy strength coexists with persistently high absenteeism. The contrast between these clusters shows how socioeconomic context shapes attendance outcomes even when policy environments are comparable."
+#| fig-cap: "t-SNE projection of the state-level feature space colored by cluster membership. C3 (Nevada and Oregon) is the paradox cluster, highest domain coverage and implementation reach yet highest female absenteeism among enacted states (41.1%). C5 (Colorado, New Jersey, North Carolina) achieves the best outcomes by combining strong policy with low poverty. C4 groups the 14 true no-policy states with zero policy score and zero domain coverage. Funded Mandate states appear across five clusters, confirming that policy classification alone does not determine outcomes."
 #| fig-width: 9
 #| fig-height: 5
 #| out-width: "100%"
@@ -1392,13 +1406,13 @@ km = KMeans(n_clusters=7, random_state=42, n_init=50)
 ml_df['cluster'] = km.fit_predict(Xc_sc)
 
 CNAMES = {
-    0:'C0: Moderate implementation',
-    1:'C1: Policy void',
-    2:'C2: High poverty, low reach',
-    3:'C3: Low poverty, high reach ',
-    4:'C4: High reach, high absenteeism',
-    5:'C5: Strong policy, low poverty',
-    6:'C6: Strong policy, high absenteeism',
+    0: 'C0: Low Policy, Low Reach',
+    1: 'C1: Moderate Policy, Low Domain',
+    2: 'C2: Low Policy, Better Outcomes',
+    3: 'C3: Strong Law, Poor Results',
+    4: 'C4: Policy Void',
+    5: 'C5: Policy Efficacy Under Low Poverty',
+    6: 'C6: Moderate Policy, Good Outcomes',
 }
 CCOLORS = ['#d95f02','#7570b3','#e7298a','#66a61e',
             '#1b9e77','#a6761d','#2214e0']
@@ -1418,19 +1432,21 @@ for c in range(7):
                label=CNAMES[c], zorder=3)
 
 for _, row in ml_df.iterrows():
-    paradox = row['cluster']==6
+    paradox = row['cluster'] == 3
     ax.annotate(
         row['state_name'].title(),
-        xy=(row['tx'], row['ty']), xytext=(5,5),
+        xy=(row['tx'], row['ty']), xytext=(5, 5),
         textcoords='offset points',
-        fontsize=6, color='#333',
+        fontsize=6,
+        color='#c0392b' if paradox else '#333',
+        fontweight='bold' if paradox else 'normal',
         bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
                   edgecolor='none', alpha=0.7))
 
-ax.set_title('Do States With The  Same Policy Share The Same Outcomes?',
+ax.set_title('Do States With The Same Policy Share The Same Outcomes?',
              fontsize=13, fontweight='bold')
-ax.set_xlabel('t-SNE Dimension 1', fontsize=9)
-ax.set_ylabel('t-SNE Dimension 2', fontsize=9)
+ax.set_xlabel('Similarity Dimension 1 (t-SNE)', fontsize=9)
+ax.set_ylabel('Similarity Dimension 2 (t-SNE)', fontsize=9)
 ax.legend(fontsize=7, loc='upper left', title='Cluster', title_fontsize=8,
           borderpad=1.0, labelspacing=0.6)
 plt.tight_layout()
@@ -1439,22 +1455,42 @@ plt.show()
 
 ```{python}
 #| label: tbl-clusters
-#| tbl-cap: "K-means cluster profiles (K=7), state-level feature matrix (n=50 states). Average female rate is the mean target variable per cluster. The cluster C5 (Strong policy, low poverty) achieves the best outcomes by combining strong policy with low poverty. The cluster C6 (Strong policy, high absenteeism) holds maximum domain coverage yet maximum absenteeism."
+#| tbl-cap: "K-means cluster profiles (K=7), state-level feature matrix (n=50 states). Avg female rate is the mean target variable per cluster. C3 (Strong Law, Poor Results) contains Nevada and Oregon — highest domain coverage and reach yet highest female absenteeism at 41.1%. C5 (Policy Efficacy Under Low Poverty) achieves the best outcomes combining strong policy with low poverty."
 
 cluster_summary = (
     ml_df.groupby('cluster')
     .agg(
-        n_states       =('state_name','count'),
-        avg_female_rate=('target_female_rate','mean'),
-        avg_policy_score=('policy_score','mean'),
-        avg_domain_score=('domain_score','mean'),
-        avg_pct_reached =('pct_k12_reached','mean'),
-        avg_ecodis      =('ecodis_rate','mean'),
+        n_states        =('state_name', 'count'),
+        states          =('state_name', lambda x: ', '.join(sorted(x.str.title()))),
+        avg_female_rate =('target_female_rate', 'mean'),
+        avg_policy_score=('policy_score', 'mean'),
+        avg_domain_score=('domain_score', 'mean'),
+        avg_pct_reached =('pct_k12_reached', 'mean'),
+        avg_ecodis      =('ecodis_rate', 'mean'),
     ).round(1)
 )
 cluster_summary.index = [CNAMES[c] for c in cluster_summary.index]
-cluster_summary.columns = ['N states','Avg female rate (%)','Avg policy score',
-                            'Avg domain score','Avg % K-12 reached','Avg ECODIS rate']
-cluster_summary
+cluster_summary.columns = [
+    'N states', 'States', 'Avg female rate (%)',
+    'Avg policy score', 'Avg domain score',
+    'Avg % K-12 reached', 'Avg ECODIS rate'
+]
+
+(cluster_summary.style
+    .set_properties(**{'font-size': '0.78em', 'text-align': 'left'})
+    .set_table_styles([
+        {'selector': 'th', 'props': [('font-size', '0.80em'), ('text-align', 'center')]},
+        {'selector': 'td', 'props': [('padding', '3px 8px')]},
+    ])
+    .format({
+        'Avg female rate (%)':  '{:.1f}',
+        'Avg policy score':     '{:.2f}',
+        'Avg domain score':     '{:.2f}',
+        'Avg % K-12 reached':   '{:.1f}',
+        'Avg ECODIS rate':      '{:.1f}',
+    })
+)
 ```
+
+
 
