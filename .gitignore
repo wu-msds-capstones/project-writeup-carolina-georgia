@@ -4,6 +4,7 @@
 /.quarto/
 /_output/
 
+.DS_Store
 .vscode/
 
 **/*.quarto_ipynb
