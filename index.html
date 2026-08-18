@@ -166,7 +166,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Skill formation and the economics of investing in disadvantaged children;,citation_author=James J. Heckman;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_issue=5782;,citation_doi=10.1126/science.1128898;,citation_volume=312;,citation_journal_title=Science;">
 <meta name="citation_reference" content="citation_title=Portraits of change: Aligning school and community resources to reduce chronic absence;,citation_author=Attendance Works;,citation_author=Everyone Graduates Center;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://www.attendanceworks.org;,citation_publisher=Attendance Works;">
 <meta name="citation_reference" content="citation_title=A simple sequentially rejective multiple test procedure;,citation_author=Sture Holm;,citation_publication_date=1979;,citation_cover_date=1979;,citation_year=1979;,citation_issue=2;,citation_volume=6;,citation_journal_title=Scandinavian Journal of Statistics;">
-<meta name="citation_reference" content="citation_title=Personal communication — Oregon Department of Education Menstrual Dignity Program;,citation_author=undefined consent];,citation_publication_date=2026;,citation_cover_date=2026;,citation_year=2026;">
+<meta name="citation_reference" content="citation_title=Personal communication — Oregon Department of Education Menstrual Dignity Program;,citation_author=Sasha Grenier;,citation_publication_date=2026;,citation_cover_date=2026;,citation_year=2026;">
 </head>
 
 <body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -456,7 +456,7 @@ window.Quarto = {
   
 
 
-<div id="7e7f0436" class="cell" data-execution_count="1">
+<div id="27c17ecc" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
@@ -473,7 +473,7 @@ window.Quarto = {
 <h1>Introduction</h1>
 <section id="the-chronic-absenteeism-crisis" class="level2">
 <h2 class="anchored" data-anchor-id="the-chronic-absenteeism-crisis">The chronic absenteeism crisis</h2>
-<p>Chronic absenteeism, defined as missing 10 percent or more of school days in a given year, has emerged as one of the most urgent challenges in US public education. The COVID-19 pandemic accelerated a trend already underway: by the 2022–2023 school year, more than one in four K-12 students was chronically absent <span class="citation" data-cites="us_dept_ed_2023">(<a href="#ref-us_dept_ed_2023" role="doc-biblioref">US Department of Education 2021--2023</a>)</span>. Research consistently links chronic absenteeism to reduced academic achievement, lower graduation rates, and long-term economic consequences, making it a key equity concern for students from disadvantaged backgrounds <span class="citation" data-cites="heckman_2006 attendance_works_2019">(<a href="#ref-heckman_2006" role="doc-biblioref">Heckman 2006</a>; <a href="#ref-attendance_works_2019" role="doc-biblioref">Attendance Works and Everyone Graduates Center 2019</a>)</span>.</p>
+<p>Chronic absenteeism, defined as missing 10 percent or more of school days in a given year, has emerged as one of the most urgent challenges in US public education. The COVID-19 pandemic accelerated a trend already underway: by the 2022–2023 school year, more than one in four K-12 students was chronically absent <span class="citation" data-cites="us_dept_ed_2023">(<a href="#ref-us_dept_ed_2023" role="doc-biblioref">US Department of Education 2021–2023</a>)</span>. Research consistently links chronic absenteeism to reduced academic achievement, lower graduation rates, and long-term economic consequences, making it a key equity concern for students from disadvantaged backgrounds <span class="citation" data-cites="heckman_2006 attendance_works_2019">(<a href="#ref-heckman_2006" role="doc-biblioref">Heckman 2006</a>; <a href="#ref-attendance_works_2019" role="doc-biblioref">Attendance Works and Everyone Graduates Center 2019</a>)</span>.</p>
 </section>
 <section id="period-poverty-as-an-absenteeism-driver" class="level2">
 <h2 class="anchored" data-anchor-id="period-poverty-as-an-absenteeism-driver">Period poverty as an absenteeism driver</h2>
@@ -642,7 +642,7 @@ window.Quarto = {
 <p>This project integrates two primary data sources: federal chronic absenteeism records from the US Department of Education’s EDFacts initiative, and state-level MHH legislation data manually transcribed from a peer-reviewed policy review <span class="citation" data-cites="ballard_2025">(<a href="#ref-ballard_2025" role="doc-biblioref">Ballard et al. 2025</a>)</span>. A third source, the NCES Geographic Relationship File (GRF) crosswalk, was used to filter the absenteeism dataset to geographically-defined traditional public school districts.</p>
 <section id="chronic-absenteeism-data-edfacts" class="level2">
 <h2 class="anchored" data-anchor-id="chronic-absenteeism-data-edfacts">Chronic absenteeism data (EDFacts)</h2>
-<p>Chronic absenteeism data are publicly available through the Every Student Succeeds Act (ESSA, 2015), which requires every state to submit annual chronic absenteeism records to the US Department of Education <span class="citation" data-cites="essa_2015 us_dept_ed_2023">(<a href="#ref-essa_2015" role="doc-biblioref"><span>“Every <span>Student</span> <span>Succeeds</span> <span>Act</span>”</span> 2015</a>; <a href="#ref-us_dept_ed_2023" role="doc-biblioref">US Department of Education 2021--2023</a>)</span>. These records are distributed through the ED Data Express portal under Data Group 814. For each school year, two separate files are released per state: a percentage file (DG814PCT) containing one row per LEA with the overall absenteeism rate, total enrollment, and total chronically absent students; and a subgroup detail file (FS195/DG814) containing many rows per LEA, one per demographic subgroup and sex combination, with raw counts of chronically absent students.</p>
+<p>Chronic absenteeism data are publicly available through the Every Student Succeeds Act (ESSA, 2015), which requires every state to submit annual chronic absenteeism records to the US Department of Education <span class="citation" data-cites="essa_2015 us_dept_ed_2023">(<a href="#ref-essa_2015" role="doc-biblioref"><span>“Every <span>Student</span> <span>Succeeds</span> <span>Act</span>”</span> 2015</a>; <a href="#ref-us_dept_ed_2023" role="doc-biblioref">US Department of Education 2021–2023</a>)</span>. These records are distributed through the ED Data Express portal under Data Group 814. For each school year, two separate files are released per state: a percentage file (DG814PCT) containing one row per LEA with the overall absenteeism rate, total enrollment, and total chronically absent students; and a subgroup detail file (FS195/DG814) containing many rows per LEA, one per demographic subgroup and sex combination, with raw counts of chronically absent students.</p>
 <p>Three school years were downloaded and processed: 2020–2021, 2021–2022, and 2022–2023. After merging the two files per year, pivoting the subgroup file from long to wide format, and stacking all three years, the combined dataset contained 53,321 district-year rows across 43 columns. Key columns were renamed for clarity (DENOMINATOR to TOTAL_STUDENTS_ENROLLMENT, NUMERATOR to TOTAL_STUDENTS_ABSENT, NUMERIC_VALUE to ABSENTEEISM_RATE). Placeholder rows with LEAID = 0 were removed as they carried no real data.</p>
 <p>The economically disadvantaged subgroup (ECODIS) only appears in the 2022–2023 file due to a federal reporting change; earlier years carry missing values for this subgroup rather than a false zero. A merge validation confirmed internal consistency: male and female counts summed to the combined total in all 131,860 subgroup-year checks with zero mismatches.</p>
 </section>
@@ -654,7 +654,7 @@ window.Quarto = {
 <section id="geographic-filter-nces-grf-crosswalk" class="level2">
 <h2 class="anchored" data-anchor-id="geographic-filter-nces-grf-crosswalk">Geographic filter: NCES GRF crosswalk</h2>
 <p>The EDFacts dataset includes not only traditional public school districts but also independent charter schools, virtual academies, and administrative service agencies that lack fixed geographic boundaries. Including these non-geographic entities creates a structural imbalance between the two comparison groups: enacted-policy states average 28 percent of their LEAs excluded by the geographic filter, compared to only 10 percent for no-policy states, because charter schools cluster disproportionately in states that also tend to pass progressive education legislation. A gap that size would have quietly biased every comparison that followed.</p>
-<p>To address this, each LEA was matched against the NCES School District Geographic Relationship File (GRF), which assigns each geographically defined district to its primary county based on Census Bureau TIGER/Line boundaries <span class="citation" data-cites="nces_grf">(<a href="#ref-nces_grf" role="doc-biblioref">National Center for Education Statistics 2021--2023</a>)</span>. Separate GRF vintages were used for each school year (GRF21 for 2020–2021, GRF22 for 2021–2022, GRF23 for 2022–2023). For districts spanning multiple counties, the primary county was assigned based on the largest land area overlap.</p>
+<p>To address this, each LEA was matched against the NCES School District Geographic Relationship File (GRF), which assigns each geographically defined district to its primary county based on Census Bureau TIGER/Line boundaries <span class="citation" data-cites="nces_grf">(<a href="#ref-nces_grf" role="doc-biblioref">National Center for Education Statistics 2021–2023</a>)</span>. Separate GRF vintages were used for each school year (GRF21 for 2020–2021, GRF22 for 2021–2022, GRF23 for 2022–2023). For districts spanning multiple counties, the primary county was assigned based on the largest land area overlap.</p>
 <p>Of the 53,321 district-year rows, 38,602 matched to a county (traditional public school districts) and 14,719 did not (charter and non-geographic entities). The 38,602 matched rows form the primary analysis dataset. The excluded rows were saved separately for transparency.</p>
 <div class="cell" data-execution_count="3">
 <details class="code-fold">
@@ -939,46 +939,46 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 </details>
 <div id="db-validation" class="cell-output cell-output-display" data-execution_count="5">
 <style type="text/css">
-#T_0d4af th {
+#T_82f42 th {
   font-size: 0.85em;
   text-align: left;
 }
-#T_0d4af td {
+#T_82f42 td {
   padding: 3px 16px;
 }
-#T_0d4af_row0_col0, #T_0d4af_row0_col1, #T_0d4af_row1_col0, #T_0d4af_row1_col1, #T_0d4af_row2_col0, #T_0d4af_row2_col1, #T_0d4af_row3_col0, #T_0d4af_row3_col1, #T_0d4af_row4_col0, #T_0d4af_row4_col1 {
+#T_82f42_row0_col0, #T_82f42_row0_col1, #T_82f42_row1_col0, #T_82f42_row1_col1, #T_82f42_row2_col0, #T_82f42_row2_col1, #T_82f42_row3_col0, #T_82f42_row3_col1, #T_82f42_row4_col0, #T_82f42_row4_col1 {
   font-size: 0.85em;
   text-align: left;
 }
 </style>
 
-<table id="T_0d4af" class="caption-top table table-sm table-striped small">
+<table id="T_82f42" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_0d4af_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Tables</th>
-<th id="T_0d4af_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Rows</th>
+<th id="T_82f42_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Tables</th>
+<th id="T_82f42_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Rows</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_0d4af_row0_col0" class="data row0 col0">absenteeism_facts</td>
-<td id="T_0d4af_row0_col1" class="data row0 col1">38602</td>
+<td id="T_82f42_row0_col0" class="data row0 col0">absenteeism_facts</td>
+<td id="T_82f42_row0_col1" class="data row0 col1">38602</td>
 </tr>
 <tr class="even">
-<td id="T_0d4af_row1_col0" class="data row1 col0">absenteeism_subgroups</td>
-<td id="T_0d4af_row1_col1" class="data row1 col1">324209</td>
+<td id="T_82f42_row1_col0" class="data row1 col0">absenteeism_subgroups</td>
+<td id="T_82f42_row1_col1" class="data row1 col1">324209</td>
 </tr>
 <tr class="odd">
-<td id="T_0d4af_row2_col0" class="data row2 col0">leas</td>
-<td id="T_0d4af_row2_col1" class="data row2 col1">12969</td>
+<td id="T_82f42_row2_col0" class="data row2 col0">leas</td>
+<td id="T_82f42_row2_col1" class="data row2 col1">12969</td>
 </tr>
 <tr class="even">
-<td id="T_0d4af_row3_col0" class="data row3 col0">states</td>
-<td id="T_0d4af_row3_col1" class="data row3 col1">52</td>
+<td id="T_82f42_row3_col0" class="data row3 col0">states</td>
+<td id="T_82f42_row3_col1" class="data row3 col1">52</td>
 </tr>
 <tr class="odd">
-<td id="T_0d4af_row4_col0" class="data row4 col0">menstrual_legislation</td>
-<td id="T_0d4af_row4_col1" class="data row4 col1">50</td>
+<td id="T_82f42_row4_col0" class="data row4 col0">menstrual_legislation</td>
+<td id="T_82f42_row4_col1" class="data row4 col1">50</td>
 </tr>
 </tbody>
 </table>
@@ -989,7 +989,6 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <h2 class="anchored" data-anchor-id="feature-engineering">Feature engineering</h2>
 <p>The <strong>female chronic absenteeism rate</strong> (primary outcome for machine learning) is estimated as:</p>
 <p><span class="math display">\[\text{Female rate} = \frac{\text{count\_total} \times \text{female share}}{\text{total enrollment} \times 0.488} \times 100\]</span></p>
-<p>where female share = count_female / count_total per subgroup, and 0.488 reflects the nationally documented 48.8% female share of K-12 public enrollment <span class="citation" data-cites="nces_digest_2023">(<a href="#ref-nces_digest_2023" role="doc-biblioref">National Center for Education Statistics 2023</a>)</span>. District-level sex-disaggregated enrollment is unavailable in EDFacts; CCD provides it only at the state level using an incompatible ID system (CCD Agency ID ≠ EDFacts LEAID), making district-level merging infeasible. Applying a fixed 48.8% split uniformly introduces small measurement error at the district level, but deviations are expected to largely cancel out when aggregated to the state level. Without a true denominator, we built the closest proxy the data would allow.</p>
 <p><strong>Policy score</strong> encodes policy strength based on resource availability, informed by the legislative framework described in <span class="citation" data-cites="ballard_2025">Ballard et al. (<a href="#ref-ballard_2025" role="doc-biblioref">2025</a>)</span>:</p>
 <table class="caption-top table">
 <thead>
@@ -1034,7 +1033,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <p>This project uses publicly available, federally mandated reporting data at the LEA level. No individual student records are involved, and all data are aggregated at the district level at minimum. The demographic subgroup data (race, disability status, economic disadvantage, English learner status) are used to examine whether policy associations differ across populations, which is a standard and appropriate use of this type of data in education equity research.</p>
 <p><strong>Binary sex classification.</strong> By focusing on the female share of chronic absenteeism as an outcome, we are treating a binary sex classification (male/female) as a proxy for students who menstruate, because subgroup-level enrollment denominators by sex are not available in this dataset. Not all students coded female in school administrative records menstruate, and some students coded male do. This framing is a methodological simplification, not an endorsement of a binary view of gender. A program specialist at the Oregon Department of Education confirmed that transgender and non-binary students are explicitly underserved by current implementation practices and are invisible in this dataset — a substantive limitation, not merely a statistical one. Future work with richer data could examine this question with greater nuance.</p>
 <p><strong>Selection bias.</strong> States with enacted legislation tend to be those that were already experiencing higher absenteeism, which means any analysis comparing enacted to non-enacted states is partly comparing states with different baseline conditions rather than measuring a pure policy effect. We address this by framing our findings as correlational and by explicitly discussing the selection effect throughout.</p>
-<p><strong>Qualitative data handling.</strong> Insights from an informational interview with an Oregon Department of Education program specialist are cited as a personal communication <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">consent] 2026</a>)</span>, pending her consent to be named. No identifying information about students, families, or individual schools is included.</p>
+<p><strong>Qualitative data handling.</strong> Insights from an informational interview with an Oregon Department of Education program specialist are cited as a personal communication <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">Grenier 2026</a>)</span>, pending her consent to be named. No identifying information about students, families, or individual schools is included.</p>
 <p><strong>Representation of vulnerable groups.</strong> The ECODIS and HOM (homeless) subgroups represent the most economically vulnerable students. Their data are presented to highlight, not diminish, their disproportionate burden of chronic absenteeism.</p>
 </section>
 </section>
@@ -1048,7 +1047,7 @@ Table&nbsp;2: Five-table normalized database schema (capstone_traditional.db). T
 <p><strong>Additional independent variables.</strong> Policy strength, domain coverage score (0–7), funding amount, and percentage of K-12 schools reached by the program.</p>
 <p><strong>Control variables.</strong> We include ECODIS rate (poverty concentration), the pre-existing gender gap in absenteeism rates, years since enactment, and implementation reach. These are features we hold constant to isolate the policy signal, poverty drives absenteeism independently of policy, the gender gap reflects structural conditions unrelated to MHH legislation, and years enacted accounts for the fact that older policies have had more time to show effects. Including these controls allows us to ask: does the policy association hold even after accounting for these other factors?</p>
 <p><strong>Multilevel nested design.</strong> Our data has a natural hierarchical structure: districts are nested within states, and the key independent variable, MHH legislation, varies only at the state level, not the district level. Because legislation is enacted at the state level and applies uniformly to all districts within that state, the analytic unit is the state (n=50) rather than the district (n≈12,800). District-level absenteeism counts are aggregated to state averages to correctly align the outcome variable with the level at which the policy varies. This is a deliberate methodological choice, not a data limitation: treating each of 38,602 district-year observations as an independent policy experiment would be statistically inappropriate given that all districts within the same state share the same policy environment. A formal multilevel regression model would explicitly estimate within-state and between-state variance; our approach addresses the same dependency by aggregating before modeling.</p>
-<p><strong>Inferential statistics.</strong> Welch’s two-sample t-tests compare the female share of chronic absenteeism between enacted and no-policy states separately for each of 12 demographic subgroups and across three school years. Welch’s t-test was chosen over the standard Student’s t-test because it does not assume equal variances between groups,appropriate here given that enacted-policy states (n≈8,265 district-year observations) and no-policy states (n≈4,500) differ substantially in size and composition. Holm-Bonferroni correction is applied across the 12 parallel subgroup tests to control the familywise error rate and reduce the risk of false positives.</p>
+<p><strong>Inferential statistics.</strong> Welch’s two-sample t-tests compare the female share of chronic absenteeism between enacted and no-policy states separately for each of 12 demographic subgroups and across three school years. Welch’s t-test was chosen over the standard Student’s t-test because it does not assume equal variances between groups, appropriate here given that enacted-policy states (n≈8,265 district-year observations) and no-policy states (n≈4,500) differ substantially in size and composition. Holm-Bonferroni correction is applied across the 12 parallel subgroup tests to control the familywise error rate and reduce the risk of false positives.</p>
 <div class="cell page-columns page-full" data-execution_count="7">
 <details class="code-fold">
 <summary>Subgroup t-test results table</summary>
@@ -1144,30 +1143,30 @@ Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism b
 <div aria-describedby="tbl-subgroup-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <div class="cell-output cell-output-display column-body" data-execution_count="6">
 <style type="text/css">
-#T_d2c31 th {
+#T_3a7ad th {
   font-size: 0.78em;
 }
-#T_d2c31 td {
+#T_3a7ad td {
   padding: 2px 6px;
 }
-#T_d2c31_row0_col0, #T_d2c31_row0_col1, #T_d2c31_row0_col2, #T_d2c31_row0_col3, #T_d2c31_row0_col4, #T_d2c31_row0_col5, #T_d2c31_row0_col6, #T_d2c31_row0_col7, #T_d2c31_row0_col8, #T_d2c31_row1_col0, #T_d2c31_row1_col1, #T_d2c31_row1_col2, #T_d2c31_row1_col3, #T_d2c31_row1_col4, #T_d2c31_row1_col5, #T_d2c31_row1_col6, #T_d2c31_row1_col7, #T_d2c31_row1_col8, #T_d2c31_row2_col0, #T_d2c31_row2_col1, #T_d2c31_row2_col2, #T_d2c31_row2_col3, #T_d2c31_row2_col4, #T_d2c31_row2_col5, #T_d2c31_row2_col6, #T_d2c31_row2_col7, #T_d2c31_row2_col8, #T_d2c31_row3_col0, #T_d2c31_row3_col1, #T_d2c31_row3_col2, #T_d2c31_row3_col3, #T_d2c31_row3_col4, #T_d2c31_row3_col5, #T_d2c31_row3_col6, #T_d2c31_row3_col7, #T_d2c31_row3_col8, #T_d2c31_row4_col0, #T_d2c31_row4_col1, #T_d2c31_row4_col2, #T_d2c31_row4_col3, #T_d2c31_row4_col4, #T_d2c31_row4_col5, #T_d2c31_row4_col6, #T_d2c31_row4_col7, #T_d2c31_row4_col8, #T_d2c31_row5_col0, #T_d2c31_row5_col1, #T_d2c31_row5_col2, #T_d2c31_row5_col3, #T_d2c31_row5_col4, #T_d2c31_row5_col5, #T_d2c31_row5_col6, #T_d2c31_row5_col7, #T_d2c31_row5_col8, #T_d2c31_row6_col0, #T_d2c31_row6_col1, #T_d2c31_row6_col2, #T_d2c31_row6_col3, #T_d2c31_row6_col4, #T_d2c31_row6_col5, #T_d2c31_row6_col6, #T_d2c31_row6_col7, #T_d2c31_row6_col8, #T_d2c31_row7_col0, #T_d2c31_row7_col1, #T_d2c31_row7_col2, #T_d2c31_row7_col3, #T_d2c31_row7_col4, #T_d2c31_row7_col5, #T_d2c31_row7_col6, #T_d2c31_row7_col7, #T_d2c31_row7_col8, #T_d2c31_row8_col0, #T_d2c31_row8_col1, #T_d2c31_row8_col2, #T_d2c31_row8_col3, #T_d2c31_row8_col4, #T_d2c31_row8_col5, #T_d2c31_row8_col6, #T_d2c31_row8_col7, #T_d2c31_row8_col8, #T_d2c31_row9_col0, #T_d2c31_row9_col1, #T_d2c31_row9_col2, #T_d2c31_row9_col3, #T_d2c31_row9_col4, #T_d2c31_row9_col5, #T_d2c31_row9_col6, #T_d2c31_row9_col7, #T_d2c31_row9_col8, #T_d2c31_row10_col0, #T_d2c31_row10_col1, #T_d2c31_row10_col2, #T_d2c31_row10_col3, #T_d2c31_row10_col4, #T_d2c31_row10_col5, #T_d2c31_row10_col6, #T_d2c31_row10_col7, #T_d2c31_row10_col8, #T_d2c31_row11_col0, #T_d2c31_row11_col1, #T_d2c31_row11_col2, #T_d2c31_row11_col3, #T_d2c31_row11_col4, #T_d2c31_row11_col5, #T_d2c31_row11_col6, #T_d2c31_row11_col7, #T_d2c31_row11_col8 {
+#T_3a7ad_row0_col0, #T_3a7ad_row0_col1, #T_3a7ad_row0_col2, #T_3a7ad_row0_col3, #T_3a7ad_row0_col4, #T_3a7ad_row0_col5, #T_3a7ad_row0_col6, #T_3a7ad_row0_col7, #T_3a7ad_row0_col8, #T_3a7ad_row1_col0, #T_3a7ad_row1_col1, #T_3a7ad_row1_col2, #T_3a7ad_row1_col3, #T_3a7ad_row1_col4, #T_3a7ad_row1_col5, #T_3a7ad_row1_col6, #T_3a7ad_row1_col7, #T_3a7ad_row1_col8, #T_3a7ad_row2_col0, #T_3a7ad_row2_col1, #T_3a7ad_row2_col2, #T_3a7ad_row2_col3, #T_3a7ad_row2_col4, #T_3a7ad_row2_col5, #T_3a7ad_row2_col6, #T_3a7ad_row2_col7, #T_3a7ad_row2_col8, #T_3a7ad_row3_col0, #T_3a7ad_row3_col1, #T_3a7ad_row3_col2, #T_3a7ad_row3_col3, #T_3a7ad_row3_col4, #T_3a7ad_row3_col5, #T_3a7ad_row3_col6, #T_3a7ad_row3_col7, #T_3a7ad_row3_col8, #T_3a7ad_row4_col0, #T_3a7ad_row4_col1, #T_3a7ad_row4_col2, #T_3a7ad_row4_col3, #T_3a7ad_row4_col4, #T_3a7ad_row4_col5, #T_3a7ad_row4_col6, #T_3a7ad_row4_col7, #T_3a7ad_row4_col8, #T_3a7ad_row5_col0, #T_3a7ad_row5_col1, #T_3a7ad_row5_col2, #T_3a7ad_row5_col3, #T_3a7ad_row5_col4, #T_3a7ad_row5_col5, #T_3a7ad_row5_col6, #T_3a7ad_row5_col7, #T_3a7ad_row5_col8, #T_3a7ad_row6_col0, #T_3a7ad_row6_col1, #T_3a7ad_row6_col2, #T_3a7ad_row6_col3, #T_3a7ad_row6_col4, #T_3a7ad_row6_col5, #T_3a7ad_row6_col6, #T_3a7ad_row6_col7, #T_3a7ad_row6_col8, #T_3a7ad_row7_col0, #T_3a7ad_row7_col1, #T_3a7ad_row7_col2, #T_3a7ad_row7_col3, #T_3a7ad_row7_col4, #T_3a7ad_row7_col5, #T_3a7ad_row7_col6, #T_3a7ad_row7_col7, #T_3a7ad_row7_col8, #T_3a7ad_row8_col0, #T_3a7ad_row8_col1, #T_3a7ad_row8_col2, #T_3a7ad_row8_col3, #T_3a7ad_row8_col4, #T_3a7ad_row8_col5, #T_3a7ad_row8_col6, #T_3a7ad_row8_col7, #T_3a7ad_row8_col8, #T_3a7ad_row9_col0, #T_3a7ad_row9_col1, #T_3a7ad_row9_col2, #T_3a7ad_row9_col3, #T_3a7ad_row9_col4, #T_3a7ad_row9_col5, #T_3a7ad_row9_col6, #T_3a7ad_row9_col7, #T_3a7ad_row9_col8, #T_3a7ad_row10_col0, #T_3a7ad_row10_col1, #T_3a7ad_row10_col2, #T_3a7ad_row10_col3, #T_3a7ad_row10_col4, #T_3a7ad_row10_col5, #T_3a7ad_row10_col6, #T_3a7ad_row10_col7, #T_3a7ad_row10_col8, #T_3a7ad_row11_col0, #T_3a7ad_row11_col1, #T_3a7ad_row11_col2, #T_3a7ad_row11_col3, #T_3a7ad_row11_col4, #T_3a7ad_row11_col5, #T_3a7ad_row11_col6, #T_3a7ad_row11_col7, #T_3a7ad_row11_col8 {
   font-size: 0.75em;
 }
 </style>
 
-<table id="T_d2c31" class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table id="T_3a7ad" class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_d2c31_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">n (enacted)</th>
-<th id="T_d2c31_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n (no policy)</th>
-<th id="T_d2c31_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Mean (enacted)</th>
-<th id="T_d2c31_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Mean (no policy)</th>
-<th id="T_d2c31_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Mean difference</th>
-<th id="T_d2c31_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">t-statistic</th>
-<th id="T_d2c31_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">p-value (raw)</th>
-<th id="T_d2c31_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">p-value (Holm-Bonferroni)</th>
-<th id="T_d2c31_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">Significant (α=0.05)</th>
+<th id="T_3a7ad_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">n (enacted)</th>
+<th id="T_3a7ad_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">n (no policy)</th>
+<th id="T_3a7ad_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Mean (enacted)</th>
+<th id="T_3a7ad_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Mean (no policy)</th>
+<th id="T_3a7ad_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Mean difference</th>
+<th id="T_3a7ad_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">t-statistic</th>
+<th id="T_3a7ad_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">p-value (raw)</th>
+<th id="T_3a7ad_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">p-value (Holm-Bonferroni)</th>
+<th id="T_3a7ad_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">Significant (α=0.05)</th>
 </tr>
 <tr class="even">
 <th class="index_name level0" data-quarto-table-cell-role="th">Subgroup</th>
@@ -1184,148 +1183,148 @@ Table&nbsp;3: Welch’s t-test results for female share of chronic absenteeism b
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_d2c31_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Asian</th>
-<td id="T_d2c31_row0_col0" class="data row0 col0">12204</td>
-<td id="T_d2c31_row0_col1" class="data row0 col1">4257</td>
-<td id="T_d2c31_row0_col2" class="data row0 col2">55.15</td>
-<td id="T_d2c31_row0_col3" class="data row0 col3">59.60</td>
-<td id="T_d2c31_row0_col4" class="data row0 col4">-4.45</td>
-<td id="T_d2c31_row0_col5" class="data row0 col5">-9.352</td>
-<td id="T_d2c31_row0_col6" class="data row0 col6">0.000000</td>
-<td id="T_d2c31_row0_col7" class="data row0 col7">0.000000</td>
-<td id="T_d2c31_row0_col8" class="data row0 col8">✓</td>
+<th id="T_3a7ad_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Asian</th>
+<td id="T_3a7ad_row0_col0" class="data row0 col0">12204</td>
+<td id="T_3a7ad_row0_col1" class="data row0 col1">4257</td>
+<td id="T_3a7ad_row0_col2" class="data row0 col2">55.15</td>
+<td id="T_3a7ad_row0_col3" class="data row0 col3">59.60</td>
+<td id="T_3a7ad_row0_col4" class="data row0 col4">-4.45</td>
+<td id="T_3a7ad_row0_col5" class="data row0 col5">-9.352</td>
+<td id="T_3a7ad_row0_col6" class="data row0 col6">0.000000</td>
+<td id="T_3a7ad_row0_col7" class="data row0 col7">0.000000</td>
+<td id="T_3a7ad_row0_col8" class="data row0 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Black or African American</th>
-<td id="T_d2c31_row1_col0" class="data row1 col0">17092</td>
-<td id="T_d2c31_row1_col1" class="data row1 col1">7431</td>
-<td id="T_d2c31_row1_col2" class="data row1 col2">52.58</td>
-<td id="T_d2c31_row1_col3" class="data row1 col3">54.55</td>
-<td id="T_d2c31_row1_col4" class="data row1 col4">-1.97</td>
-<td id="T_d2c31_row1_col5" class="data row1 col5">-6.256</td>
-<td id="T_d2c31_row1_col6" class="data row1 col6">0.000000</td>
-<td id="T_d2c31_row1_col7" class="data row1 col7">0.000000</td>
-<td id="T_d2c31_row1_col8" class="data row1 col8">✓</td>
+<th id="T_3a7ad_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Black or African American</th>
+<td id="T_3a7ad_row1_col0" class="data row1 col0">17092</td>
+<td id="T_3a7ad_row1_col1" class="data row1 col1">7431</td>
+<td id="T_3a7ad_row1_col2" class="data row1 col2">52.58</td>
+<td id="T_3a7ad_row1_col3" class="data row1 col3">54.55</td>
+<td id="T_3a7ad_row1_col4" class="data row1 col4">-1.97</td>
+<td id="T_3a7ad_row1_col5" class="data row1 col5">-6.256</td>
+<td id="T_3a7ad_row1_col6" class="data row1 col6">0.000000</td>
+<td id="T_3a7ad_row1_col7" class="data row1 col7">0.000000</td>
+<td id="T_3a7ad_row1_col8" class="data row1 col8">✓</td>
 </tr>
 <tr class="odd">
-<th id="T_d2c31_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hispanic / Latino</th>
-<td id="T_d2c31_row2_col0" class="data row2 col0">21933</td>
-<td id="T_d2c31_row2_col1" class="data row2 col1">11301</td>
-<td id="T_d2c31_row2_col2" class="data row2 col2">51.11</td>
-<td id="T_d2c31_row2_col3" class="data row2 col3">52.41</td>
-<td id="T_d2c31_row2_col4" class="data row2 col4">-1.30</td>
-<td id="T_d2c31_row2_col5" class="data row2 col5">-6.359</td>
-<td id="T_d2c31_row2_col6" class="data row2 col6">0.000000</td>
-<td id="T_d2c31_row2_col7" class="data row2 col7">0.000000</td>
-<td id="T_d2c31_row2_col8" class="data row2 col8">✓</td>
+<th id="T_3a7ad_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hispanic / Latino</th>
+<td id="T_3a7ad_row2_col0" class="data row2 col0">21933</td>
+<td id="T_3a7ad_row2_col1" class="data row2 col1">11301</td>
+<td id="T_3a7ad_row2_col2" class="data row2 col2">51.11</td>
+<td id="T_3a7ad_row2_col3" class="data row2 col3">52.41</td>
+<td id="T_3a7ad_row2_col4" class="data row2 col4">-1.30</td>
+<td id="T_3a7ad_row2_col5" class="data row2 col5">-6.359</td>
+<td id="T_3a7ad_row2_col6" class="data row2 col6">0.000000</td>
+<td id="T_3a7ad_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_3a7ad_row2_col8" class="data row2 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Multiracial</th>
-<td id="T_d2c31_row3_col0" class="data row3 col0">20071</td>
-<td id="T_d2c31_row3_col1" class="data row3 col1">9989</td>
-<td id="T_d2c31_row3_col2" class="data row3 col2">52.10</td>
-<td id="T_d2c31_row3_col3" class="data row3 col3">54.25</td>
-<td id="T_d2c31_row3_col4" class="data row3 col4">-2.15</td>
-<td id="T_d2c31_row3_col5" class="data row3 col5">-8.447</td>
-<td id="T_d2c31_row3_col6" class="data row3 col6">0.000000</td>
-<td id="T_d2c31_row3_col7" class="data row3 col7">0.000000</td>
-<td id="T_d2c31_row3_col8" class="data row3 col8">✓</td>
+<th id="T_3a7ad_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Multiracial</th>
+<td id="T_3a7ad_row3_col0" class="data row3 col0">20071</td>
+<td id="T_3a7ad_row3_col1" class="data row3 col1">9989</td>
+<td id="T_3a7ad_row3_col2" class="data row3 col2">52.10</td>
+<td id="T_3a7ad_row3_col3" class="data row3 col3">54.25</td>
+<td id="T_3a7ad_row3_col4" class="data row3 col4">-2.15</td>
+<td id="T_3a7ad_row3_col5" class="data row3 col5">-8.447</td>
+<td id="T_3a7ad_row3_col6" class="data row3 col6">0.000000</td>
+<td id="T_3a7ad_row3_col7" class="data row3 col7">0.000000</td>
+<td id="T_3a7ad_row3_col8" class="data row3 col8">✓</td>
 </tr>
 <tr class="odd">
-<th id="T_d2c31_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Children w/ Disabilities (IDEA)</th>
-<td id="T_d2c31_row4_col0" class="data row4 col0">23746</td>
-<td id="T_d2c31_row4_col1" class="data row4 col1">12280</td>
-<td id="T_d2c31_row4_col2" class="data row4 col2">37.35</td>
-<td id="T_d2c31_row4_col3" class="data row4 col3">39.41</td>
-<td id="T_d2c31_row4_col4" class="data row4 col4">-2.06</td>
-<td id="T_d2c31_row4_col5" class="data row4 col5">-13.666</td>
-<td id="T_d2c31_row4_col6" class="data row4 col6">0.000000</td>
-<td id="T_d2c31_row4_col7" class="data row4 col7">0.000000</td>
-<td id="T_d2c31_row4_col8" class="data row4 col8">✓</td>
+<th id="T_3a7ad_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Children w/ Disabilities (IDEA)</th>
+<td id="T_3a7ad_row4_col0" class="data row4 col0">23746</td>
+<td id="T_3a7ad_row4_col1" class="data row4 col1">12280</td>
+<td id="T_3a7ad_row4_col2" class="data row4 col2">37.35</td>
+<td id="T_3a7ad_row4_col3" class="data row4 col3">39.41</td>
+<td id="T_3a7ad_row4_col4" class="data row4 col4">-2.06</td>
+<td id="T_3a7ad_row4_col5" class="data row4 col5">-13.666</td>
+<td id="T_3a7ad_row4_col6" class="data row4 col6">0.000000</td>
+<td id="T_3a7ad_row4_col7" class="data row4 col7">0.000000</td>
+<td id="T_3a7ad_row4_col8" class="data row4 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">White</th>
-<td id="T_d2c31_row5_col0" class="data row5 col0">24468</td>
-<td id="T_d2c31_row5_col1" class="data row5 col1">13130</td>
-<td id="T_d2c31_row5_col2" class="data row5 col2">48.45</td>
-<td id="T_d2c31_row5_col3" class="data row5 col3">49.62</td>
-<td id="T_d2c31_row5_col4" class="data row5 col4">-1.17</td>
-<td id="T_d2c31_row5_col5" class="data row5 col5">-10.652</td>
-<td id="T_d2c31_row5_col6" class="data row5 col6">0.000000</td>
-<td id="T_d2c31_row5_col7" class="data row5 col7">0.000000</td>
-<td id="T_d2c31_row5_col8" class="data row5 col8">✓</td>
+<th id="T_3a7ad_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">White</th>
+<td id="T_3a7ad_row5_col0" class="data row5 col0">24468</td>
+<td id="T_3a7ad_row5_col1" class="data row5 col1">13130</td>
+<td id="T_3a7ad_row5_col2" class="data row5 col2">48.45</td>
+<td id="T_3a7ad_row5_col3" class="data row5 col3">49.62</td>
+<td id="T_3a7ad_row5_col4" class="data row5 col4">-1.17</td>
+<td id="T_3a7ad_row5_col5" class="data row5 col5">-10.652</td>
+<td id="T_3a7ad_row5_col6" class="data row5 col6">0.000000</td>
+<td id="T_3a7ad_row5_col7" class="data row5 col7">0.000000</td>
+<td id="T_3a7ad_row5_col8" class="data row5 col8">✓</td>
 </tr>
 <tr class="odd">
-<th id="T_d2c31_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">English Learner</th>
-<td id="T_d2c31_row6_col0" class="data row6 col0">16206</td>
-<td id="T_d2c31_row6_col1" class="data row6 col1">7704</td>
-<td id="T_d2c31_row6_col2" class="data row6 col2">49.41</td>
-<td id="T_d2c31_row6_col3" class="data row6 col3">51.86</td>
-<td id="T_d2c31_row6_col4" class="data row6 col4">-2.44</td>
-<td id="T_d2c31_row6_col5" class="data row6 col5">-8.478</td>
-<td id="T_d2c31_row6_col6" class="data row6 col6">0.000000</td>
-<td id="T_d2c31_row6_col7" class="data row6 col7">0.000000</td>
-<td id="T_d2c31_row6_col8" class="data row6 col8">✓</td>
+<th id="T_3a7ad_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">English Learner</th>
+<td id="T_3a7ad_row6_col0" class="data row6 col0">16206</td>
+<td id="T_3a7ad_row6_col1" class="data row6 col1">7704</td>
+<td id="T_3a7ad_row6_col2" class="data row6 col2">49.41</td>
+<td id="T_3a7ad_row6_col3" class="data row6 col3">51.86</td>
+<td id="T_3a7ad_row6_col4" class="data row6 col4">-2.44</td>
+<td id="T_3a7ad_row6_col5" class="data row6 col5">-8.478</td>
+<td id="T_3a7ad_row6_col6" class="data row6 col6">0.000000</td>
+<td id="T_3a7ad_row6_col7" class="data row6 col7">0.000000</td>
+<td id="T_3a7ad_row6_col8" class="data row6 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Section 504 Disability</th>
-<td id="T_d2c31_row7_col0" class="data row7 col0">14496</td>
-<td id="T_d2c31_row7_col1" class="data row7 col1">9225</td>
-<td id="T_d2c31_row7_col2" class="data row7 col2">49.18</td>
-<td id="T_d2c31_row7_col3" class="data row7 col3">50.85</td>
-<td id="T_d2c31_row7_col4" class="data row7 col4">-1.66</td>
-<td id="T_d2c31_row7_col5" class="data row7 col5">-6.201</td>
-<td id="T_d2c31_row7_col6" class="data row7 col6">0.000000</td>
-<td id="T_d2c31_row7_col7" class="data row7 col7">0.000000</td>
-<td id="T_d2c31_row7_col8" class="data row7 col8">✓</td>
+<th id="T_3a7ad_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Section 504 Disability</th>
+<td id="T_3a7ad_row7_col0" class="data row7 col0">14496</td>
+<td id="T_3a7ad_row7_col1" class="data row7 col1">9225</td>
+<td id="T_3a7ad_row7_col2" class="data row7 col2">49.18</td>
+<td id="T_3a7ad_row7_col3" class="data row7 col3">50.85</td>
+<td id="T_3a7ad_row7_col4" class="data row7 col4">-1.66</td>
+<td id="T_3a7ad_row7_col5" class="data row7 col5">-6.201</td>
+<td id="T_3a7ad_row7_col6" class="data row7 col6">0.000000</td>
+<td id="T_3a7ad_row7_col7" class="data row7 col7">0.000000</td>
+<td id="T_3a7ad_row7_col8" class="data row7 col8">✓</td>
 </tr>
 <tr class="odd">
-<th id="T_d2c31_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Homeless</th>
-<td id="T_d2c31_row8_col0" class="data row8 col0">17706</td>
-<td id="T_d2c31_row8_col1" class="data row8 col1">7575</td>
-<td id="T_d2c31_row8_col2" class="data row8 col2">52.75</td>
-<td id="T_d2c31_row8_col3" class="data row8 col3">55.08</td>
-<td id="T_d2c31_row8_col4" class="data row8 col4">-2.33</td>
-<td id="T_d2c31_row8_col5" class="data row8 col5">-8.087</td>
-<td id="T_d2c31_row8_col6" class="data row8 col6">0.000000</td>
-<td id="T_d2c31_row8_col7" class="data row8 col7">0.000000</td>
-<td id="T_d2c31_row8_col8" class="data row8 col8">✓</td>
+<th id="T_3a7ad_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">Homeless</th>
+<td id="T_3a7ad_row8_col0" class="data row8 col0">17706</td>
+<td id="T_3a7ad_row8_col1" class="data row8 col1">7575</td>
+<td id="T_3a7ad_row8_col2" class="data row8 col2">52.75</td>
+<td id="T_3a7ad_row8_col3" class="data row8 col3">55.08</td>
+<td id="T_3a7ad_row8_col4" class="data row8 col4">-2.33</td>
+<td id="T_3a7ad_row8_col5" class="data row8 col5">-8.087</td>
+<td id="T_3a7ad_row8_col6" class="data row8 col6">0.000000</td>
+<td id="T_3a7ad_row8_col7" class="data row8 col7">0.000000</td>
+<td id="T_3a7ad_row8_col8" class="data row8 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">Economically Disadvantaged</th>
-<td id="T_d2c31_row9_col0" class="data row9 col0">8098</td>
-<td id="T_d2c31_row9_col1" class="data row9 col1">4462</td>
-<td id="T_d2c31_row9_col2" class="data row9 col2">49.08</td>
-<td id="T_d2c31_row9_col3" class="data row9 col3">50.16</td>
-<td id="T_d2c31_row9_col4" class="data row9 col4">-1.08</td>
-<td id="T_d2c31_row9_col5" class="data row9 col5">-6.338</td>
-<td id="T_d2c31_row9_col6" class="data row9 col6">0.000000</td>
-<td id="T_d2c31_row9_col7" class="data row9 col7">0.000000</td>
-<td id="T_d2c31_row9_col8" class="data row9 col8">✓</td>
+<th id="T_3a7ad_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">Economically Disadvantaged</th>
+<td id="T_3a7ad_row9_col0" class="data row9 col0">8098</td>
+<td id="T_3a7ad_row9_col1" class="data row9 col1">4462</td>
+<td id="T_3a7ad_row9_col2" class="data row9 col2">49.08</td>
+<td id="T_3a7ad_row9_col3" class="data row9 col3">50.16</td>
+<td id="T_3a7ad_row9_col4" class="data row9 col4">-1.08</td>
+<td id="T_3a7ad_row9_col5" class="data row9 col5">-6.338</td>
+<td id="T_3a7ad_row9_col6" class="data row9 col6">0.000000</td>
+<td id="T_3a7ad_row9_col7" class="data row9 col7">0.000000</td>
+<td id="T_3a7ad_row9_col8" class="data row9 col8">✓</td>
 </tr>
 <tr class="odd">
-<th id="T_d2c31_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Pacific Islander</th>
-<td id="T_d2c31_row10_col0" class="data row10 col0">5755</td>
-<td id="T_d2c31_row10_col1" class="data row10 col1">2089</td>
-<td id="T_d2c31_row10_col2" class="data row10 col2">62.87</td>
-<td id="T_d2c31_row10_col3" class="data row10 col3">65.82</td>
-<td id="T_d2c31_row10_col4" class="data row10 col4">-2.94</td>
-<td id="T_d2c31_row10_col5" class="data row10 col5">-3.852</td>
-<td id="T_d2c31_row10_col6" class="data row10 col6">0.000119</td>
-<td id="T_d2c31_row10_col7" class="data row10 col7">0.000238</td>
-<td id="T_d2c31_row10_col8" class="data row10 col8">✓</td>
+<th id="T_3a7ad_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">Pacific Islander</th>
+<td id="T_3a7ad_row10_col0" class="data row10 col0">5755</td>
+<td id="T_3a7ad_row10_col1" class="data row10 col1">2089</td>
+<td id="T_3a7ad_row10_col2" class="data row10 col2">62.87</td>
+<td id="T_3a7ad_row10_col3" class="data row10 col3">65.82</td>
+<td id="T_3a7ad_row10_col4" class="data row10 col4">-2.94</td>
+<td id="T_3a7ad_row10_col5" class="data row10 col5">-3.852</td>
+<td id="T_3a7ad_row10_col6" class="data row10 col6">0.000119</td>
+<td id="T_3a7ad_row10_col7" class="data row10 col7">0.000238</td>
+<td id="T_3a7ad_row10_col8" class="data row10 col8">✓</td>
 </tr>
 <tr class="even">
-<th id="T_d2c31_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">American Indian / Alaska Native</th>
-<td id="T_d2c31_row11_col0" class="data row11 col0">10510</td>
-<td id="T_d2c31_row11_col1" class="data row11 col1">6247</td>
-<td id="T_d2c31_row11_col2" class="data row11 col2">60.04</td>
-<td id="T_d2c31_row11_col3" class="data row11 col3">59.30</td>
-<td id="T_d2c31_row11_col4" class="data row11 col4">0.74</td>
-<td id="T_d2c31_row11_col5" class="data row11 col5">1.765</td>
-<td id="T_d2c31_row11_col6" class="data row11 col6">0.077626</td>
-<td id="T_d2c31_row11_col7" class="data row11 col7">0.077626</td>
-<td id="T_d2c31_row11_col8" class="data row11 col8">✗</td>
+<th id="T_3a7ad_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">American Indian / Alaska Native</th>
+<td id="T_3a7ad_row11_col0" class="data row11 col0">10510</td>
+<td id="T_3a7ad_row11_col1" class="data row11 col1">6247</td>
+<td id="T_3a7ad_row11_col2" class="data row11 col2">60.04</td>
+<td id="T_3a7ad_row11_col3" class="data row11 col3">59.30</td>
+<td id="T_3a7ad_row11_col4" class="data row11 col4">0.74</td>
+<td id="T_3a7ad_row11_col5" class="data row11 col5">1.765</td>
+<td id="T_3a7ad_row11_col6" class="data row11 col6">0.077626</td>
+<td id="T_3a7ad_row11_col7" class="data row11 col7">0.077626</td>
+<td id="T_3a7ad_row11_col8" class="data row11 col8">✗</td>
 </tr>
 </tbody>
 </table>
@@ -2289,7 +2288,7 @@ Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Ne
 <span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
 <span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="fig-subgroup-by-year" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-height="6" data-fig-width="9" data-execution_count="14">
+<div id="fig-subgroup-by-year" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-width="9" data-execution_count="14" data-fig-height="6">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-subgroup-by-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display">
@@ -2305,7 +2304,7 @@ Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Ne
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-subgroup-by-year-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1361" height="883">
+<div id="fig-subgroup-by-year-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="883" width="1361">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-subgroup-by-year-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="capstone_files/figure-html/fig-subgroup-by-year-output-2.png" class="lightbox" data-gallery="fig-subgroup-by-year" title="Figure&nbsp;7&nbsp;(b): "><img src="capstone_files/figure-html/fig-subgroup-by-year-output-2.png" id="fig-subgroup-by-year-2" data-ref-parent="fig-subgroup-by-year" width="1361" height="883" class="figure-img"></a>
@@ -2317,7 +2316,7 @@ Figure&nbsp;6: Female share difference by subgroup (enacted minus no-policy). Ne
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-subgroup-by-year-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="1361" height="883">
+<div id="fig-subgroup-by-year-3" class="quarto-float quarto-figure quarto-figure-center anchored" height="883" width="1361">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-subgroup-by-year-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="capstone_files/figure-html/fig-subgroup-by-year-output-3.png" class="lightbox" data-gallery="fig-subgroup-by-year" title="Figure&nbsp;7&nbsp;(c): "><img src="capstone_files/figure-html/fig-subgroup-by-year-output-3.png" id="fig-subgroup-by-year-3" data-ref-parent="fig-subgroup-by-year" width="1361" height="883" class="figure-img"></a>
@@ -2641,102 +2640,102 @@ Table&nbsp;5: Feature matrix summary statistics for the state-level machine lear
 <div aria-describedby="tbl-ml-features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display" data-execution_count="15">
 <style type="text/css">
-#T_f7991 th {
+#T_cb0d7 th {
   font-size: 0.85em;
   text-align: center;
 }
-#T_f7991 td:first-child {
+#T_cb0d7 td:first-child {
   text-align: left;
 }
-#T_f7991 td {
+#T_cb0d7 td {
   padding: 3px 10px;
 }
-#T_f7991_row0_col0, #T_f7991_row0_col1, #T_f7991_row0_col2, #T_f7991_row0_col3, #T_f7991_row0_col4, #T_f7991_row1_col0, #T_f7991_row1_col1, #T_f7991_row1_col2, #T_f7991_row1_col3, #T_f7991_row1_col4, #T_f7991_row2_col0, #T_f7991_row2_col1, #T_f7991_row2_col2, #T_f7991_row2_col3, #T_f7991_row2_col4, #T_f7991_row3_col0, #T_f7991_row3_col1, #T_f7991_row3_col2, #T_f7991_row3_col3, #T_f7991_row3_col4, #T_f7991_row4_col0, #T_f7991_row4_col1, #T_f7991_row4_col2, #T_f7991_row4_col3, #T_f7991_row4_col4, #T_f7991_row5_col0, #T_f7991_row5_col1, #T_f7991_row5_col2, #T_f7991_row5_col3, #T_f7991_row5_col4, #T_f7991_row6_col0, #T_f7991_row6_col1, #T_f7991_row6_col2, #T_f7991_row6_col3, #T_f7991_row6_col4, #T_f7991_row7_col0, #T_f7991_row7_col1, #T_f7991_row7_col2, #T_f7991_row7_col3, #T_f7991_row7_col4, #T_f7991_row8_col0, #T_f7991_row8_col1, #T_f7991_row8_col2, #T_f7991_row8_col3, #T_f7991_row8_col4, #T_f7991_row9_col0, #T_f7991_row9_col1, #T_f7991_row9_col2, #T_f7991_row9_col3, #T_f7991_row9_col4 {
+#T_cb0d7_row0_col0, #T_cb0d7_row0_col1, #T_cb0d7_row0_col2, #T_cb0d7_row0_col3, #T_cb0d7_row0_col4, #T_cb0d7_row1_col0, #T_cb0d7_row1_col1, #T_cb0d7_row1_col2, #T_cb0d7_row1_col3, #T_cb0d7_row1_col4, #T_cb0d7_row2_col0, #T_cb0d7_row2_col1, #T_cb0d7_row2_col2, #T_cb0d7_row2_col3, #T_cb0d7_row2_col4, #T_cb0d7_row3_col0, #T_cb0d7_row3_col1, #T_cb0d7_row3_col2, #T_cb0d7_row3_col3, #T_cb0d7_row3_col4, #T_cb0d7_row4_col0, #T_cb0d7_row4_col1, #T_cb0d7_row4_col2, #T_cb0d7_row4_col3, #T_cb0d7_row4_col4, #T_cb0d7_row5_col0, #T_cb0d7_row5_col1, #T_cb0d7_row5_col2, #T_cb0d7_row5_col3, #T_cb0d7_row5_col4, #T_cb0d7_row6_col0, #T_cb0d7_row6_col1, #T_cb0d7_row6_col2, #T_cb0d7_row6_col3, #T_cb0d7_row6_col4, #T_cb0d7_row7_col0, #T_cb0d7_row7_col1, #T_cb0d7_row7_col2, #T_cb0d7_row7_col3, #T_cb0d7_row7_col4, #T_cb0d7_row8_col0, #T_cb0d7_row8_col1, #T_cb0d7_row8_col2, #T_cb0d7_row8_col3, #T_cb0d7_row8_col4, #T_cb0d7_row9_col0, #T_cb0d7_row9_col1, #T_cb0d7_row9_col2, #T_cb0d7_row9_col3, #T_cb0d7_row9_col4 {
   font-size: 0.82em;
   text-align: right;
 }
 </style>
 
-<table id="T_f7991" class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table id="T_cb0d7" class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th id="T_f7991_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Feature</th>
-<th id="T_f7991_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Mean</th>
-<th id="T_f7991_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Std</th>
-<th id="T_f7991_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Min</th>
-<th id="T_f7991_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Max</th>
+<th id="T_cb0d7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Feature</th>
+<th id="T_cb0d7_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Mean</th>
+<th id="T_cb0d7_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Std</th>
+<th id="T_cb0d7_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Min</th>
+<th id="T_cb0d7_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">Max</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_f7991_row0_col0" class="data row0 col0">Policy score</td>
-<td id="T_f7991_row0_col1" class="data row0 col1">1.72</td>
-<td id="T_f7991_row0_col2" class="data row0 col2">1.64</td>
-<td id="T_f7991_row0_col3" class="data row0 col3">0.00</td>
-<td id="T_f7991_row0_col4" class="data row0 col4">4.00</td>
+<td id="T_cb0d7_row0_col0" class="data row0 col0">Policy score</td>
+<td id="T_cb0d7_row0_col1" class="data row0 col1">1.72</td>
+<td id="T_cb0d7_row0_col2" class="data row0 col2">1.64</td>
+<td id="T_cb0d7_row0_col3" class="data row0 col3">0.00</td>
+<td id="T_cb0d7_row0_col4" class="data row0 col4">4.00</td>
 </tr>
 <tr class="even">
-<td id="T_f7991_row1_col0" class="data row1 col0">Years enacted</td>
-<td id="T_f7991_row1_col1" class="data row1 col1">1.16</td>
-<td id="T_f7991_row1_col2" class="data row1 col2">1.65</td>
-<td id="T_f7991_row1_col3" class="data row1 col3">0.00</td>
-<td id="T_f7991_row1_col4" class="data row1 col4">6.00</td>
+<td id="T_cb0d7_row1_col0" class="data row1 col0">Years enacted</td>
+<td id="T_cb0d7_row1_col1" class="data row1 col1">1.16</td>
+<td id="T_cb0d7_row1_col2" class="data row1 col2">1.65</td>
+<td id="T_cb0d7_row1_col3" class="data row1 col3">0.00</td>
+<td id="T_cb0d7_row1_col4" class="data row1 col4">6.00</td>
 </tr>
 <tr class="odd">
-<td id="T_f7991_row2_col0" class="data row2 col0">Funding amount ($)</td>
-<td id="T_f7991_row2_col1" class="data row2 col1">562000.00</td>
-<td id="T_f7991_row2_col2" class="data row2 col2">1221848.72</td>
-<td id="T_f7991_row2_col3" class="data row2 col3">0.00</td>
-<td id="T_f7991_row2_col4" class="data row2 col4">5600000.00</td>
+<td id="T_cb0d7_row2_col0" class="data row2 col0">Funding amount ($)</td>
+<td id="T_cb0d7_row2_col1" class="data row2 col1">562000.00</td>
+<td id="T_cb0d7_row2_col2" class="data row2 col2">1221848.72</td>
+<td id="T_cb0d7_row2_col3" class="data row2 col3">0.00</td>
+<td id="T_cb0d7_row2_col4" class="data row2 col4">5600000.00</td>
 </tr>
 <tr class="even">
-<td id="T_f7991_row3_col0" class="data row3 col0">% K-12 reached</td>
-<td id="T_f7991_row3_col1" class="data row3 col1">34.34</td>
-<td id="T_f7991_row3_col2" class="data row3 col2">36.23</td>
-<td id="T_f7991_row3_col3" class="data row3 col3">0.00</td>
-<td id="T_f7991_row3_col4" class="data row3 col4">98.00</td>
+<td id="T_cb0d7_row3_col0" class="data row3 col0">% K-12 reached</td>
+<td id="T_cb0d7_row3_col1" class="data row3 col1">34.34</td>
+<td id="T_cb0d7_row3_col2" class="data row3 col2">36.23</td>
+<td id="T_cb0d7_row3_col3" class="data row3 col3">0.00</td>
+<td id="T_cb0d7_row3_col4" class="data row3 col4">98.00</td>
 </tr>
 <tr class="odd">
-<td id="T_f7991_row4_col0" class="data row4 col0">Domain coverage score</td>
-<td id="T_f7991_row4_col1" class="data row4 col1">1.64</td>
-<td id="T_f7991_row4_col2" class="data row4 col2">1.55</td>
-<td id="T_f7991_row4_col3" class="data row4 col3">0.00</td>
-<td id="T_f7991_row4_col4" class="data row4 col4">5.00</td>
+<td id="T_cb0d7_row4_col0" class="data row4 col0">Domain coverage score</td>
+<td id="T_cb0d7_row4_col1" class="data row4 col1">1.64</td>
+<td id="T_cb0d7_row4_col2" class="data row4 col2">1.55</td>
+<td id="T_cb0d7_row4_col3" class="data row4 col3">0.00</td>
+<td id="T_cb0d7_row4_col4" class="data row4 col4">5.00</td>
 </tr>
 <tr class="even">
-<td id="T_f7991_row5_col0" class="data row5 col0">Domain: Knowledge</td>
-<td id="T_f7991_row5_col1" class="data row5 col1">0.04</td>
-<td id="T_f7991_row5_col2" class="data row5 col2">0.20</td>
-<td id="T_f7991_row5_col3" class="data row5 col3">0.00</td>
-<td id="T_f7991_row5_col4" class="data row5 col4">1.00</td>
+<td id="T_cb0d7_row5_col0" class="data row5 col0">Domain: Knowledge</td>
+<td id="T_cb0d7_row5_col1" class="data row5 col1">0.04</td>
+<td id="T_cb0d7_row5_col2" class="data row5 col2">0.20</td>
+<td id="T_cb0d7_row5_col3" class="data row5 col3">0.00</td>
+<td id="T_cb0d7_row5_col4" class="data row5 col4">1.00</td>
 </tr>
 <tr class="odd">
-<td id="T_f7991_row6_col0" class="data row6 col0">Domain: Social environment</td>
-<td id="T_f7991_row6_col1" class="data row6 col1">0.18</td>
-<td id="T_f7991_row6_col2" class="data row6 col2">0.39</td>
-<td id="T_f7991_row6_col3" class="data row6 col3">0.00</td>
-<td id="T_f7991_row6_col4" class="data row6 col4">1.00</td>
+<td id="T_cb0d7_row6_col0" class="data row6 col0">Domain: Social environment</td>
+<td id="T_cb0d7_row6_col1" class="data row6 col1">0.18</td>
+<td id="T_cb0d7_row6_col2" class="data row6 col2">0.39</td>
+<td id="T_cb0d7_row6_col3" class="data row6 col3">0.00</td>
+<td id="T_cb0d7_row6_col4" class="data row6 col4">1.00</td>
 </tr>
 <tr class="even">
-<td id="T_f7991_row7_col0" class="data row7 col0">Domain: MHH impact</td>
-<td id="T_f7991_row7_col1" class="data row7 col1">0.08</td>
-<td id="T_f7991_row7_col2" class="data row7 col2">0.27</td>
-<td id="T_f7991_row7_col3" class="data row7 col3">0.00</td>
-<td id="T_f7991_row7_col4" class="data row7 col4">1.00</td>
+<td id="T_cb0d7_row7_col0" class="data row7 col0">Domain: MHH impact</td>
+<td id="T_cb0d7_row7_col1" class="data row7 col1">0.08</td>
+<td id="T_cb0d7_row7_col2" class="data row7 col2">0.27</td>
+<td id="T_cb0d7_row7_col3" class="data row7 col3">0.00</td>
+<td id="T_cb0d7_row7_col4" class="data row7 col4">1.00</td>
 </tr>
 <tr class="odd">
-<td id="T_f7991_row8_col0" class="data row8 col0">ECODIS rate (poverty)</td>
-<td id="T_f7991_row8_col1" class="data row8 col1">49.44</td>
-<td id="T_f7991_row8_col2" class="data row8 col2">1.31</td>
-<td id="T_f7991_row8_col3" class="data row8 col3">46.35</td>
-<td id="T_f7991_row8_col4" class="data row8 col4">53.62</td>
+<td id="T_cb0d7_row8_col0" class="data row8 col0">ECODIS rate (poverty)</td>
+<td id="T_cb0d7_row8_col1" class="data row8 col1">49.44</td>
+<td id="T_cb0d7_row8_col2" class="data row8 col2">1.31</td>
+<td id="T_cb0d7_row8_col3" class="data row8 col3">46.35</td>
+<td id="T_cb0d7_row8_col4" class="data row8 col4">53.62</td>
 </tr>
 <tr class="even">
-<td id="T_f7991_row9_col0" class="data row9 col0">Gender gap (2022–23)</td>
-<td id="T_f7991_row9_col1" class="data row9 col1">-2.22</td>
-<td id="T_f7991_row9_col2" class="data row9 col2">0.67</td>
-<td id="T_f7991_row9_col3" class="data row9 col3">-3.94</td>
-<td id="T_f7991_row9_col4" class="data row9 col4">-0.70</td>
+<td id="T_cb0d7_row9_col0" class="data row9 col0">Gender gap (2022–23)</td>
+<td id="T_cb0d7_row9_col1" class="data row9 col1">-2.22</td>
+<td id="T_cb0d7_row9_col2" class="data row9 col2">0.67</td>
+<td id="T_cb0d7_row9_col3" class="data row9 col3">-3.94</td>
+<td id="T_cb0d7_row9_col4" class="data row9 col4">-0.70</td>
 </tr>
 </tbody>
 </table>
@@ -2954,7 +2953,7 @@ Table&nbsp;6: Regression model comparison, state-level ML pipeline (n=50 states)
 <section id="oregon-case-study-the-implementation-gap" class="level3">
 <h3 class="anchored" data-anchor-id="oregon-case-study-the-implementation-gap">Oregon Case Study: The Implementation Gap</h3>
 <p>Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration, Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.</p>
-<p>Policy on paper is not policy in practice. An informational interview with a program specialist at the Oregon Department of Education’s Menstrual Dignity Program <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">consent] 2026</a>)</span> revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: MHH legislation is necessary but insufficient, and its impact depends critically on implementation fidelity at the school and district levels.</p>
+<p>Policy on paper is not policy in practice. An informational interview with a program specialist at the Oregon Department of Education’s Menstrual Dignity Program <span class="citation" data-cites="oregon_specialist_2026">(<a href="#ref-oregon_specialist_2026" role="doc-biblioref">Grenier 2026</a>)</span> revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: MHH legislation is necessary but insufficient, and its impact depends critically on implementation fidelity at the school and district levels.</p>
 </section>
 <section id="k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h3>
@@ -3157,7 +3156,7 @@ Table&nbsp;7: K-means cluster profiles (K=7), state-level feature matrix (n=50 s
 <section id="legislation-alone-is-not-enough" class="level2">
 <h2 class="anchored" data-anchor-id="legislation-alone-is-not-enough">Legislation Alone is Not Enough</h2>
 <p>The principal takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association is apparent under every analytical lens we applied to it. This does not prove the policy works causally, but it justifies continued investment in both the policy and its evaluation.</p>
-<p>Enacting a law is the baseline, not the goal. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent - determines outcomes more than what the legislation requires. Our case study for Oregon confirms this: Oregon, along with Nevada, holds the strongest policy configurations in the nation, yet has the worst chronic absenteeism outcomes among all enacted-policy states.</p>
+<p>Enacting a law is the baseline, not the goal. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent - determines outcomes more than what the legislation requires. Our case study for Oregon confirms this: Oregon holds the strongest policy configurations in the nation, yet has the second-worst chronic absenteeism outcomes among all enacted-policy states after Arizona.</p>
 <p>Our specific recommendation is that states without enacted legislation should treat the ECODIS finding as their highest-priority decision point. Economically disadvantaged female students are both the most likely to face period-poverty barriers due to cost and the group showing the most consistent association with the legislation signal across all analytical versions.</p>
 </section>
 <section id="data-access" class="level2">
@@ -3179,11 +3178,11 @@ Attendance Works, and Everyone Graduates Center. 2019. <span>“Portraits of Cha
 <div id="ref-ballard_2025" class="csl-entry" role="listitem">
 Ballard, Madeleine et al. 2025. <span>“Menstrual Health and Hygiene in <span>US</span> <span>K-12</span> Schools: A Systematic Policy Review.”</span> <em>Frontiers in Reproductive Health</em>.
 </div>
-<div id="ref-oregon_specialist_2026" class="csl-entry" role="listitem">
-consent], [Name withheld pending. 2026. <span>“Personal Communication — <span class="nocase">Oregon Department of Education Menstrual Dignity Program</span>.”</span>
-</div>
 <div id="ref-essa_2015" class="csl-entry" role="listitem">
 <span>“Every <span>Student</span> <span>Succeeds</span> <span>Act</span>.”</span> 2015.
+</div>
+<div id="ref-oregon_specialist_2026" class="csl-entry" role="listitem">
+Grenier, Sasha. 2026. <span>“Personal Communication — <span class="nocase">Oregon Department of Education Menstrual Dignity Program</span>.”</span>
 </div>
 <div id="ref-heckman_2006" class="csl-entry" role="listitem">
 Heckman, James J. 2006. <span>“Skill Formation and the Economics of Investing in Disadvantaged Children.”</span> <em>Science</em> 312 (5782): 1900–1902. <a href="https://doi.org/10.1126/science.1128898">https://doi.org/10.1126/science.1128898</a>.
@@ -3192,16 +3191,13 @@ Heckman, James J. 2006. <span>“Skill Formation and the Economics of Investing 
 Holm, Sture. 1979. <span>“A Simple Sequentially Rejective Multiple Test Procedure.”</span> <em>Scandinavian Journal of Statistics</em> 6 (2): 65–70.
 </div>
 <div id="ref-nces_grf" class="csl-entry" role="listitem">
-National Center for Education Statistics. 2021--2023. <span>“School <span>District</span> <span>Geographic</span> <span>Relationship</span> <span>Files</span>.”</span> NCES Education Demographic and Geographic Estimates (EDGE) program. <a href="https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles">https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles</a>.
-</div>
-<div id="ref-nces_digest_2023" class="csl-entry" role="listitem">
-———. 2023. <span>“Digest of <span>Education</span> <span>Statistics</span> 2023, <span>Table</span> 203.10.”</span> US Department of Education. <a href="https://nces.ed.gov/programs/digest/">https://nces.ed.gov/programs/digest/</a>.
+National Center for Education Statistics. 2021–2023. <span>“School <span>District</span> <span>Geographic</span> <span>Relationship</span> <span>Files</span>.”</span> NCES Education Demographic and Geographic Estimates (EDGE) program. <a href="https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles">https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles</a>.
 </div>
 <div id="ref-period_thinx_2025" class="csl-entry" role="listitem">
 PERIOD., and Thinx. 2025. <span>“2025 State of the Period Study.”</span> PERIOD. <a href="https://period.org/uploads/2025-State-of-the-Period-Study.pdf">https://period.org/uploads/2025-State-of-the-Period-Study.pdf</a>.
 </div>
 <div id="ref-us_dept_ed_2023" class="csl-entry" role="listitem">
-US Department of Education. 2021--2023. <span>“<span>EDFacts</span> Chronic Absenteeism Data (<span>Data Group 814</span>).”</span> ED Data Express. <a href="https://eddataexpress.ed.gov">https://eddataexpress.ed.gov</a>.
+US Department of Education. 2021–2023. <span>“<span>EDFacts</span> Chronic Absenteeism Data (<span>Data Group 814</span>).”</span> ED Data Express. <a href="https://eddataexpress.ed.gov">https://eddataexpress.ed.gov</a>.
 </div>
 </div>
 </section>
