@@ -1,0 +1,17 @@
+name: capstone
+channels:
+  - defaults
+dependencies:
+  - geopandas
+  - jupyter
+  - matplotlib
+  - numpy
+  - pandas
+  - proj
+  - pyproj
+  - python=3.11
+  - scikit-learn
+  - scipy
+  - seaborn
+  - shapely
+prefix: /opt/miniconda3/envs/capstone
