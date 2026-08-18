@@ -773,7 +773,7 @@ To address the multiple comparisons problem introduced by running 12 parallel si
 
 ```{python}
 #| label: fig-subgroup
-#| fig-cap: 'Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share, the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.'
+#| fig-cap: "Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share, the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance."
 #| fig-width: 7
 #| fig-height: 5
 #| out-width: "100%"
@@ -882,6 +882,53 @@ plt.show()
 #| label: subgroup-func
 #| include: false
 
+#| label: subgroup-func
+#| include: false
+
+# ── Pull subgroup data — shared across all three year charts ──
+sg_raw = pd.read_sql("""
+    SELECT ag.school_year,
+           ag.subgroup_code,
+           ag.count_female,
+           ag.count_total,
+           s.state_name
+    FROM absenteeism_subgroups ag
+    JOIN leas l ON ag.lea_id = l.lea_id
+    JOIN states s ON l.state_id = s.state_id
+    WHERE ag.count_total > 0
+      AND ag.subgroup_code IN (
+          'AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+          'WDIS','DISAB504STAT','LEP','HOM','ECODIS')
+      AND LOWER(s.state_name) NOT IN (
+          'bureau of indian education',
+          'district of columbia',
+          'puerto rico')
+""", conn)
+
+sg_raw['legislation_status'] = sg_raw['state_name'].str.lower().apply(
+    lambda x: 'Enacted policy' if x in ENACTED_STATES else 'No enacted policy'
+)
+sg_raw['female_share'] = sg_raw['count_female'] / sg_raw['count_total']
+sg_raw = sg_raw[sg_raw['female_share'].between(0, 1)].copy()
+
+subgroup_codes = ['AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+                   'WDIS','DISAB504STAT','LEP','HOM','ECODIS']
+
+subgroup_labels = {
+    'AM7':          'American Indian / Alaska Native',
+    'AS7':          'Asian',
+    'PI7':          'Native Hawaiian / Pacific Islander',
+    'BL7':          'Black or African American',
+    'HI7':          'Hispanic / Latino',
+    'MU7':          'Two or more races',
+    'WH7':          'White',
+    'WDIS':         'Children with disabilities (IDEA)',
+    'DISAB504STAT': 'Section 504 disability status',
+    'LEP':          'English learner',
+    'HOM':          'Homeless',
+    'ECODIS':       'Economically disadvantaged',
+}
+
 def plot_subgroup_year(year, sg_raw):
     df_yr = sg_raw[sg_raw['school_year'] == year].copy()
 
@@ -938,7 +985,7 @@ def plot_subgroup_year(year, sg_raw):
                 color    = '#999999'
             max_val = pivot.loc[label].max()
             ax.text(max_val + 0.003, i, sig_text,
-                    va='center', ha='left', fontsize=4,
+                    va='center', ha='left', fontsize=7,
                     color=color, style='italic')
 
     ecodis_label = subgroup_labels.get('ECODIS', 'Economically disadvantaged')
@@ -979,7 +1026,7 @@ def plot_subgroup_year(year, sg_raw):
 ```{python}
 
 #| label: fig-subgroup-2021
-#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2020-2021. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected.""
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2020-2021. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
@@ -1001,7 +1048,7 @@ plot_subgroup_year('2021-2022', sg_raw)
 
 ```{python}
 #| label: fig-subgroup-2223
-#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2022-2023. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected. ECODIS annotated as the group most directly linked to period poverty as a cost barrier.""
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2022-2023. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected. ECODIS annotated as the group most directly linked to period poverty as a cost barrier."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
