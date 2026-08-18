@@ -7,7 +7,7 @@ To follow this analysis, readers need familiarity with the following terms:
 | Term | Definition |
 |------|-----------|
 | **Chronic absenteeism** | Missing ≥10% of school days in a given year |
-| **LEA** | Local Education Agency — a school district |
+| **LEA** | Local Education Agency, a school district |
 | **EDFacts** | Federal data system collecting LEA-level chronic absenteeism counts |
 | **Female share of absent** | Female students chronically absent ÷ total students chronically absent, as a percentage |
 | **Period poverty** | Inability to access menstrual products due to cost or availability |

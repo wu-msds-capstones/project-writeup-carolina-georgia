@@ -245,7 +245,7 @@ Across all three school years, districts in enacted-policy states showed a consi
 ```{python}
 
 #| label: fig-us-map
-#| fig-cap: "Female share of chronic absenteeism by state and MHH policy type, school year 2022–2023. Each state is colored by policy type: Funded Mandate (dark blue), Appropriations (light blue), Authorization (green), Unfunded Mandate (orange), and No Enacted Policy (gray). The percentage shown inside each state is the average female share of chronically absent students across all traditional public school districts in that state. Traditional Public School Districts Only."
+#| fig-cap: "Female share of chronic absenteeism by state and MHH policy type, school year 2022–2023. Each state is colored by policy type: Funded Mandate (purple), Appropriations (light purple), Authorization (orange), Unfunded Mandate (light orange), and No Enacted Policy (gray). The percentage shown inside each state is the average female share of chronically absent students across all traditional public school districts in that state. Traditional Public School Districts Only."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
@@ -394,7 +394,7 @@ plt.show()
 
 ```{python}
 #| label: fig-policy-type-bars
-#| fig-cap: "Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type. Traditional Public School Districts Only."
+#| fig-cap: "Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type."
 #| fig-width: 9
 #| fig-height: 8
 #| out-width: "100%"
@@ -435,7 +435,7 @@ sg_pol = pd.read_sql("""
           'WDIS','DISAB504STAT','LEP','HOM','ECODIS')
 """, conn)
 
-# ── Female share from subgroups (proportion only) ─────────────
+# Female share from subgroups (proportion only)
 lea_sub = (
     sg_pol.groupby(['state_name', 'lea_id',
                     'total_students_absent',
@@ -487,7 +487,7 @@ BAR_HEIGHT = 0.45
 BAR_PAD    = 0.35
 ROW_SIZE   = 0.35
 
-# ── Row max: ensures bars same width within each row ──────────
+# Row max: ensures bars same width within each row 
 row_pairs = [['FM', 'UM'], ['AP', 'AT']]
 row_max   = {
     pt: max(len(state_agg[state_agg['policy_type'] == p])
@@ -496,7 +496,7 @@ row_max   = {
     for pt in pair
 }
 
-# ── Dynamic figure height based on row content ────────────────
+# Dynamic figure height based on row content
 height_top = row_max['FM'] * ROW_SIZE + 1.5
 height_bot = row_max['AP'] * ROW_SIZE + 1.5
 
@@ -571,7 +571,7 @@ plt.show()
 ```
 
 
-### Year-over-year female chronic absenteeism by state
+### Year-over-year Female Chronic Absenteeism by State
 
 To examine whether the female share was changing differently in the two groups over time, we computed year-over-year changes in female share for each state across two transition periods: 2020–2021 to 2021–2022, and 2021–2022 to 2022–2023. Female share rose in nearly every state during the pandemic spike year, with no significant difference between groups (+1.90pp enacted vs +1.36pp no-policy, p = 0.10). During the partial recovery year, the two groups were virtually identical (+0.81pp enacted vs +0.82pp no-policy, p = 0.97). Neither transition showed a statistically significant group difference, confirming that while enacted-policy states consistently show a lower **level** of female share, they are not changing at a different **rate**. This null trajectory result is discussed further in the Discussion section as evidence that product provision alone may be insufficient to alter the direction of female absenteeism trends.
 
@@ -651,11 +651,11 @@ plt.show()
 ```
 
 
-### Female vs male chronic absenteeism rate
+### Female vs Male Chronic Absenteeism Rate
 
 ```{python}
 #| label: fig-female-male-bars
-#| fig-cap: "Female and male chronic absenteeism rates by school year and legislation status. Rates are estimated as total absent × sex share ÷ estimated sex-specific enrollment (female 48.8%, male 51.2%, NCES 2023 Table 203.10). Female share is derived from subgroup counts to avoid double-counting students appearing in multiple subgroups. Traditional Public School Districts Only."
+#| fig-cap: "Female and male chronic absenteeism rates by school year and legislation status. Rates are estimated as total absent × sex share ÷ estimated sex-specific enrollment (female 48.8%, male 51.2%, NCES 2023 Table 203.10). Female share is derived from subgroup counts to avoid double-counting students appearing in multiple subgroups."
 #| fig-width: 8
 #| fig-height: 4
 #| out-width: "100%"
@@ -824,7 +824,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-### Subgroup analysis with Holm-Bonferroni correction
+### Subgroup Analysis with Holm-Bonferroni Correction
 
 The female-share comparison was conducted separately for each of 12 demographic subgroups using Welch's t-tests. Eleven of 12 subgroups showed a statistically significantly lower female share in enacted-policy states. The strongest signal was among children with disabilities under IDEA (p ≈ 2.8×10⁻⁴²), and the largest effect size was for Asian students (4.4 percentage points lower in enacted-policy states). The economically disadvantaged subgroup (ECODIS, available in 2022–2023 only) showed a significant association (p ≈ 2.5×10⁻¹⁰), which is of particular interest given that period poverty is by definition a poverty-driven barrier. The only subgroup without a significant difference was American Indian or Alaska Native.
 
@@ -832,7 +832,7 @@ To address the multiple comparisons problem introduced by running 12 parallel si
 
 ```{python}
 #| label: fig-subgroup
-#| fig-cap: 'Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share - the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.'
+#| fig-cap: 'Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share, the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.'
 #| fig-width: 7
 #| fig-height: 5
 #| out-width: "100%"
@@ -940,7 +940,7 @@ plt.show()
 ```{python}
 
 #| label: fig-subgroup-by-year
-#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Blue bars show enacted-policy states; orange bars show no-policy states. Significance labels reflect Welch's t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only."
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Green bars show enacted-policy states; gold bars show no-policy states. Significance labels reflect Welch's t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
@@ -965,7 +965,7 @@ subgroup_labels = {
     'ECODIS':       'Economically disadvantaged',
 }
 
-# ── Pull subgroup data from database ─────────────────────────
+# Pull subgroup data from database
 sg_raw = pd.read_sql("""
     SELECT ag.school_year,
            ag.subgroup_code,
@@ -1098,11 +1098,11 @@ for year in years:
 ```
 
 
-### Economically disadvantaged students
+### Economically Disadvantaged Students
 
-In the 2022–2023 school year, economically disadvantaged students represented 66.8 percent of all chronically absent students nationwide, totaling 7,981,704 students, of whom 48.9 percent were female (3,900,707 students). This subgroup is central to the project's theoretical framing: if menstrual product access is a meaningful driver of female absenteeism, its effect should be most visible among students who cannot afford products independently. The ECODIS finding — significantly lower female share in enacted-policy states — is consistent with this hypothesis, though the single-year availability of this subgroup limits the strength of the inference.
+In the 2022–2023 school year, economically disadvantaged students represented 66.8 percent of all chronically absent students nationwide, totaling 7,981,704 students, of whom 48.9 percent were female (3,900,707 students). This subgroup is central to the project's theoretical framing: if menstrual product access is a meaningful driver of female absenteeism, its effect should be most visible among students who cannot afford products independently. The ECODIS finding, significantly lower female share in enacted-policy states, is consistent with this hypothesis, though the single-year availability of this subgroup limits the strength of the inference.
 
-### Robustness checks
+### Robustness Checks
 
 The core female-share finding was cross-checked at three different levels of geographic aggregation: the full LEA-level dataset (including charters), the traditional-LEA-only dataset, and a county-level aggregation. The pattern held consistently across all three. The main difference was in the funding-amount correlation, which dropped from r = 0.429 in the full dataset to r = 0.176 in both cleaner versions, suggesting the higher original value was inflated by the charter distribution asymmetry.
 
@@ -1152,7 +1152,7 @@ Machine learning serves two complementary purposes in this analysis. First, regr
 
 **Linear Regression** was chosen as the baseline model because it provides directly interpretable coefficients for a policy audience: each coefficient answers "controlling for all other features, what is the estimated association between this feature and female absenteeism?" Its assumption of linearity is a known simplification but appropriate for a first-pass model on n=50 states.
 
-**Random Forest** was chosen as the second model because it captures non-linear relationships and feature interactions that linear regression cannot. It is robust to correlated features and provides feature importance scores that are stable across runs. With n=50, overfitting is expected and is quantified honestly using out-of-bag (OOB) score. The two models are not competitors — they triangulate the same story from different angles.
+**Random Forest** was chosen as the second model because it captures non-linear relationships and feature interactions that linear regression cannot. It is robust to correlated features and provides feature importance scores that are stable across runs. With n=50, overfitting is expected and is quantified honestly using out-of-bag (OOB) score. The two models are not competitors, they triangulate the same story from different angles.
 
 **K-means clustering** was chosen because the research question is fundamentally exploratory: we want to discover whether states naturally group into meaningfully distinct profiles beyond the binary enacted/no-policy classification.
 
@@ -1278,11 +1278,11 @@ print(f"Target (female rate 2022-23): mean={ml_df['target_female_rate'].mean():.
 
 ### Linear regression
 
-A linear regression using the clean 10-feature set explained 36.1% of variance in the target (R²=0.361, RMSE=6.24pp). Five-fold cross-validation returned a mean CV R² of -0.505, indicating that the model does not generalize to unseen states, expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. **Policy score carries a positive standardized coefficient (+1.02)**, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. The **strongest negative coefficient belongs to domain coverage score (-1.44)**, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.
+A linear regression using the clean 10-feature set explained 36.1% of the variance in the target (R²=0.361, RMSE=6.24pp). Five-fold cross-validation returned a mean CV R² of -0.505, indicating that the model does not generalize to unseen states, as expected with n=50 and 10 features. Despite poor predictive generalization, the coefficient table provides interpretable directional findings. **The policy score has a positive standardized coefficient (+1.02)**, suggesting that states with stronger policies tend to have higher predicted female absenteeism when controlling for other features. This likely reflects selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. The **strongest negative coefficient belongs to domain coverage score (-1.44)**, suggesting that policy implementation across the seven MHH domains is associated with better outcomes than a well-funded policy with a narrow scope.
 
 ```{python}
 #| label: fig-lr-coef
-#| fig-cap: "Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. Policy score is positive (+1.02), likely reflecting selection bias, states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone."
+#| fig-cap: "Linear regression standardized coefficients (n=50 states). Green bars reduce female absenteeism; gold bars increase it. The policy score is positive (+1.02), likely reflecting selection bias: states with higher baseline absenteeism were more motivated to enact stronger legislation. Domain coverage score is the strongest protective factor (-144), suggesting policy breadth matters more than policy strength alone."
 #| fig-width: 8
 #| fig-height: 5
 #| out-width: "100%"
@@ -1390,7 +1390,7 @@ plt.show()
 
 ```{python}
 #| label: tbl-model-comparison
-#| tbl-cap: "Regression model comparison — state-level ML pipeline (n=50 states). The large gap between training R² and cross-validation R² reflects overfitting expected at this sample size. OOB R² is the most conservative and honest generalization estimate."
+#| tbl-cap: "Regression model comparison, state-level ML pipeline (n=50 states). The large gap between training R² and cross-validation R² reflects overfitting expected at this sample size. OOB R² is the most conservative and honest generalization estimate."
 
 pd.DataFrame({
     'Metric': ['Training R²','5-Fold CV R²','OOB R² (RF only)','RMSE','Top predictor'],
@@ -1411,9 +1411,9 @@ pd.DataFrame({
 }).set_index('Metric')
 ```
 
-### Oregon case study: the implementation gap
+### Oregon Case Study: The Implementation Gap
 
-Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration — Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.
+Oregon presents the most instructive case for understanding the gap between policy enactment and policy impact. Oregon holds the strongest possible policy configuration, Funded Mandate, domain coverage score 5/7, 93% K-12 reach, yet its female chronic absenteeism rate stands at 42.1%, the second highest among enacted-policy states and well above the national average of 25.6%.
 
 An informational interview with a program specialist at the Oregon Department of Education's Menstrual Dignity Program [@oregon_specialist_2026] revealed that despite full funding authorization, local school boards have actively blocked implementation efforts, including placement of products in elementary school bathrooms and gender-neutral restrooms. Furthermore, the specialist confirmed that a substantial number of Oregon schools do not submit reimbursement requests, effectively opting out of a legally required program. Oregon exemplifies the central conclusion: **MHH legislation is necessary but insufficient**, and its impact depends critically on implementation fidelity at the school and district level.
 
@@ -1423,7 +1423,7 @@ K-means clustering was applied to the full 11-feature matrix (including the targ
 
 ```{python}
 #| label: fig-tsne
-#| fig-cap: "t-SNE projection of the state-level feature space, colored by cluster membership. The 18 no-policy states (gray, C1) form a distinct mass on the right, cleanly separated from all enacted-policy clusters. Oregon and Nevada (red, C6 — the Paradox Cluster) sit isolated at top center, visually distinct from all other Funded Mandate states. Colorado, New Jersey, and North Carolina (dark blue, C5 — the Sweet Spot) anchor the lower left, combining strong policy with low poverty and achieving the best outcomes."
+#| fig-cap: "This t‑SNE projection highlights two contrasting clusters of states with strong MHH legislation: Cluster 5, where low-poverty conditions align with lower female-specific chronic absenteeism, and Cluster 6, where similar policy strength coexists with persistently high absenteeism. The contrast between these clusters shows how socioeconomic context shapes attendance outcomes even when policy environments are comparable."
 #| fig-width: 9
 #| fig-height: 5
 #| out-width: "100%"
@@ -1483,7 +1483,7 @@ plt.show()
 
 ```{python}
 #| label: tbl-clusters
-#| tbl-cap: "K-means cluster profiles (K=7) — state-level feature matrix (n=50 states). Avg female rate is the mean target variable per cluster. The Sweet Spot cluster (C5) achieves the best outcomes by combining strong policy with low poverty. The Paradox Cluster (C6) holds maximum domain coverage yet maximum absenteeism."
+#| tbl-cap: "K-means cluster profiles (K=7), state-level feature matrix (n=50 states). Average female rate is the mean target variable per cluster. The cluster C5 (Strong policy, low poverty) achieves the best outcomes by combining strong policy with low poverty. The cluster C6 (Strong policy, high absenteeism) holds maximum domain coverage yet maximum absenteeism."
 
 cluster_summary = (
     ml_df.groupby('cluster')
