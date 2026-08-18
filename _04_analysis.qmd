@@ -80,7 +80,7 @@ The validated and normalized database provided the foundation for the explorator
 
 #| column: body
 #| label: tbl-subgroup-ttest
-#| tbl-cap: "Welch's t-test results for female share of chronic absenteeism by demographic subgroup. Enacted-policy states are compared to no-policy states for each subgroup. Mean difference is computed as enacted minus no-policy — negative values indicate enacted states have a lower female share (favourable direction). Holm-Bonferroni adjusted p-values are shown alongside raw p-values. Traditional Public School Districts Only."
+#| tbl-cap: "Welch's t-test results for female share of chronic absenteeism by demographic subgroup. Enacted-policy states are compared to no-policy states for each subgroup. Mean difference is computed as enacted minus no-policy, negative values indicate enacted states have a lower female share (favourable direction). Holm-Bonferroni adjusted p-values are shown alongside raw p-values."
 #| code-summary: "Subgroup t-test results table"
 
 sg_all = pd.read_sql("""
@@ -940,12 +940,10 @@ plt.show()
 ```{python}
 
 #| label: fig-subgroup-by-year
-#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Green bars show enacted-policy states; gold bars show no-policy states. Significance labels reflect Welch's t-test p-values. The economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier. Traditional Public School Districts Only."
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup and school year. Green bars show enacted-policy states; gold bars show no-policy states. Significance labels reflect Welch's t-test p-values. During the school year 2022 - 2023 the economically disadvantaged subgroup (ECODIS) is annotated as the group most directly linked to period poverty as a cost barrier."
 #| fig-width: 9
 #| fig-height: 6
 #| out-width: "100%"
-
-from statsmodels.stats.multitest import multipletests
 
 subgroup_codes = ['AM7','AS7','PI7','BL7','HI7','MU7','WH7',
                    'WDIS','DISAB504STAT','LEP','HOM','ECODIS']
@@ -1161,7 +1159,8 @@ Machine learning serves two complementary purposes in this analysis. First, regr
 ### Feature matrix
 
 ```{python}
-#| label: ml-features
+#| label: tbl-ml-features
+#| tbl-cap: "Feature matrix summary statistics for the state-level machine learning pipeline (n=50 states). Each row represents one of the 10 features used in Linear Regression, Random Forest, and K-means clustering. Policy score ranges from 0 (no enacted policy) to 4 (Funded Mandate). Domain coverage score counts how many of the 7 MHH policy domains the state legislation addresses. ECODIS rate reflects the average female share of chronically absent economically disadvantaged students. Gender gap is the deviation of the female share from 50%, expressed in percentage points."
 #| code-summary: "Build state-level ML feature matrix from database"
 
 state_yr = pd.read_sql("""
@@ -1271,9 +1270,30 @@ FEAT_LABELS = {
     'ecodis_rate':'ECODIS rate (poverty)', 'gender_gap_2223':'Gender gap (2022–23)',
 }
 
-print(f"Feature matrix: {len(ml_df)} states × {len(FEATURES)} features")
-print(f"Target (female rate 2022-23): mean={ml_df['target_female_rate'].mean():.1f}%, "
-      f"range={ml_df['target_female_rate'].min():.1f}–{ml_df['target_female_rate'].max():.1f}%")
+# Feature matrix summary table
+feat_table = pd.DataFrame({
+    'Feature': [FEAT_LABELS[f] for f in FEATURES],
+    'Mean':    [ml_df[f].mean() for f in FEATURES],
+    'Std':     [ml_df[f].std()  for f in FEATURES],
+    'Min':     [ml_df[f].min()  for f in FEATURES],
+    'Max':     [ml_df[f].max()  for f in FEATURES],
+})
+
+(feat_table.style
+    .hide(axis='index')
+    .set_properties(**{'font-size': '0.82em', 'text-align': 'right'})
+    .set_table_styles([
+        {'selector': 'th', 'props': [('font-size', '0.85em'), ('text-align', 'center')]},
+        {'selector': 'td:first-child', 'props': [('text-align', 'left')]},
+        {'selector': 'td', 'props': [('padding', '3px 10px')]},
+    ])
+    .format({
+        'Mean': '{:.2f}',
+        'Std':  '{:.2f}',
+        'Min':  '{:.2f}',
+        'Max':  '{:.2f}',
+    })
+)
 ```
 
 ### Linear regression
@@ -1295,12 +1315,6 @@ kf = KFold(n_splits=5, shuffle=True, random_state=42)
 
 lr    = LinearRegression()
 lr.fit(Xs, y)
-
-print(pd.DataFrame({
-    'Feature': FEATURES,
-    'Label': [FEAT_LABELS[f] for f in FEATURES],
-    'Coefficient': lr.coef_
-}).sort_values('Coefficient'))
 
 cv_lr = cross_val_score(lr, Xs, y, cv=kf, scoring='r2')
 r2_lr = r2_score(y, lr.predict(Xs))
@@ -1327,8 +1341,7 @@ ax.axvline(0, color='black', linewidth=1.2)
 ax.set_yticks(range(len(coef_df)))
 ax.set_yticklabels(coef_df['Feature'], fontsize=10)
 ax.set_xlabel('Standardized Coefficient\n(negative = associated with lower female absenteeism)', fontsize=9)
-ax.set_title(f'Linear Regression — Standardized Coefficients\n'
-             f'R²={r2_lr:.3f} · RMSE={rmse_lr:.2f}pp · 5-Fold CV R²={cv_lr.mean():.3f}',
+ax.set_title(f'Linear Regression — Standardized Coefficients',
              fontsize=11, fontweight='bold')
 ax.legend(handles=[
     mpatches.Patch(color=C_ENACTED, alpha=0.88, label='Negative — reduces female absenteeism'),
@@ -1372,9 +1385,7 @@ for i, val in enumerate(fi_df['Importance']):
 ax.set_yticks(range(len(fi_df)))
 ax.set_yticklabels(fi_df['Feature'], fontsize=10)
 ax.set_xlabel('Feature importance (mean decrease in impurity)', fontsize=9)
-ax.set_title(f'Random Forest — Feature Importance\n'
-             f'Training R²={r2_rf:.3f} · OOB R²={rf.oob_score_:.3f} · '
-             f'5-Fold CV R²={cv_rf.mean():.3f} · RMSE={rmse_rf:.2f}pp',
+ax.set_title('Random Forest — Feature Importance',
              fontsize=11, fontweight='bold')
 ax.axvline(fi_df['Importance'].median(), color='gray',
            linewidth=1.0, linestyle='--', alpha=0.6)
