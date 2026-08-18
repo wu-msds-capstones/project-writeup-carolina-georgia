@@ -333,10 +333,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-
-
-## Policy Type Bars
-
 ```{python}
 #| label: fig-policy-type-bars
 #| fig-cap: "Female chronic absenteeism rate by state and MHH policy type, school year 2022–2023. Each panel shows states grouped by their policy classification: Funded Mandate (FM), Unfunded Mandate (UM), Appropriations (AP), and Authorization (AT). Rates are estimated as total absent × female share ÷ estimated female enrollment (48.8% of total, NCES 2023 Table 203.10). States are sorted by female absenteeism rate within each policy type."
@@ -777,7 +773,7 @@ To address the multiple comparisons problem introduced by running 12 parallel si
 
 ```{python}
 #| label: fig-subgroup
-#| fig-cap: 'Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share, the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance.'
+#| fig-cap: "Female share difference by subgroup (enacted minus no-policy). Negative values mean enacted states have a lower female share, the favourable direction. Stars denote significance after Holm-Bonferroni correction (* p<0.05, ** p<0.01, *** p<0.001). The ECODIS (economically disadvantaged) subgroup is outlined as the group most directly exposed to period poverty as a cost barrier to attendance."
 #| fig-width: 7
 #| fig-height: 5
 #| out-width: "100%"
@@ -883,31 +879,13 @@ plt.show()
 ## Subgroups Analysis
 
 ```{python}
+#| label: subgroup-func
+#| include: false
 
-#| label: fig-subgroup-by-year
-#| fig-width: 9
-#| fig-height: 6
-#| out-width: "100%"
+#| label: subgroup-func
+#| include: false
 
-subgroup_codes = ['AM7','AS7','PI7','BL7','HI7','MU7','WH7',
-                   'WDIS','DISAB504STAT','LEP','HOM','ECODIS']
-
-subgroup_labels = {
-    'AM7':          'American Indian / Alaska Native',
-    'AS7':          'Asian',
-    'PI7':          'Native Hawaiian / Pacific Islander',
-    'BL7':          'Black or African American',
-    'HI7':          'Hispanic / Latino',
-    'MU7':          'Two or more races',
-    'WH7':          'White',
-    'WDIS':         'Children with disabilities (IDEA)',
-    'DISAB504STAT': 'Section 504 disability status',
-    'LEP':          'English learner',
-    'HOM':          'Homeless',
-    'ECODIS':       'Economically disadvantaged',
-}
-
-# Pull subgroup data from database
+# ── Pull subgroup data — shared across all three year charts ──
 sg_raw = pd.read_sql("""
     SELECT ag.school_year,
            ag.subgroup_code,
@@ -933,13 +911,27 @@ sg_raw['legislation_status'] = sg_raw['state_name'].str.lower().apply(
 sg_raw['female_share'] = sg_raw['count_female'] / sg_raw['count_total']
 sg_raw = sg_raw[sg_raw['female_share'].between(0, 1)].copy()
 
-years = ['2020-2021', '2021-2022', '2022-2023']
+subgroup_codes = ['AM7','AS7','PI7','BL7','HI7','MU7','WH7',
+                   'WDIS','DISAB504STAT','LEP','HOM','ECODIS']
 
-# One chart per school year 
-for year in years:
+subgroup_labels = {
+    'AM7':          'American Indian / Alaska Native',
+    'AS7':          'Asian',
+    'PI7':          'Native Hawaiian / Pacific Islander',
+    'BL7':          'Black or African American',
+    'HI7':          'Hispanic / Latino',
+    'MU7':          'Two or more races',
+    'WH7':          'White',
+    'WDIS':         'Children with disabilities (IDEA)',
+    'DISAB504STAT': 'Section 504 disability status',
+    'LEP':          'English learner',
+    'HOM':          'Homeless',
+    'ECODIS':       'Economically disadvantaged',
+}
+
+def plot_subgroup_year(year, sg_raw):
     df_yr = sg_raw[sg_raw['school_year'] == year].copy()
 
-    #  T-test per subgroup with Holm-Bonferroni 
     test_results = {}
     codes_tested = []
     p_values_raw = []
@@ -955,13 +947,11 @@ for year in years:
         codes_tested.append(code)
         p_values_raw.append(p)
 
-    # Apply Holm-Bonferroni correction
     if p_values_raw:
         _, p_adj, _, _ = multipletests(p_values_raw, method='holm')
         for code, p_raw, p_hb in zip(codes_tested, p_values_raw, p_adj):
             test_results[code] = {'p_raw': p_raw, 'p_adj': p_hb}
 
-    # Build pivot 
     pivot = (
         df_yr.groupby(['subgroup_code', 'legislation_status'])['female_share']
         .mean().reset_index()
@@ -972,12 +962,10 @@ for year in years:
     pivot.index = pivot.index.map(lambda c: subgroup_labels.get(c, c))
     pivot = pivot.sort_values('Enacted policy')
 
-    #  Plot 
     fig, ax = plt.subplots(figsize=(9, 6))
     pivot.plot(kind='barh', ax=ax, width=0.80,
                color=[C_ENACTED, C_NOPOLICY])
 
-    # Significance labels using Holm-Bonferroni adjusted p
     label_to_code = {v: k for k, v in subgroup_labels.items()}
     for i, label in enumerate(pivot.index):
         code = label_to_code.get(label)
@@ -997,12 +985,11 @@ for year in years:
                 color    = '#999999'
             max_val = pivot.loc[label].max()
             ax.text(max_val + 0.003, i, sig_text,
-                    va='center', ha='left', fontsize=7,
+                    va='center', ha='left', fontsize=4,
                     color=color, style='italic')
 
-    # ECODIS highlight annotation
     ecodis_label = subgroup_labels.get('ECODIS', 'Economically disadvantaged')
-    if ecodis_label in pivot.index:
+    if ecodis_label in pivot.index and year == '2022-2023':
         idx = list(pivot.index).index(ecodis_label)
         ax.annotate(
             '\u2190 Period poverty link',
@@ -1011,10 +998,9 @@ for year in years:
             fontsize=5.5, color='#4214b5', va='center'
         )
 
-    n_total = len(df_yr['female_share'].dropna())
     ax.set_xlabel(
         'Average Female Share of Chronically Absent Students\n'
-        '(Female absent ÷ Total absent, per district)',
+        '(Female absent / Total absent, per district)',
         fontsize=6.5
     )
     ax.set_ylabel('')
@@ -1033,26 +1019,42 @@ for year in years:
     )
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-
-    plt.tight_layout()
-
-    # Add caption only on last chart
-    if year == '2022-2023':
-        fig.text(0.5, -0.04,
-            "Figure: Female share of chronic absenteeism by demographic subgroup and school year.\n"
-            "Enacted-policy states vs no-policy states. Significance labels reflect Welch's t-test\n"
-            "p-values (Holm-Bonferroni corrected). ECODIS annotated as the group most directly\n"
-            "linked to period poverty as a cost barrier. Traditional Public School Districts Only.",
-            ha='center', va='top', fontsize=7, color='#444444',
-            wrap=True)
-        plt.subplots_adjust(bottom=0.12)
-
     plt.tight_layout()
     plt.show()
-    plt.show()
+```
+
+```{python}
+
+#| label: fig-subgroup-2021
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2020-2021. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected."
+#| fig-width: 9
+#| fig-height: 6
+#| out-width: "100%"
+
+plot_subgroup_year('2020-2021', sg_raw)
 
 ```
 
+```{python}
+#| label: fig-subgroup-2122
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2021-2022. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected."
+#| fig-width: 9
+#| fig-height: 6
+#| out-width: "100%"
+
+plot_subgroup_year('2021-2022', sg_raw)
+
+```
+
+```{python}
+#| label: fig-subgroup-2223
+#| fig-cap: "Female share of chronic absenteeism by demographic subgroup, school year 2022-2023. Enacted-policy states vs no-policy states. Significance labels reflect Welch t-test p-values, Holm-Bonferroni corrected. ECODIS annotated as the group most directly linked to period poverty as a cost barrier."
+#| fig-width: 9
+#| fig-height: 6
+#| out-width: "100%"
+
+plot_subgroup_year('2022-2023', sg_raw)
+```
 
 ### Economically Disadvantaged Students
 
