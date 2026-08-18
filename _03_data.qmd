@@ -198,8 +198,6 @@ The **female chronic absenteeism rate** (primary outcome for machine learning) i
 
 $$\text{Female rate} = \frac{\text{count\_total} \times \text{female share}}{\text{total enrollment} \times 0.488} \times 100$$
 
-where female share = count\_female / count\_total per subgroup, and 0.488 reflects the nationally documented 48.8% female share of K-12 public enrollment [@nces_digest_2023]. District-level sex-disaggregated enrollment is unavailable in EDFacts; CCD provides it only at the state level using an incompatible ID system (CCD Agency ID ≠ EDFacts LEAID), making district-level merging infeasible. Applying a fixed 48.8% split uniformly introduces small measurement error at the district level, but deviations are expected to largely cancel out when aggregated to the state level. Without a true denominator, we built the closest proxy the data would allow.
-
 **Policy score** encodes policy strength based on resource availability, informed by the legislative framework described in @ballard_2025:
 
 | Policy type | Score | Rationale |
