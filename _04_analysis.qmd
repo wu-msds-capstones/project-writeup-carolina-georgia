@@ -1423,7 +1423,7 @@ K-means clustering was applied to the full 11-feature matrix (including the targ
 
 ```{python}
 #| label: fig-tsne
-#| fig-cap: This t‑SNE projection highlights two contrasting clusters of states with strong MHH legislation: Cluster 5, where low-poverty conditions align with lower female-specific chronic absenteeism, and Cluster 6, where similar policy strength coexists with persistently high absenteeism. The contrast between these clusters shows how socioeconomic context shapes attendance outcomes even when policy environments are comparable."
+#| fig-cap: "This t‑SNE projection highlights two contrasting clusters of states with strong MHH legislation: Cluster 5, where low-poverty conditions align with lower female-specific chronic absenteeism, and Cluster 6, where similar policy strength coexists with persistently high absenteeism. The contrast between these clusters shows how socioeconomic context shapes attendance outcomes even when policy environments are comparable."
 #| fig-width: 9
 #| fig-height: 5
 #| out-width: "100%"
