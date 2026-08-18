@@ -74,7 +74,7 @@ The economically disadvantaged subgroup (ECODIS) only appears in the 2022–2023
 
 State-level MHH legislation data were sourced from @ballard_2025, a peer-reviewed systematic policy review published in *Frontiers in Reproductive Health*. Table 2 of that article covers all 32 US states with enacted school MHH legislation as of August 2024, reporting policy type (funded mandate, unfunded mandate, appropriation, or authorization), year enacted, funding amount, estimated percentage of K-12 students reached, and coverage of seven MHH policy domains (materials provision, WASH facilities, knowledge and education, discomfort and disorders, supportive social environment, MHH impact assessment, and funding mechanism).
 
-The table was manually transcribed into a CSV file and validated against the article's own summary statistics. The remaining 18 states without enacted legislation were added with a policy type of NO_ENACTED_POLICY. A stray whitespace character found in one field was corrected before database loading.
+The table was manually transcribed into a CSV file and validated against the article's own summary statistics. The remaining 18 states without enacted legislation were added with a policy type of NO_ENACTED_POLICY.
 
 ## Geographic filter: NCES GRF crosswalk
 
