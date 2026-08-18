@@ -1,9 +1,20 @@
 # Conclusions
 
-The one takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association survives every analytical lens applied to it. This does not prove the policy works causally, but it is precisely the kind of early, consistent, multi-method signal that justifies continued investment in both the policy and its evaluation.
+## Legislation Alone is Not Enough
 
-**Policy type alone is not enough.** Enacting a law is the floor, not the ceiling. Implementation fidelity, whether schools actually stock products and whether allocated funds are actually spent, determines outcomes more than what the legislation requires. Our case study for Oregon State  makes this concrete: Oregon and Nevada hold the strongest policy configurations in the nation and the worst outcomes among enacted states.
+The principal takeaway from this project is that MHH legislation is associated with a consistently lower female share of chronic absenteeism across nearly every demographic group examined, and this association is apparent under every analytical lens we applied to it. This does not prove the policy works causally, but it justifies continued investment in both the policy and its evaluation.
+
+Enacting a law is the baseline, not the goal. Implementation fidelity — whether schools actually stock products and whether allocated funds are actually spent - determines outcomes more than what the legislation requires. Our case study for Oregon confirms this: Oregon, along with Nevada, holds the strongest policy configurations in the nation, yet has the worst chronic absenteeism outcomes among all enacted-policy states.
 
 Our specific recommendation is that states without enacted legislation should treat the ECODIS finding as their highest-priority decision point. Economically disadvantaged female students are both the most likely to face period-poverty barriers due to cost and the group showing the most consistent association with the legislation signal across all analytical versions.
 
-**Future work** should: (1) extend to 2023–2025 school years for a within-state difference-in-differences design; (2) develop a district-level implementation fidelity measure using product purchase records and reimbursement claim rates; (3) replicate the ML pipeline at the LEA level (n≈12,800) for stable, generalizable regression estimates; and (4) explicitly include transgender and non-binary students in both data collection and analysis frameworks.
+## Data Access
+
+This project's biggest constraint wasn't analytical — it was access. Despite ESSA requiring every state to report chronic absenteeism data, we found that the data infrastructure for actually using it is inconsistent at best: many states' data was difficult to locate, incomplete, or published in formats that made cross-state comparison labor-intensive rather than straightforward. A more standardized, consistently formatted, and centrally accessible chronic absenteeism reporting system — ideally one that doesn't require researchers to individually track down 50 different state education department portals — would meaningfully lower the barrier to studies like this one, and would let future work extend well beyond the three-year window we were limited to here. Access to data shouldn't be the hardest part of studying a law meant to help students.
+
+## Future Work
+
+Future work should: (1) extend to 2023–2025 school years for a within-state difference-in-differences design; (2) develop a district-level implementation fidelity measure using product purchase records and reimbursement claim rates; (3) replicate the ML pipeline at the LEA level (n≈12,800) for stable, generalizable regression estimates; and (4) explicitly include transgender and non-binary students in both data collection and analysis frameworks. 
+
+This returns us to our original question: yes, MHH legislation is associated with meaningfully different absenteeism outcomes, but 'yes' comes with real asterisks this project has tried to make visible rather than hide.
+
